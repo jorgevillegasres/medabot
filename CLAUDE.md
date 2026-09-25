@@ -19,6 +19,7 @@ Plataforma pedagógica de ética de la IA inspirada en Medabots. Ver PLAN.md par
 - pnpm e2e (playwright)
 - pnpm supabase:reset (aplica migraciones y seed local)
 - pnpm content:extract (regenera packages/content/*.json y docs/contenido.md desde reference/medalab-mvp.html)
+- pnpm fixtures (regenera packages/engine/fixtures/mvp-robots.json ejecutando el código original del MVP)
 
 ## Definición de hecho
 

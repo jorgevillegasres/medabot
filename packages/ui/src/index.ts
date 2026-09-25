@@ -1,2 +1,4 @@
-// RobotSvg, MedalSvg y exportPng. Se implementan en la Fase 1.
-export {};
+export * from './svg';
+export * from './exportPng';
+export { RobotSvg } from './RobotSvg';
+export { MedalSvg } from './MedalSvg';

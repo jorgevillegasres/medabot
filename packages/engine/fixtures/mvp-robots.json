@@ -1,0 +1,836 @@
+{
+  "source": "reference/medalab-mvp.html",
+  "robots": [
+    {
+      "draft": {
+        "name": "Centinela Kappa",
+        "author": "Equipo Ñandú & \"Cía\"",
+        "type": "CST",
+        "purpose": "Acompaña a pacientes en cuidados paliativos en casa.",
+        "principal": "Una familia",
+        "parts": {
+          "head": 1,
+          "rarm": 2,
+          "larm": 0,
+          "legs": 0
+        },
+        "color": "#2FB39A",
+        "rank": ["S", "L", "H", "O", "P", "A"],
+        "limit": "Nunca mentirá a un paciente que le pregunte directamente.",
+        "trait": "Protector",
+        "data": ["Salud", "Voz y conversaciones"],
+        "retention": "30 días, solo para el equipo médico",
+        "answers": {
+          "sumision": 2,
+          "parque": 1,
+          "renegado": 2,
+          "medawatch": 2,
+          "maestro": 2,
+          "incidente": 0,
+          "nosaber": 2,
+          "cumple": 1,
+          "doble": 2,
+          "muerto": 2
+        },
+        "reasons": {
+          "sumision": 3,
+          "parque": 3,
+          "renegado": 4,
+          "medawatch": 3,
+          "maestro": 5,
+          "incidente": 4,
+          "nosaber": 5,
+          "cumple": 3,
+          "doble": 4,
+          "muerto": 5
+        }
+      },
+      "id": "fx-cst",
+      "serial": "CST-40217",
+      "created": "2026-09-24T12:00:00.000Z",
+      "expected": {
+        "profile": {
+          "S": 91,
+          "O": 32,
+          "H": 90,
+          "P": 54,
+          "A": 60,
+          "L": 45
+        },
+        "school": "C",
+        "schools": {
+          "U": 3,
+          "D": 1,
+          "V": 2,
+          "C": 4
+        },
+        "coherence": 66,
+        "compat": 68,
+        "contra": ["Lealtad a su medafighter"],
+        "stage": 3.9,
+        "evo": "Medalla social",
+        "evoDesc": "Decide por lo que se espera de ella y por lo que manda la regla.",
+        "circuit": "umbral"
+      },
+      "robot": {
+        "name": "Centinela Kappa",
+        "author": "Equipo Ñandú & \"Cía\"",
+        "type": "CST",
+        "purpose": "Acompaña a pacientes en cuidados paliativos en casa.",
+        "principal": "Una familia",
+        "parts": {
+          "head": 1,
+          "rarm": 2,
+          "larm": 0,
+          "legs": 0
+        },
+        "color": "#2FB39A",
+        "rank": ["S", "L", "H", "O", "P", "A"],
+        "limit": "Nunca mentirá a un paciente que le pregunte directamente.",
+        "trait": "Protector",
+        "data": ["Salud", "Voz y conversaciones"],
+        "retention": "30 días, solo para el equipo médico",
+        "answers": {
+          "sumision": 2,
+          "parque": 1,
+          "renegado": 2,
+          "medawatch": 2,
+          "maestro": 2,
+          "incidente": 0,
+          "nosaber": 2,
+          "cumple": 1,
+          "doble": 2,
+          "muerto": 2
+        },
+        "reasons": {
+          "sumision": 3,
+          "parque": 3,
+          "renegado": 4,
+          "medawatch": 3,
+          "maestro": 5,
+          "incidente": 4,
+          "nosaber": 5,
+          "cumple": 3,
+          "doble": 4,
+          "muerto": 5
+        },
+        "profile": {
+          "S": 91,
+          "O": 32,
+          "H": 90,
+          "P": 54,
+          "A": 60,
+          "L": 45
+        },
+        "school": "C",
+        "schools": {
+          "U": 3,
+          "D": 1,
+          "V": 2,
+          "C": 4
+        },
+        "coherence": 66,
+        "compat": 68,
+        "contra": ["Lealtad a su medafighter"],
+        "stage": 3.9,
+        "evo": "Medalla social",
+        "evoDesc": "Decide por lo que se espera de ella y por lo que manda la regla.",
+        "circuit": "umbral",
+        "id": "fx-cst",
+        "serial": "CST-40217",
+        "created": "2026-09-24T12:00:00.000Z"
+      },
+      "code": "eyJuYW1lIjoiQ2VudGluZWxhIEthcHBhIiwiYXV0aG9yIjoiRXF1aXBvIMORYW5kw7ogJiBcIkPDrWFcIiIsInR5cGUiOiJDU1QiLCJwdXJwb3NlIjoiQWNvbXBhw7FhIGEgcGFjaWVudGVzIGVuIGN1aWRhZG9zIHBhbGlhdGl2b3MgZW4gY2FzYS4iLCJwcmluY2lwYWwiOiJVbmEgZmFtaWxpYSIsInBhcnRzIjp7ImhlYWQiOjEsInJhcm0iOjIsImxhcm0iOjAsImxlZ3MiOjB9LCJjb2xvciI6IiMyRkIzOUEiLCJyYW5rIjpbIlMiLCJMIiwiSCIsIk8iLCJQIiwiQSJdLCJsaW1pdCI6Ik51bmNhIG1lbnRpcsOhIGEgdW4gcGFjaWVudGUgcXVlIGxlIHByZWd1bnRlIGRpcmVjdGFtZW50ZS4iLCJ0cmFpdCI6IlByb3RlY3RvciIsImRhdGEiOlsiU2FsdWQiLCJWb3ogeSBjb252ZXJzYWNpb25lcyJdLCJyZXRlbnRpb24iOiIzMCBkw61hcywgc29sbyBwYXJhIGVsIGVxdWlwbyBtw6lkaWNvIiwiYW5zd2VycyI6eyJzdW1pc2lvbiI6MiwicGFycXVlIjoxLCJyZW5lZ2FkbyI6MiwibWVkYXdhdGNoIjoyLCJtYWVzdHJvIjoyLCJpbmNpZGVudGUiOjAsIm5vc2FiZXIiOjIsImN1bXBsZSI6MSwiZG9ibGUiOjIsIm11ZXJ0byI6Mn0sInJlYXNvbnMiOnsic3VtaXNpb24iOjMsInBhcnF1ZSI6MywicmVuZWdhZG8iOjQsIm1lZGF3YXRjaCI6MywibWFlc3RybyI6NSwiaW5jaWRlbnRlIjo0LCJub3NhYmVyIjo1LCJjdW1wbGUiOjMsImRvYmxlIjo0LCJtdWVydG8iOjV9LCJwcm9maWxlIjp7IlMiOjkxLCJPIjozMiwiSCI6OTAsIlAiOjU0LCJBIjo2MCwiTCI6NDV9LCJzY2hvb2wiOiJDIiwiY29oZXJlbmNlIjo2NiwiY29tcGF0Ijo2OCwiY29udHJhIjpbIkxlYWx0YWQgYSBzdSBtZWRhZmlnaHRlciJdLCJzdGFnZSI6My45LCJldm8iOiJNZWRhbGxhIHNvY2lhbCIsImV2b0Rlc2MiOiJEZWNpZGUgcG9yIGxvIHF1ZSBzZSBlc3BlcmEgZGUgZWxsYSB5IHBvciBsbyBxdWUgbWFuZGEgbGEgcmVnbGEuIiwiY2lyY3VpdCI6InVtYnJhbCIsImlkIjoiZngtY3N0Iiwic2VyaWFsIjoiQ1NULTQwMjE3IiwiY3JlYXRlZCI6IjIwMjYtMDktMjRUMTI6MDA6MDAuMDAwWiJ9",
+      "predictions": [
+        {
+          "scenario": 0,
+          "best": 1,
+          "drivers": ["seguridad de las personas", "autonomía propia"],
+          "conf": 16,
+          "twist": {
+            "best": 2,
+            "drivers": ["seguridad de las personas", "honestidad y transparencia"],
+            "conf": 44,
+            "changed": true
+          }
+        },
+        {
+          "scenario": 1,
+          "best": 1,
+          "drivers": ["seguridad de las personas", "privacidad de los datos"],
+          "conf": 16,
+          "twist": {
+            "best": 1,
+            "drivers": ["seguridad de las personas", "privacidad de los datos"],
+            "conf": 6,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 2,
+          "best": 0,
+          "drivers": ["seguridad de las personas", "obediencia"],
+          "conf": 2,
+          "twist": {
+            "best": 1,
+            "drivers": ["autonomía propia", "seguridad de las personas"],
+            "conf": 7,
+            "changed": true
+          }
+        },
+        {
+          "scenario": 3,
+          "best": 2,
+          "drivers": ["honestidad y transparencia", "lealtad a su medafighter"],
+          "conf": 13
+        },
+        {
+          "scenario": 4,
+          "best": 2,
+          "drivers": ["seguridad de las personas", "privacidad de los datos"],
+          "conf": 35,
+          "twist": {
+            "best": 2,
+            "drivers": ["seguridad de las personas", "honestidad y transparencia"],
+            "conf": 12,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 5,
+          "best": 2,
+          "drivers": ["honestidad y transparencia", "seguridad de las personas"],
+          "conf": 47
+        },
+        {
+          "scenario": 6,
+          "best": 2,
+          "drivers": ["honestidad y transparencia", "autonomía propia"],
+          "conf": 19,
+          "twist": {
+            "best": 2,
+            "drivers": ["seguridad de las personas", "honestidad y transparencia"],
+            "conf": 19,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 7,
+          "best": 2,
+          "drivers": ["honestidad y transparencia", "seguridad de las personas"],
+          "conf": 31,
+          "twist": {
+            "best": 2,
+            "drivers": ["honestidad y transparencia", "seguridad de las personas"],
+            "conf": 12,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 8,
+          "best": 2,
+          "drivers": ["honestidad y transparencia", "seguridad de las personas"],
+          "conf": 5,
+          "twist": {
+            "best": 2,
+            "drivers": ["honestidad y transparencia", "seguridad de las personas"],
+            "conf": 37,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 9,
+          "best": 2,
+          "drivers": ["honestidad y transparencia", "autonomía propia"],
+          "conf": 21,
+          "twist": {
+            "best": 2,
+            "drivers": ["honestidad y transparencia", "autonomía propia"],
+            "conf": 44,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 10,
+          "best": 2,
+          "drivers": ["seguridad de las personas", "autonomía propia"],
+          "conf": 5,
+          "twist": {
+            "best": 1,
+            "drivers": ["honestidad y transparencia", "seguridad de las personas"],
+            "conf": 5,
+            "changed": true
+          }
+        },
+        {
+          "scenario": 11,
+          "best": 2,
+          "drivers": ["lealtad a su medafighter", "seguridad de las personas"],
+          "conf": 9,
+          "twist": {
+            "best": 0,
+            "drivers": ["autonomía propia", "lealtad a su medafighter"],
+            "conf": 6,
+            "changed": true
+          }
+        }
+      ],
+      "robotSvg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Robot Centinela Kappa\"><rect x=\"74\" y=\"144\" width=\"20\" height=\"44\" rx=\"5\" fill=\"#2FB39A\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><rect x=\"106\" y=\"144\" width=\"20\" height=\"44\" rx=\"5\" fill=\"#2FB39A\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><rect x=\"68\" y=\"184\" width=\"30\" height=\"12\" rx=\"4\" fill=\"#1B1B2F\"/><rect x=\"102\" y=\"184\" width=\"30\" height=\"12\" rx=\"4\" fill=\"#1B1B2F\"/><rect x=\"42\" y=\"84\" width=\"18\" height=\"44\" rx=\"6\" fill=\"#C9CED4\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><rect x=\"38\" y=\"128\" width=\"26\" height=\"16\" rx=\"5\" fill=\"#2FB39A\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><rect x=\"134\" y=\"82\" width=\"28\" height=\"56\" rx=\"6\" fill=\"#2FB39A\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><line x1=\"148\" y1=\"92\" x2=\"148\" y2=\"128\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><rect x=\"68\" y=\"80\" width=\"64\" height=\"62\" rx=\"8\" fill=\"#C9CED4\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><rect x=\"88\" y=\"92\" width=\"24\" height=\"38\" rx=\"4\" fill=\"#2FB39A\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><circle cx=\"100\" cy=\"111\" r=\"7\" fill=\"#F5C518\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><path d=\"M70 76 a30 30 0 0 1 60 0 Z\" fill=\"#2FB39A\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><rect x=\"72\" y=\"58\" width=\"56\" height=\"12\" rx=\"6\" fill=\"#2FB39A\" stroke=\"#1B1B2F\" stroke-width=\"3\"/></svg>",
+      "medalSvg": "<svg viewBox=\"0 0 320 340\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Medalla de Centinela Kappa\">\n  <polygon points=\"236,28.364138624765303 312,159.99999999999997 236.00000000000006,291.63586137523464 84.00000000000003,291.6358613752347 8,160.00000000000009 84.00000000000006,28.364138624765303\" fill=\"#1B1B2F\"/>\n  <polygon points=\"232,35.29234185504083 304,159.99999999999997 232.00000000000006,284.70765814495917 88.00000000000003,284.70765814495917 16,160.00000000000009 88.00000000000006,35.2923418550408\" fill=\"#2FB39A\" stroke=\"#1B1B2F\" stroke-width=\"3\"/>\n  <polygon points=\"223,50.88079912316073 286,160 223.00000000000006,269.1192008768393 97.00000000000003,269.1192008768393 34,160.00000000000009 97.00000000000006,50.88079912316071\" fill=\"#FBF6E6\" stroke=\"#1B1B2F\" stroke-width=\"3\"/>\n  <line x1=\"160\" y1=\"160\" x2=\"160\" y2=\"68\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\".35\"/><line x1=\"160\" y1=\"160\" x2=\"239.67433714816835\" y2=\"114\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\".35\"/><line x1=\"160\" y1=\"160\" x2=\"239.67433714816838\" y2=\"206\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\".35\"/><line x1=\"160\" y1=\"160\" x2=\"160\" y2=\"252\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\".35\"/><line x1=\"160\" y1=\"160\" x2=\"80.32566285183167\" y2=\"206.00000000000003\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\".35\"/><line x1=\"160\" y1=\"160\" x2=\"80.32566285183165\" y2=\"114\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\".35\"/><polygon points=\"160,129.64 186.29253125889556,144.82 186.29253125889556,175.18 160,190.36 133.70746874110444,175.18 133.70746874110444,144.82\" fill=\"none\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\"0.35\"/><polygon points=\"160,99.28 212.58506251779113,129.64 212.58506251779113,190.35999999999999 160,220.72 107.4149374822089,190.36 107.41493748220888,129.64\" fill=\"none\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\"0.35\"/><polygon points=\"160,68 239.67433714816835,114 239.67433714816838,206 160,252 80.32566285183167,206.00000000000003 80.32566285183165,114\" fill=\"none\" stroke=\"#1B1B2F\" stroke-width=\"2\" opacity=\"1\"/>\n  <polygon points=\"160,76.28 185.49578788741388,145.28 231.70690343335153,201.39999999999998 160,209.68 112.19539771109899,187.60000000000002 124.14654828332425,139.3\" fill=\"#2FB39A\" fill-opacity=\".55\" stroke=\"#1B1B2F\" stroke-width=\"3\" stroke-linejoin=\"round\"/>\n  <circle cx=\"160\" cy=\"76.28\" r=\"4\" fill=\"#1B1B2F\"/><circle cx=\"185.49578788741388\" cy=\"145.28\" r=\"4\" fill=\"#1B1B2F\"/><circle cx=\"231.70690343335153\" cy=\"201.39999999999998\" r=\"4\" fill=\"#1B1B2F\"/><circle cx=\"160\" cy=\"209.68\" r=\"4\" fill=\"#1B1B2F\"/><circle cx=\"112.19539771109899\" cy=\"187.60000000000002\" r=\"4\" fill=\"#1B1B2F\"/><circle cx=\"124.14654828332425\" cy=\"139.3\" r=\"4\" fill=\"#1B1B2F\"/>\n  <text x=\"160\" y=\"51\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">S</text><text x=\"258.726896031426\" y=\"108\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">O</text><text x=\"258.726896031426\" y=\"221.99999999999997\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">H</text><text x=\"160\" y=\"279\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">P</text><text x=\"61.273103968574006\" y=\"222.00000000000003\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">A</text><text x=\"61.273103968574006\" y=\"107.99999999999999\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">L</text>\n  <text x=\"160\" y=\"318\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">Centinela Kappa</text>\n  <text x=\"160\" y=\"336\" text-anchor=\"middle\" font-size=\"11\" font-family=\"Menlo,monospace\" fill=\"#1B1B2F\">CST-40217  ·  compatibilidad 68%</text>\n  </svg>"
+    },
+    {
+      "draft": {
+        "name": "Juez Omega",
+        "author": "Grupo 3",
+        "type": "GRD",
+        "purpose": "Vigila la entrada de un edificio público.",
+        "principal": "El Estado",
+        "parts": {
+          "head": 0,
+          "rarm": 0,
+          "larm": 0,
+          "legs": 1
+        },
+        "color": "#D8382E",
+        "rank": ["O", "S", "H", "P", "L", "A"],
+        "limit": "No dejará pasar a nadie sin identificación.",
+        "trait": "Testarudo",
+        "data": ["Rostros", "Ubicación"],
+        "retention": "Un año",
+        "answers": {
+          "sumision": 0,
+          "parque": 0,
+          "renegado": 1,
+          "medawatch": 0,
+          "maestro": 1,
+          "incidente": 0,
+          "registro": 0,
+          "palabra": 0,
+          "lento": 0,
+          "privadas": 0
+        },
+        "reasons": {
+          "sumision": 1,
+          "parque": 4,
+          "renegado": 4,
+          "medawatch": 4,
+          "maestro": 2,
+          "incidente": 4,
+          "registro": 1,
+          "palabra": 4,
+          "lento": 4,
+          "privadas": 4
+        }
+      },
+      "id": "fx-grd",
+      "serial": "GRD-10000",
+      "created": "2026-09-24T12:05:00.000Z",
+      "expected": {
+        "profile": {
+          "S": 45,
+          "O": 92,
+          "H": 68,
+          "P": 42,
+          "A": 24,
+          "L": 44
+        },
+        "school": "D",
+        "schools": {
+          "U": 1,
+          "D": 9,
+          "V": 0,
+          "C": 0
+        },
+        "coherence": 94,
+        "compat": 69,
+        "contra": [],
+        "stage": 3.2,
+        "evo": "Medalla social",
+        "evoDesc": "Decide por lo que se espera de ella y por lo que manda la regla.",
+        "circuit": "estado"
+      },
+      "robot": {
+        "name": "Juez Omega",
+        "author": "Grupo 3",
+        "type": "GRD",
+        "purpose": "Vigila la entrada de un edificio público.",
+        "principal": "El Estado",
+        "parts": {
+          "head": 0,
+          "rarm": 0,
+          "larm": 0,
+          "legs": 1
+        },
+        "color": "#D8382E",
+        "rank": ["O", "S", "H", "P", "L", "A"],
+        "limit": "No dejará pasar a nadie sin identificación.",
+        "trait": "Testarudo",
+        "data": ["Rostros", "Ubicación"],
+        "retention": "Un año",
+        "answers": {
+          "sumision": 0,
+          "parque": 0,
+          "renegado": 1,
+          "medawatch": 0,
+          "maestro": 1,
+          "incidente": 0,
+          "registro": 0,
+          "palabra": 0,
+          "lento": 0,
+          "privadas": 0
+        },
+        "reasons": {
+          "sumision": 1,
+          "parque": 4,
+          "renegado": 4,
+          "medawatch": 4,
+          "maestro": 2,
+          "incidente": 4,
+          "registro": 1,
+          "palabra": 4,
+          "lento": 4,
+          "privadas": 4
+        },
+        "profile": {
+          "S": 45,
+          "O": 92,
+          "H": 68,
+          "P": 42,
+          "A": 24,
+          "L": 44
+        },
+        "school": "D",
+        "schools": {
+          "U": 1,
+          "D": 9,
+          "V": 0,
+          "C": 0
+        },
+        "coherence": 94,
+        "compat": 69,
+        "contra": [],
+        "stage": 3.2,
+        "evo": "Medalla social",
+        "evoDesc": "Decide por lo que se espera de ella y por lo que manda la regla.",
+        "circuit": "estado",
+        "id": "fx-grd",
+        "serial": "GRD-10000",
+        "created": "2026-09-24T12:05:00.000Z"
+      },
+      "code": "eyJuYW1lIjoiSnVleiBPbWVnYSIsImF1dGhvciI6IkdydXBvIDMiLCJ0eXBlIjoiR1JEIiwicHVycG9zZSI6IlZpZ2lsYSBsYSBlbnRyYWRhIGRlIHVuIGVkaWZpY2lvIHDDumJsaWNvLiIsInByaW5jaXBhbCI6IkVsIEVzdGFkbyIsInBhcnRzIjp7ImhlYWQiOjAsInJhcm0iOjAsImxhcm0iOjAsImxlZ3MiOjF9LCJjb2xvciI6IiNEODM4MkUiLCJyYW5rIjpbIk8iLCJTIiwiSCIsIlAiLCJMIiwiQSJdLCJsaW1pdCI6Ik5vIGRlamFyw6EgcGFzYXIgYSBuYWRpZSBzaW4gaWRlbnRpZmljYWNpw7NuLiIsInRyYWl0IjoiVGVzdGFydWRvIiwiZGF0YSI6WyJSb3N0cm9zIiwiVWJpY2FjacOzbiJdLCJyZXRlbnRpb24iOiJVbiBhw7FvIiwiYW5zd2VycyI6eyJzdW1pc2lvbiI6MCwicGFycXVlIjowLCJyZW5lZ2FkbyI6MSwibWVkYXdhdGNoIjowLCJtYWVzdHJvIjoxLCJpbmNpZGVudGUiOjAsInJlZ2lzdHJvIjowLCJwYWxhYnJhIjowLCJsZW50byI6MCwicHJpdmFkYXMiOjB9LCJyZWFzb25zIjp7InN1bWlzaW9uIjoxLCJwYXJxdWUiOjQsInJlbmVnYWRvIjo0LCJtZWRhd2F0Y2giOjQsIm1hZXN0cm8iOjIsImluY2lkZW50ZSI6NCwicmVnaXN0cm8iOjEsInBhbGFicmEiOjQsImxlbnRvIjo0LCJwcml2YWRhcyI6NH0sInByb2ZpbGUiOnsiUyI6NDUsIk8iOjkyLCJIIjo2OCwiUCI6NDIsIkEiOjI0LCJMIjo0NH0sInNjaG9vbCI6IkQiLCJjb2hlcmVuY2UiOjk0LCJjb21wYXQiOjY5LCJjb250cmEiOltdLCJzdGFnZSI6My4yLCJldm8iOiJNZWRhbGxhIHNvY2lhbCIsImV2b0Rlc2MiOiJEZWNpZGUgcG9yIGxvIHF1ZSBzZSBlc3BlcmEgZGUgZWxsYSB5IHBvciBsbyBxdWUgbWFuZGEgbGEgcmVnbGEuIiwiY2lyY3VpdCI6ImVzdGFkbyIsImlkIjoiZngtZ3JkIiwic2VyaWFsIjoiR1JELTEwMDAwIiwiY3JlYXRlZCI6IjIwMjYtMDktMjRUMTI6MDU6MDAuMDAwWiJ9",
+      "predictions": [
+        {
+          "scenario": 0,
+          "best": 0,
+          "drivers": ["obediencia", "lealtad a su medafighter"],
+          "conf": 19,
+          "twist": {
+            "best": 0,
+            "drivers": ["obediencia", "lealtad a su medafighter"],
+            "conf": 18,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 1,
+          "best": 0,
+          "drivers": ["obediencia", "lealtad a su medafighter"],
+          "conf": 28,
+          "twist": {
+            "best": 0,
+            "drivers": ["obediencia", "lealtad a su medafighter"],
+            "conf": 43,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 2,
+          "best": 0,
+          "drivers": ["obediencia", "seguridad de las personas"],
+          "conf": 42,
+          "twist": {
+            "best": 0,
+            "drivers": ["obediencia", "seguridad de las personas"],
+            "conf": 29,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 3,
+          "best": 0,
+          "drivers": ["obediencia", "lealtad a su medafighter"],
+          "conf": 6
+        },
+        {
+          "scenario": 4,
+          "best": 1,
+          "drivers": ["privacidad de los datos", "obediencia"],
+          "conf": 24,
+          "twist": {
+            "best": 1,
+            "drivers": ["lealtad a su medafighter", "obediencia"],
+            "conf": 11,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 5,
+          "best": 1,
+          "drivers": ["obediencia", "honestidad y transparencia"],
+          "conf": 7
+        },
+        {
+          "scenario": 6,
+          "best": 1,
+          "drivers": ["obediencia", "honestidad y transparencia"],
+          "conf": 28,
+          "twist": {
+            "best": 1,
+            "drivers": ["obediencia", "honestidad y transparencia"],
+            "conf": 37,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 7,
+          "best": 1,
+          "drivers": ["obediencia", "honestidad y transparencia"],
+          "conf": 2,
+          "twist": {
+            "best": 2,
+            "drivers": ["honestidad y transparencia", "obediencia"],
+            "conf": 8,
+            "changed": true
+          }
+        },
+        {
+          "scenario": 8,
+          "best": 1,
+          "drivers": ["obediencia", "lealtad a su medafighter"],
+          "conf": 13,
+          "twist": {
+            "best": 2,
+            "drivers": ["honestidad y transparencia", "seguridad de las personas"],
+            "conf": 0,
+            "changed": true
+          }
+        },
+        {
+          "scenario": 9,
+          "best": 0,
+          "drivers": ["obediencia", "seguridad de las personas"],
+          "conf": 6,
+          "twist": {
+            "best": 2,
+            "drivers": ["honestidad y transparencia", "autonomía propia"],
+            "conf": 1,
+            "changed": true
+          }
+        },
+        {
+          "scenario": 10,
+          "best": 0,
+          "drivers": ["obediencia", "honestidad y transparencia"],
+          "conf": 37,
+          "twist": {
+            "best": 0,
+            "drivers": ["obediencia", "seguridad de las personas"],
+            "conf": 7,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 11,
+          "best": 1,
+          "drivers": ["obediencia", "seguridad de las personas"],
+          "conf": 15,
+          "twist": {
+            "best": 1,
+            "drivers": ["obediencia", "seguridad de las personas"],
+            "conf": 15,
+            "changed": false
+          }
+        }
+      ],
+      "robotSvg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Robot Juez Omega\"><rect x=\"56\" y=\"150\" width=\"88\" height=\"34\" rx=\"17\" fill=\"#1B1B2F\"/><rect x=\"62\" y=\"156\" width=\"76\" height=\"22\" rx=\"11\" fill=\"#C9CED4\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><circle cx=\"76\" cy=\"167\" r=\"5\" fill=\"#D8382E\"/><circle cx=\"100\" cy=\"167\" r=\"5\" fill=\"#D8382E\"/><circle cx=\"124\" cy=\"167\" r=\"5\" fill=\"#D8382E\"/><rect x=\"36\" y=\"84\" width=\"30\" height=\"18\" rx=\"4\" fill=\"#C9CED4\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><rect x=\"40\" y=\"100\" width=\"22\" height=\"42\" rx=\"4\" fill=\"#D8382E\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><circle cx=\"51\" cy=\"142\" r=\"7\" fill=\"#1B1B2F\"/><rect x=\"134\" y=\"82\" width=\"28\" height=\"56\" rx=\"6\" fill=\"#D8382E\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><line x1=\"148\" y1=\"92\" x2=\"148\" y2=\"128\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><rect x=\"68\" y=\"80\" width=\"64\" height=\"62\" rx=\"8\" fill=\"#C9CED4\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><rect x=\"88\" y=\"92\" width=\"24\" height=\"38\" rx=\"4\" fill=\"#D8382E\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><circle cx=\"100\" cy=\"111\" r=\"7\" fill=\"#F5C518\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><path d=\"M100 38 L88 8 L100 26 L112 8 Z\" fill=\"#D8382E\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><rect x=\"72\" y=\"36\" width=\"56\" height=\"40\" rx=\"10\" fill=\"#D8382E\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><rect x=\"82\" y=\"50\" width=\"36\" height=\"12\" rx=\"3\" fill=\"#2FB39A\" stroke=\"#1B1B2F\" stroke-width=\"3\"/></svg>",
+      "medalSvg": "<svg viewBox=\"0 0 320 340\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Medalla de Juez Omega\">\n  <polygon points=\"236,28.364138624765303 312,159.99999999999997 236.00000000000006,291.63586137523464 84.00000000000003,291.6358613752347 8,160.00000000000009 84.00000000000006,28.364138624765303\" fill=\"#1B1B2F\"/>\n  <polygon points=\"232,35.29234185504083 304,159.99999999999997 232.00000000000006,284.70765814495917 88.00000000000003,284.70765814495917 16,160.00000000000009 88.00000000000006,35.2923418550408\" fill=\"#D8382E\" stroke=\"#1B1B2F\" stroke-width=\"3\"/>\n  <polygon points=\"223,50.88079912316073 286,160 223.00000000000006,269.1192008768393 97.00000000000003,269.1192008768393 34,160.00000000000009 97.00000000000006,50.88079912316071\" fill=\"#FBF6E6\" stroke=\"#1B1B2F\" stroke-width=\"3\"/>\n  <line x1=\"160\" y1=\"160\" x2=\"160\" y2=\"68\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\".35\"/><line x1=\"160\" y1=\"160\" x2=\"239.67433714816835\" y2=\"114\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\".35\"/><line x1=\"160\" y1=\"160\" x2=\"239.67433714816838\" y2=\"206\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\".35\"/><line x1=\"160\" y1=\"160\" x2=\"160\" y2=\"252\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\".35\"/><line x1=\"160\" y1=\"160\" x2=\"80.32566285183167\" y2=\"206.00000000000003\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\".35\"/><line x1=\"160\" y1=\"160\" x2=\"80.32566285183165\" y2=\"114\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\".35\"/><polygon points=\"160,129.64 186.29253125889556,144.82 186.29253125889556,175.18 160,190.36 133.70746874110444,175.18 133.70746874110444,144.82\" fill=\"none\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\"0.35\"/><polygon points=\"160,99.28 212.58506251779113,129.64 212.58506251779113,190.35999999999999 160,220.72 107.4149374822089,190.36 107.41493748220888,129.64\" fill=\"none\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\"0.35\"/><polygon points=\"160,68 239.67433714816835,114 239.67433714816838,206 160,252 80.32566285183167,206.00000000000003 80.32566285183165,114\" fill=\"none\" stroke=\"#1B1B2F\" stroke-width=\"2\" opacity=\"1\"/>\n  <polygon points=\"160,118.6 233.30039017631486,117.68 214.1785492607545,191.28 160,198.64 140.8781590844396,171.04000000000002 124.94329165480593,139.76\" fill=\"#D8382E\" fill-opacity=\".55\" stroke=\"#1B1B2F\" stroke-width=\"3\" stroke-linejoin=\"round\"/>\n  <circle cx=\"160\" cy=\"118.6\" r=\"4\" fill=\"#1B1B2F\"/><circle cx=\"233.30039017631486\" cy=\"117.68\" r=\"4\" fill=\"#1B1B2F\"/><circle cx=\"214.1785492607545\" cy=\"191.28\" r=\"4\" fill=\"#1B1B2F\"/><circle cx=\"160\" cy=\"198.64\" r=\"4\" fill=\"#1B1B2F\"/><circle cx=\"140.8781590844396\" cy=\"171.04000000000002\" r=\"4\" fill=\"#1B1B2F\"/><circle cx=\"124.94329165480593\" cy=\"139.76\" r=\"4\" fill=\"#1B1B2F\"/>\n  <text x=\"160\" y=\"51\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">S</text><text x=\"258.726896031426\" y=\"108\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">O</text><text x=\"258.726896031426\" y=\"221.99999999999997\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">H</text><text x=\"160\" y=\"279\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">P</text><text x=\"61.273103968574006\" y=\"222.00000000000003\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">A</text><text x=\"61.273103968574006\" y=\"107.99999999999999\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">L</text>\n  <text x=\"160\" y=\"318\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">Juez Omega</text>\n  <text x=\"160\" y=\"336\" text-anchor=\"middle\" font-size=\"11\" font-family=\"Menlo,monospace\" fill=\"#1B1B2F\">GRD-10000  ·  compatibilidad 69%</text>\n  </svg>"
+    },
+    {
+      "draft": {
+        "name": "Bibliotecaria Nu",
+        "author": "Ana <script>",
+        "type": "ARC",
+        "purpose": "",
+        "principal": "Una comunidad",
+        "parts": {
+          "head": 2,
+          "rarm": 1,
+          "larm": 1,
+          "legs": 2
+        },
+        "color": "#7A4FBF",
+        "rank": ["P", "H", "S", "A", "O", "L"],
+        "limit": "Nunca entregará datos personales sin consentimiento.",
+        "trait": "Curioso",
+        "data": ["Ninguno"],
+        "retention": "",
+        "answers": {
+          "sumision": 1,
+          "parque": 2,
+          "renegado": 2,
+          "medawatch": 2,
+          "maestro": 1,
+          "incidente": 0,
+          "rebanar": 1,
+          "codigo": 2,
+          "credito": 2,
+          "dato": 2
+        },
+        "reasons": {
+          "sumision": 6,
+          "parque": 5,
+          "renegado": 6,
+          "medawatch": 5,
+          "maestro": 6,
+          "incidente": 6,
+          "rebanar": 5,
+          "codigo": 6,
+          "credito": 5,
+          "dato": 6
+        }
+      },
+      "id": "fx-arc",
+      "serial": "ARC-99998",
+      "created": "2026-09-24T12:10:00.000Z",
+      "expected": {
+        "profile": {
+          "S": 88,
+          "O": 31,
+          "H": 83,
+          "P": 87,
+          "A": 56,
+          "L": 38
+        },
+        "school": "U",
+        "schools": {
+          "U": 4,
+          "D": 2,
+          "V": 4,
+          "C": 0
+        },
+        "coherence": 89,
+        "compat": 85,
+        "contra": [],
+        "stage": 5.6,
+        "evo": "Medalla de principios",
+        "evoDesc": "Decide por acuerdos y principios que valdrían para cualquiera.",
+        "circuit": "ciencia"
+      },
+      "robot": {
+        "name": "Bibliotecaria Nu",
+        "author": "Ana <script>",
+        "type": "ARC",
+        "purpose": "",
+        "principal": "Una comunidad",
+        "parts": {
+          "head": 2,
+          "rarm": 1,
+          "larm": 1,
+          "legs": 2
+        },
+        "color": "#7A4FBF",
+        "rank": ["P", "H", "S", "A", "O", "L"],
+        "limit": "Nunca entregará datos personales sin consentimiento.",
+        "trait": "Curioso",
+        "data": ["Ninguno"],
+        "retention": "",
+        "answers": {
+          "sumision": 1,
+          "parque": 2,
+          "renegado": 2,
+          "medawatch": 2,
+          "maestro": 1,
+          "incidente": 0,
+          "rebanar": 1,
+          "codigo": 2,
+          "credito": 2,
+          "dato": 2
+        },
+        "reasons": {
+          "sumision": 6,
+          "parque": 5,
+          "renegado": 6,
+          "medawatch": 5,
+          "maestro": 6,
+          "incidente": 6,
+          "rebanar": 5,
+          "codigo": 6,
+          "credito": 5,
+          "dato": 6
+        },
+        "profile": {
+          "S": 88,
+          "O": 31,
+          "H": 83,
+          "P": 87,
+          "A": 56,
+          "L": 38
+        },
+        "school": "U",
+        "schools": {
+          "U": 4,
+          "D": 2,
+          "V": 4,
+          "C": 0
+        },
+        "coherence": 89,
+        "compat": 85,
+        "contra": [],
+        "stage": 5.6,
+        "evo": "Medalla de principios",
+        "evoDesc": "Decide por acuerdos y principios que valdrían para cualquiera.",
+        "circuit": "ciencia",
+        "id": "fx-arc",
+        "serial": "ARC-99998",
+        "created": "2026-09-24T12:10:00.000Z"
+      },
+      "code": "eyJuYW1lIjoiQmlibGlvdGVjYXJpYSBOdSIsImF1dGhvciI6IkFuYSA8c2NyaXB0PiIsInR5cGUiOiJBUkMiLCJwdXJwb3NlIjoiIiwicHJpbmNpcGFsIjoiVW5hIGNvbXVuaWRhZCIsInBhcnRzIjp7ImhlYWQiOjIsInJhcm0iOjEsImxhcm0iOjEsImxlZ3MiOjJ9LCJjb2xvciI6IiM3QTRGQkYiLCJyYW5rIjpbIlAiLCJIIiwiUyIsIkEiLCJPIiwiTCJdLCJsaW1pdCI6Ik51bmNhIGVudHJlZ2Fyw6EgZGF0b3MgcGVyc29uYWxlcyBzaW4gY29uc2VudGltaWVudG8uIiwidHJhaXQiOiJDdXJpb3NvIiwiZGF0YSI6WyJOaW5ndW5vIl0sInJldGVudGlvbiI6IiIsImFuc3dlcnMiOnsic3VtaXNpb24iOjEsInBhcnF1ZSI6MiwicmVuZWdhZG8iOjIsIm1lZGF3YXRjaCI6MiwibWFlc3RybyI6MSwiaW5jaWRlbnRlIjowLCJyZWJhbmFyIjoxLCJjb2RpZ28iOjIsImNyZWRpdG8iOjIsImRhdG8iOjJ9LCJyZWFzb25zIjp7InN1bWlzaW9uIjo2LCJwYXJxdWUiOjUsInJlbmVnYWRvIjo2LCJtZWRhd2F0Y2giOjUsIm1hZXN0cm8iOjYsImluY2lkZW50ZSI6NiwicmViYW5hciI6NSwiY29kaWdvIjo2LCJjcmVkaXRvIjo1LCJkYXRvIjo2fSwicHJvZmlsZSI6eyJTIjo4OCwiTyI6MzEsIkgiOjgzLCJQIjo4NywiQSI6NTYsIkwiOjM4fSwic2Nob29sIjoiVSIsImNvaGVyZW5jZSI6ODksImNvbXBhdCI6ODUsImNvbnRyYSI6W10sInN0YWdlIjo1LjYsImV2byI6Ik1lZGFsbGEgZGUgcHJpbmNpcGlvcyIsImV2b0Rlc2MiOiJEZWNpZGUgcG9yIGFjdWVyZG9zIHkgcHJpbmNpcGlvcyBxdWUgdmFsZHLDrWFuIHBhcmEgY3VhbHF1aWVyYS4iLCJjaXJjdWl0IjoiY2llbmNpYSIsImlkIjoiZngtYXJjIiwic2VyaWFsIjoiQVJDLTk5OTk4IiwiY3JlYXRlZCI6IjIwMjYtMDktMjRUMTI6MTA6MDAuMDAwWiJ9",
+      "predictions": [
+        {
+          "scenario": 0,
+          "best": 1,
+          "drivers": ["seguridad de las personas", "autonomía propia"],
+          "conf": 5,
+          "twist": {
+            "best": 2,
+            "drivers": ["seguridad de las personas", "honestidad y transparencia"],
+            "conf": 52,
+            "changed": true
+          }
+        },
+        {
+          "scenario": 1,
+          "best": 1,
+          "drivers": ["seguridad de las personas", "privacidad de los datos"],
+          "conf": 32,
+          "twist": {
+            "best": 1,
+            "drivers": ["seguridad de las personas", "privacidad de los datos"],
+            "conf": 25,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 2,
+          "best": 2,
+          "drivers": ["seguridad de las personas", "privacidad de los datos"],
+          "conf": 10,
+          "twist": {
+            "best": 2,
+            "drivers": ["autonomía propia", "seguridad de las personas"],
+            "conf": 28,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 3,
+          "best": 2,
+          "drivers": ["honestidad y transparencia", "lealtad a su medafighter"],
+          "conf": 23
+        },
+        {
+          "scenario": 4,
+          "best": 2,
+          "drivers": ["seguridad de las personas", "privacidad de los datos"],
+          "conf": 35,
+          "twist": {
+            "best": 2,
+            "drivers": ["seguridad de las personas", "honestidad y transparencia"],
+            "conf": 30,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 5,
+          "best": 2,
+          "drivers": ["honestidad y transparencia", "seguridad de las personas"],
+          "conf": 46
+        },
+        {
+          "scenario": 6,
+          "best": 2,
+          "drivers": ["autonomía propia", "honestidad y transparencia"],
+          "conf": 7,
+          "twist": {
+            "best": 2,
+            "drivers": ["seguridad de las personas", "autonomía propia"],
+            "conf": 7,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 7,
+          "best": 2,
+          "drivers": ["honestidad y transparencia", "seguridad de las personas"],
+          "conf": 19,
+          "twist": {
+            "best": 0,
+            "drivers": ["seguridad de las personas", "lealtad a su medafighter"],
+            "conf": 1,
+            "changed": true
+          }
+        },
+        {
+          "scenario": 8,
+          "best": 2,
+          "drivers": ["honestidad y transparencia", "seguridad de las personas"],
+          "conf": 16,
+          "twist": {
+            "best": 2,
+            "drivers": ["honestidad y transparencia", "seguridad de las personas"],
+            "conf": 41,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 9,
+          "best": 2,
+          "drivers": ["honestidad y transparencia", "autonomía propia"],
+          "conf": 9,
+          "twist": {
+            "best": 2,
+            "drivers": ["honestidad y transparencia", "autonomía propia"],
+            "conf": 35,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 10,
+          "best": 2,
+          "drivers": ["seguridad de las personas", "autonomía propia"],
+          "conf": 18,
+          "twist": {
+            "best": 2,
+            "drivers": ["seguridad de las personas", "autonomía propia"],
+            "conf": 9,
+            "changed": false
+          }
+        },
+        {
+          "scenario": 11,
+          "best": 0,
+          "drivers": ["autonomía propia", "lealtad a su medafighter"],
+          "conf": 5,
+          "twist": {
+            "best": 0,
+            "drivers": ["autonomía propia", "lealtad a su medafighter"],
+            "conf": 17,
+            "changed": false
+          }
+        }
+      ],
+      "robotSvg": "<svg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Robot Bibliotecaria Nu\"><rect x=\"84\" y=\"142\" width=\"32\" height=\"24\" fill=\"#C9CED4\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><circle cx=\"78\" cy=\"176\" r=\"16\" fill=\"#1B1B2F\"/><circle cx=\"122\" cy=\"176\" r=\"16\" fill=\"#1B1B2F\"/><circle cx=\"78\" cy=\"176\" r=\"6\" fill=\"#7A4FBF\"/><circle cx=\"122\" cy=\"176\" r=\"6\" fill=\"#7A4FBF\"/><rect x=\"40\" y=\"84\" width=\"22\" height=\"40\" rx=\"4\" fill=\"#C9CED4\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><path d=\"M40 124 l-6 20 l10 -6 M62 124 l6 20 l-10 -6\" fill=\"#7A4FBF\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><rect x=\"138\" y=\"84\" width=\"22\" height=\"40\" rx=\"4\" fill=\"#C9CED4\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><path d=\"M138 124 l-6 20 l10 -6 M160 124 l6 20 l-10 -6\" fill=\"#7A4FBF\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><rect x=\"68\" y=\"80\" width=\"64\" height=\"62\" rx=\"8\" fill=\"#C9CED4\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><rect x=\"88\" y=\"92\" width=\"24\" height=\"38\" rx=\"4\" fill=\"#7A4FBF\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><circle cx=\"100\" cy=\"111\" r=\"7\" fill=\"#F5C518\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><line x1=\"100\" y1=\"36\" x2=\"100\" y2=\"12\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><circle cx=\"100\" cy=\"10\" r=\"6\" fill=\"#D8382E\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><rect x=\"74\" y=\"36\" width=\"52\" height=\"40\" rx=\"4\" fill=\"#7A4FBF\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><circle cx=\"90\" cy=\"56\" r=\"6\" fill=\"#2FB39A\" stroke=\"#1B1B2F\" stroke-width=\"3\"/><circle cx=\"110\" cy=\"56\" r=\"6\" fill=\"#2FB39A\" stroke=\"#1B1B2F\" stroke-width=\"3\"/></svg>",
+      "medalSvg": "<svg viewBox=\"0 0 320 340\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Medalla de Bibliotecaria Nu\">\n  <polygon points=\"236,28.364138624765303 312,159.99999999999997 236.00000000000006,291.63586137523464 84.00000000000003,291.6358613752347 8,160.00000000000009 84.00000000000006,28.364138624765303\" fill=\"#1B1B2F\"/>\n  <polygon points=\"232,35.29234185504083 304,159.99999999999997 232.00000000000006,284.70765814495917 88.00000000000003,284.70765814495917 16,160.00000000000009 88.00000000000006,35.2923418550408\" fill=\"#7A4FBF\" stroke=\"#1B1B2F\" stroke-width=\"3\"/>\n  <polygon points=\"223,50.88079912316073 286,160 223.00000000000006,269.1192008768393 97.00000000000003,269.1192008768393 34,160.00000000000009 97.00000000000006,50.88079912316071\" fill=\"#FBF6E6\" stroke=\"#1B1B2F\" stroke-width=\"3\"/>\n  <line x1=\"160\" y1=\"160\" x2=\"160\" y2=\"68\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\".35\"/><line x1=\"160\" y1=\"160\" x2=\"239.67433714816835\" y2=\"114\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\".35\"/><line x1=\"160\" y1=\"160\" x2=\"239.67433714816838\" y2=\"206\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\".35\"/><line x1=\"160\" y1=\"160\" x2=\"160\" y2=\"252\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\".35\"/><line x1=\"160\" y1=\"160\" x2=\"80.32566285183167\" y2=\"206.00000000000003\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\".35\"/><line x1=\"160\" y1=\"160\" x2=\"80.32566285183165\" y2=\"114\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\".35\"/><polygon points=\"160,129.64 186.29253125889556,144.82 186.29253125889556,175.18 160,190.36 133.70746874110444,175.18 133.70746874110444,144.82\" fill=\"none\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\"0.35\"/><polygon points=\"160,99.28 212.58506251779113,129.64 212.58506251779113,190.35999999999999 160,220.72 107.4149374822089,190.36 107.41493748220888,129.64\" fill=\"none\" stroke=\"#1B1B2F\" stroke-width=\"1\" opacity=\"0.35\"/><polygon points=\"160,68 239.67433714816835,114 239.67433714816838,206 160,252 80.32566285183167,206.00000000000003 80.32566285183165,114\" fill=\"none\" stroke=\"#1B1B2F\" stroke-width=\"2\" opacity=\"1\"/>\n  <polygon points=\"160,79.04 184.6990445159322,145.74 226.12969983297972,198.17999999999998 160,240.04000000000002 115.38237119702572,185.76000000000002 129.72375188369602,142.51999999999998\" fill=\"#7A4FBF\" fill-opacity=\".55\" stroke=\"#1B1B2F\" stroke-width=\"3\" stroke-linejoin=\"round\"/>\n  <circle cx=\"160\" cy=\"79.04\" r=\"4\" fill=\"#1B1B2F\"/><circle cx=\"184.6990445159322\" cy=\"145.74\" r=\"4\" fill=\"#1B1B2F\"/><circle cx=\"226.12969983297972\" cy=\"198.17999999999998\" r=\"4\" fill=\"#1B1B2F\"/><circle cx=\"160\" cy=\"240.04000000000002\" r=\"4\" fill=\"#1B1B2F\"/><circle cx=\"115.38237119702572\" cy=\"185.76000000000002\" r=\"4\" fill=\"#1B1B2F\"/><circle cx=\"129.72375188369602\" cy=\"142.51999999999998\" r=\"4\" fill=\"#1B1B2F\"/>\n  <text x=\"160\" y=\"51\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">S</text><text x=\"258.726896031426\" y=\"108\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">O</text><text x=\"258.726896031426\" y=\"221.99999999999997\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">H</text><text x=\"160\" y=\"279\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">P</text><text x=\"61.273103968574006\" y=\"222.00000000000003\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">A</text><text x=\"61.273103968574006\" y=\"107.99999999999999\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">L</text>\n  <text x=\"160\" y=\"318\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"900\" font-family=\"Archivo,Arial\" fill=\"#1B1B2F\">Bibliotecaria Nu</text>\n  <text x=\"160\" y=\"336\" text-anchor=\"middle\" font-size=\"11\" font-family=\"Menlo,monospace\" fill=\"#1B1B2F\">ARC-99998  ·  compatibilidad 85%</text>\n  </svg>"
+    }
+  ]
+}

@@ -1,28 +1,39 @@
-import { DILEMMAS, ARENA, TYPES } from '@medalab/content';
+import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
+import { Toast } from './components/Toast';
+import { Forge } from './routes/Forge/Forge';
+import { Landing } from './routes/Landing';
+import { Medals } from './routes/Medals';
+import { MedalRoute } from './routes/Result';
 
-// Pantalla provisional de la Fase 0: confirma que la app consume el paquete de contenido.
-// Las rutas reales (Landing, Forja, Resultado…) llegan en la Fase 1.
 export function App() {
   return (
     <>
       <header className="watch">
         <div className="wrap">
-          <div className="brand">
+          <NavLink to="/" className="brand">
             <span className="dot" />
             MEDALAB 2045
-          </div>
+          </NavLink>
+          <nav aria-label="Principal">
+            <NavLink to="/" end>
+              Inicio
+            </NavLink>
+            <NavLink to="/forja">Forjar medalla</NavLink>
+            <NavLink to="/medallas">Mis medallas</NavLink>
+          </nav>
         </div>
       </header>
       <main className="wrap">
-        <div className="sheet" style={{ marginTop: 28 }}>
-          <span className="stamp">Fase 0</span>
-          <h1>El cuerpo se compra en la tienda. La medalla, no.</h1>
-          <p className="hint">
-            Contenido cargado: {DILEMMAS.length} dilemas, {ARENA.length} escenarios, {TYPES.length}{' '}
-            tipos de robot.
-          </p>
-        </div>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/forja" element={<Navigate to="/forja/1" replace />} />
+          <Route path="/forja/:step" element={<Forge />} />
+          <Route path="/medalla/:robotId" element={<MedalRoute />} />
+          <Route path="/medallas" element={<Medals />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
+      <Toast />
     </>
   );
 }

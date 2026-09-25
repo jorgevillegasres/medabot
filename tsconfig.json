@@ -3,5 +3,12 @@
   "compilerOptions": {
     "types": ["node"]
   },
-  "include": ["packages/*/src", "apps/*/src", "scripts/*.d.mts", "vitest.config.ts"]
+  "include": [
+    "packages/*/src",
+    "apps/*/src",
+    "apps/*/e2e",
+    "apps/*/*.config.ts",
+    "scripts/*.d.mts",
+    "vitest.config.ts"
+  ]
 }

@@ -9,6 +9,14 @@
     ".": "./src/index.ts"
   },
   "dependencies": {
-    "@medalab/content": "workspace:*"
+    "@medalab/content": "workspace:*",
+    "@medalab/engine": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "react": "^18.3.1"
   }
 }

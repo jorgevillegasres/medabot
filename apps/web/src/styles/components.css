@@ -1,0 +1,501 @@
+/* Componentes portados de reference/medalab-mvp.html (adaptados a enlaces y listas). */
+
+/* ===== Navegación ===== */
+a {
+  color: inherit;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+}
+h2 {
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+}
+h3 {
+  font-size: 1.1rem;
+}
+.brand {
+  text-decoration: none;
+  color: inherit;
+}
+nav {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+nav a {
+  color: var(--paper);
+  border: 2px solid transparent;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+}
+nav a[aria-current='page'] {
+  background: var(--yellow);
+  color: #1b1b2f;
+  border-color: var(--yellow);
+}
+nav a:hover {
+  border-color: var(--yellow);
+}
+section.view {
+  padding-top: 28px;
+}
+
+/* ===== Hojas y formularios ===== */
+.sheet + .sheet {
+  margin-top: 22px;
+}
+.grid {
+  display: grid;
+  gap: 18px;
+}
+.g2 {
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+}
+.g3 {
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+}
+label,
+.label {
+  display: block;
+  font-weight: 600;
+  margin: 12px 0 6px;
+}
+input[type='text'],
+textarea,
+select {
+  width: 100%;
+  font: inherit;
+  padding: 10px 12px;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+}
+textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  background: var(--yellow);
+  color: #1b1b2f;
+  border: 3px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-weight: 900;
+  font-stretch: 125%;
+  box-shadow: 4px 4px 0 var(--line);
+  transition: transform 0.08s;
+}
+.btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--line);
+}
+.btn.alt {
+  background: var(--card);
+  color: var(--ink);
+}
+.btn.red {
+  background: var(--red);
+  color: #fff;
+}
+.btn.small {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  box-shadow: 3px 3px 0 var(--line);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ===== Pasos de la forja ===== */
+.steps {
+  display: flex;
+  gap: 0;
+  margin: 18px 0 26px;
+  padding: 0;
+  list-style: none;
+  border: 3px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.steps li {
+  flex: 1;
+  padding: 8px 6px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.85rem;
+  background: var(--paper2);
+  color: var(--ink2);
+  border-right: 3px solid var(--line);
+}
+.steps li:last-child {
+  border-right: 0;
+}
+.steps li.on {
+  background: var(--yellow);
+  color: #1b1b2f;
+}
+.steps li.done {
+  background: var(--green);
+  color: #fff;
+}
+
+/* ===== Constructor ===== */
+.svgbox {
+  display: block;
+}
+.svgbox svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.parts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+  gap: 10px;
+}
+.partpick {
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+  background: var(--paper);
+}
+.partpick .opts {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+.partpick .opts button {
+  flex: 1;
+  border: 2px solid var(--line);
+  background: var(--card);
+  border-radius: 8px;
+  padding: 6px 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.partpick .opts button.on {
+  background: var(--yellow);
+  color: #1b1b2f;
+}
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+.swatches button {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid var(--line);
+}
+.swatches button.on {
+  outline: 3px solid var(--yellow);
+  outline-offset: 2px;
+}
+.preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper2);
+  border: 3px solid var(--line);
+  border-radius: 14px;
+  min-height: 280px;
+  padding: 10px;
+}
+.preview .svgbox {
+  width: min(240px, 80%);
+}
+
+/* ===== Jerarquía de valores ===== */
+.rank {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: r;
+}
+.rank li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  background: var(--paper);
+}
+.rank li::before {
+  counter-increment: r;
+  content: counter(r);
+  font-weight: 900;
+  font-stretch: 125%;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--paper);
+  display: grid;
+  place-items: center;
+  font-size: 0.85rem;
+}
+.rank li .v {
+  flex: 1;
+  font-weight: 600;
+}
+.rank li small {
+  display: block;
+  font-weight: 400;
+  color: var(--ink2);
+}
+.rank li button {
+  flex: none;
+  border: 2px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+  font-weight: 900;
+}
+.rank li button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.rank .handle {
+  order: -1;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  font-size: 1.2rem;
+  color: var(--ink2);
+  padding: 4px 2px;
+}
+.rank li.dragging {
+  opacity: 0.5;
+}
+.rank li.drop {
+  border-style: dashed;
+  border-color: var(--blue);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chips button {
+  border: 2px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-weight: 600;
+}
+.chips button.on {
+  background: var(--ink);
+  color: var(--paper);
+}
+.chips.small button {
+  font-size: 0.8rem;
+  padding: 5px 10px;
+}
+
+/* ===== Dilemas ===== */
+.dilema {
+  border: 3px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.dilema h3 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  align-items: baseline;
+}
+.dilema h3 span {
+  font-size: 0.8rem;
+  color: var(--red);
+}
+.opt {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 2px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+.opt.on {
+  background: var(--yellow);
+  color: #1b1b2f;
+  font-weight: 600;
+}
+.why {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 2px dashed color-mix(in srgb, var(--line) 40%, transparent);
+}
+.why .chips {
+  margin-top: 6px;
+}
+.progress {
+  height: 10px;
+  border: 2px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--paper2);
+  margin: 10px 0 6px;
+}
+.progress i {
+  display: block;
+  height: 100%;
+  background: var(--green);
+  width: 0;
+  transition: width 0.3s;
+}
+
+/* ===== Medalla ===== */
+.medalwrap {
+  display: grid;
+  grid-template-columns: minmax(260px, 360px) 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 720px) {
+  .medalwrap {
+    grid-template-columns: 1fr;
+  }
+}
+.metric {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 2px dashed color-mix(in srgb, var(--line) 40%, transparent);
+  padding: 8px 0;
+}
+.metric b {
+  font-stretch: 125%;
+  text-align: right;
+}
+.code {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.75rem;
+  word-break: break-all;
+  background: var(--paper2);
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  max-height: 110px;
+  overflow: auto;
+}
+
+/* ===== Tarjetas ===== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(210px, 100%), 1fr));
+  gap: 16px;
+}
+.card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: var(--card);
+  border: 3px solid var(--line);
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 4px 4px 0 var(--line);
+}
+.card .svgbox svg {
+  background: var(--paper2);
+  border-radius: 10px;
+  border: 2px solid var(--line);
+}
+.card h3 {
+  margin: 10px 0 2px;
+}
+.card .serial {
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 0.75rem;
+  color: var(--ink2);
+}
+.tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  padding: 2px 8px;
+  margin: 6px 4px 0 0;
+}
+.empty {
+  border: 3px dashed var(--line);
+  border-radius: 14px;
+  padding: 30px;
+  text-align: center;
+  color: var(--ink2);
+}
+
+/* ===== Varios ===== */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 3px solid var(--yellow);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 50;
+}
+.toast.show {
+  opacity: 1;
+}
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 28px;
+  align-items: center;
+}
+@media (max-width: 760px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}
+.hero .medal .svgbox {
+  max-width: 320px;
+  margin: 0 auto;
+}
+.lore {
+  border-left: 6px solid var(--yellow);
+  padding: 6px 16px;
+  background: var(--paper2);
+  border-radius: 0 10px 10px 0;
+  margin: 16px 0;
+}
+.lore p {
+  margin: 0;
+}
