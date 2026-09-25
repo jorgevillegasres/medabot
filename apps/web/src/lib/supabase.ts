@@ -1,19 +1,21 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
 const url = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+const publishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string | undefined;
 
 /** null si no hay variables de entorno: la app funciona en modo local (Fase 1). */
 export const supabase: SupabaseClient | null =
-  url && anonKey
-    ? createClient(url, anonKey, { auth: { persistSession: true, autoRefreshToken: true } })
+  url && publishableKey
+    ? createClient(url, publishableKey, { auth: { persistSession: true, autoRefreshToken: true } })
     : null;
 
 export const isOnline = supabase !== null;
 
 export function db(): SupabaseClient {
   if (!supabase)
-    throw new Error('Supabase no está configurado (VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY).');
+    throw new Error(
+      'Supabase no está configurado (VITE_SUPABASE_URL / VITE_SUPABASE_PUBLISHABLE_KEY).',
+    );
   return supabase;
 }
 

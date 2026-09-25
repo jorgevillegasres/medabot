@@ -12,9 +12,6 @@ values
   ('00000000-0000-4000-8000-0000000000b2', 'authenticated', 'authenticated', null, true, now(), now()),
   ('00000000-0000-4000-8000-0000000000c1', 'authenticated', 'authenticated', null, true, now(), now());
 
-create temp table t_ctx (k text primary key, v text) on commit drop;
-grant all on t_ctx to authenticated;
-
 create or replace function pg_temp.as_user(p_id text, p_anon boolean) returns void language plpgsql as $$
 begin
   perform set_config('request.jwt.claims',
@@ -157,5 +154,9 @@ begin
 
   raise notice 'RLS: todas las pruebas pasaron';
 end $$;
+
+-- Solo se llega aquí si el bloque anterior no lanzó ninguna FALLA.
+reset role;
+select 'RLS: todas las pruebas pasaron' as resultado;
 
 rollback;
