@@ -1,9 +1,14 @@
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { CIRCUITS, SCHOOLS, getType } from '@medalab/content';
 import { axesByWeight, medalCode, type Robot } from '@medalab/engine';
 import { MedalSvg, downloadBlob, exportPng, medalSvg } from '@medalab/ui';
+import { Metric } from '../components/Metric';
+import { publishRobot } from '../lib/api';
+import { explain, isOnline } from '../lib/supabase';
+import { useCourse } from '../store/course';
 import { toast } from '../store/toast';
-import { useRobot } from '../store/robots';
+import { useRobot, useRobots } from '../store/robots';
 
 /** Ancho del PNG de la medalla. La versión de impresión (2400 px) llega en la Fase 4. */
 const PNG_WIDTH = 1200;
@@ -79,8 +84,9 @@ export function ResultView({ robot: r, onForgeAnother }: Props) {
           <div className="code" data-testid="medal-code" tabIndex={0}>
             {code}
           </div>
+          <PublishBox robot={r} />
           <div className="row" style={{ marginTop: 12 }}>
-            <button type="button" className="btn small" onClick={copyCode}>
+            <button type="button" className="btn small alt" onClick={copyCode}>
               Copiar código
             </button>
             <button type="button" className="btn small alt" onClick={savePng}>
@@ -98,11 +104,51 @@ export function ResultView({ robot: r, onForgeAnother }: Props) {
   );
 }
 
-function Metric({ label, value }: { label: string; value: string | undefined }) {
+/** Publicar en la galería del curso (solo si hay servidor y el estudiante entró a un curso). */
+function PublishBox({ robot }: { robot: Robot }) {
+  const course = useCourse((s) => s.course);
+  const publishedId = useCourse((s) => s.published[robot.id]);
+  const markPublished = useCourse((s) => s.markPublished);
+  const updateLocal = useRobots((s) => s.update);
+  const [busy, setBusy] = useState(false);
+
+  if (!isOnline) return null;
+  if (!course)
+    return (
+      <p className="hint" style={{ marginTop: 12 }}>
+        Para publicar tu robot en la galería del curso,{' '}
+        <Link to="/entrar">entra con el código de tu curso</Link>.
+      </p>
+    );
+  if (publishedId)
+    return (
+      <p className="hint" style={{ marginTop: 12 }}>
+        Publicado en la galería de {course.name}.{' '}
+        <Link to={`/robot/${publishedId}`}>Ver su ficha</Link>
+      </p>
+    );
+
+  const publish = async () => {
+    setBusy(true);
+    try {
+      const { row } = await publishRobot(robot, course.id);
+      // Si la serie chocó con otra del curso, el servidor tiene la nueva: se sincroniza.
+      if (row.serial !== robot.serial) updateLocal(robot.id, { serial: row.serial });
+      markPublished(robot.id, row.id);
+      toast('Robot publicado en la galería.');
+    } catch (err) {
+      toast(explain(err));
+    } finally {
+      setBusy(false);
+    }
+  };
+
   return (
-    <div className="metric">
-      <span>{label}</span>
-      <b>{value ?? '—'}</b>
+    <div className="row" style={{ marginTop: 12 }}>
+      <button type="button" className="btn" onClick={publish} disabled={busy}>
+        {busy ? 'Publicando…' : 'Publicar en la galería'}
+      </button>
+      <span className="hint">Curso: {course.name}</span>
     </div>
   );
 }

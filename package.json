@@ -14,7 +14,8 @@
     "format:check": "prettier --check .",
     "content:extract": "node scripts/extract-content.mjs",
     "e2e": "pnpm --filter @medalab/web e2e",
-    "fixtures": "node scripts/make-fixtures.mjs"
+    "fixtures": "node scripts/make-fixtures.mjs",
+    "seed": "node scripts/make-seed.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.15.0",

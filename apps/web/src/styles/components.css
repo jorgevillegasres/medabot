@@ -65,6 +65,7 @@ label,
   margin: 12px 0 6px;
 }
 input[type='text'],
+input[type='email'],
 textarea,
 select {
   width: 100%;
@@ -498,4 +499,93 @@ textarea {
 }
 .lore p {
   margin: 0;
+}
+
+/* ===== Fase 2: curso, galería y panel ===== */
+.error {
+  color: var(--red);
+  font-weight: 600;
+}
+.linkbtn {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  text-decoration: underline;
+  font: inherit;
+}
+.tag.mine {
+  background: var(--yellow);
+  color: #1b1b2f;
+}
+.joincode {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-weight: 900;
+  font-size: clamp(2rem, 7vw, 3rem);
+  letter-spacing: 0.08em;
+  margin: 0 0 8px;
+}
+code {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.85em;
+  word-break: break-all;
+}
+.barrow {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) 2ch;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.9rem;
+  padding: 4px 0;
+}
+.barrow small {
+  color: var(--ink2);
+}
+.bar {
+  height: 10px;
+  border: 2px solid var(--line);
+  border-radius: 6px;
+  background: var(--paper2);
+  overflow: hidden;
+}
+.bar i {
+  display: block;
+  height: 100%;
+  background: var(--green);
+}
+.check {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 0;
+}
+.tablewrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.table th,
+.table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 8px 6px;
+  border-bottom: 2px dashed color-mix(in srgb, var(--line) 40%, transparent);
+}
+.table th {
+  font-stretch: 125%;
+  border-bottom: 3px solid var(--line);
+  white-space: nowrap;
+}
+.table small {
+  color: var(--ink2);
+}
+.foot {
+  padding-top: 0;
+  padding-bottom: 40px;
+  font-size: 0.85rem;
+  color: var(--ink2);
 }
