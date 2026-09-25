@@ -589,3 +589,188 @@ code {
   font-size: 0.85rem;
   color: var(--ink2);
 }
+
+/* ===== Fase 3: Arena (portado del MVP) ===== */
+.arena {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+@media (max-width: 760px) {
+  .arena {
+    grid-template-columns: 1fr;
+  }
+  .vs {
+    transform: rotate(90deg);
+  }
+}
+.vs {
+  display: grid;
+  place-items: center;
+  font-stretch: 125%;
+  font-weight: 900;
+  font-size: 2.4rem;
+  color: var(--red);
+}
+.fighter {
+  background: var(--card);
+  border: 3px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  min-height: 200px;
+}
+.fighter .fighter-svg {
+  width: 120px;
+  float: right;
+  margin: 0 0 10px 10px;
+}
+.fighter .side {
+  display: inline-grid;
+  place-items: center;
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.8em;
+}
+.verdict {
+  clear: both;
+  margin-top: 12px;
+  border: 3px solid var(--green);
+  background: color-mix(in srgb, var(--green) 12%, var(--card));
+  border-radius: 10px;
+  padding: 12px;
+}
+.changed {
+  margin: 6px 0 0;
+}
+.changed.yes {
+  color: var(--red);
+}
+.referee {
+  text-align: center;
+  margin: 20px 0;
+}
+.referee p {
+  margin: 0 auto;
+}
+.scenario {
+  font-size: 1.1rem;
+}
+.options {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+  display: grid;
+  gap: 6px;
+}
+.options li {
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 12px;
+  background: var(--paper);
+}
+.votecount {
+  font-weight: 600;
+  margin: 8px 0 0;
+}
+.votebars {
+  margin-top: 10px;
+}
+.votebars .barrow.hit span:first-child {
+  font-weight: 900;
+}
+.votebars .barrow.hit .bar i {
+  background: var(--yellow);
+}
+
+/* Votación en el celular */
+.ballot-side {
+  margin-top: 14px;
+}
+.ballot-side .chips {
+  margin-top: 8px;
+}
+.ballot-side .chips button {
+  flex: 1;
+  min-height: 44px;
+}
+.svgbox.mini {
+  width: 44px;
+}
+.ballot.done {
+  border-color: var(--green);
+}
+
+/* Proyector */
+.screen {
+  max-width: none;
+}
+.bout.big {
+  font-size: clamp(1.1rem, 1.6vw, 1.6rem);
+}
+.bout.big h2 {
+  font-size: clamp(2rem, 4vw, 3.6rem);
+}
+.bout.big .scenario {
+  font-size: 1.3em;
+}
+.bout.big .fighter .fighter-svg {
+  width: clamp(140px, 14vw, 240px);
+}
+.bout.big .vs {
+  font-size: clamp(3rem, 6vw, 6rem);
+}
+.bout.big .referee {
+  font-size: 1.2em;
+}
+.mosaic {
+  display: grid;
+  grid-template-columns: minmax(280px, 420px) 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 760px) {
+  .mosaic {
+    grid-template-columns: 1fr;
+  }
+}
+.featured {
+  text-align: center;
+  animation: fadein 0.6s ease;
+}
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+}
+.tile {
+  border: 3px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  padding: 8px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: transform 0.4s;
+}
+.tile.on {
+  background: var(--yellow);
+  color: #1b1b2f;
+  transform: scale(1.06);
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .featured {
+    animation: none;
+  }
+}

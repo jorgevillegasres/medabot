@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "e2e:profesor": "playwright open --save-storage=e2e/.auth/teacher.json http://localhost:5173/profesor"
   },
   "dependencies": {
     "@medalab/content": "workspace:*",

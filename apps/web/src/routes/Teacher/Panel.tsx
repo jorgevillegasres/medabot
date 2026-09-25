@@ -167,6 +167,9 @@ function CourseView({ course, onCourse }: { course: Course; onCourse: (c: Course
               >
                 Copiar enlace
               </button>
+              <Link className="btn small" to={`/arena?curso=${course.id}`}>
+                Ir a la Arena
+              </Link>
               <button
                 className={course.gallery_closed ? 'btn small' : 'btn small red'}
                 type="button"

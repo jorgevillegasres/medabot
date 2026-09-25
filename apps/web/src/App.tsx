@@ -1,6 +1,7 @@
 import { Link, NavLink, Navigate, Route, Routes } from 'react-router-dom';
 import { Toast } from './components/Toast';
 import { isOnline } from './lib/supabase';
+import { Arena } from './routes/Arena';
 import { Forge } from './routes/Forge/Forge';
 import { Gallery } from './routes/Gallery';
 import { Join } from './routes/Join';
@@ -8,8 +9,10 @@ import { Landing } from './routes/Landing';
 import { Medals } from './routes/Medals';
 import { MedalRoute } from './routes/Result';
 import { RobotSheet } from './routes/RobotSheet';
+import { Screen } from './routes/Screen';
 import { TeacherLogin } from './routes/Teacher/Login';
 import { TeacherPanel } from './routes/Teacher/Panel';
+import { Vote } from './routes/Vote';
 import { useCourse } from './store/course';
 
 export function App() {
@@ -28,6 +31,7 @@ export function App() {
             </NavLink>
             <NavLink to="/forja">Forjar medalla</NavLink>
             {isOnline && course && <NavLink to="/galeria">Galería</NavLink>}
+            {isOnline && course && <NavLink to="/votar">Votar</NavLink>}
             <NavLink to="/medallas">Mis medallas</NavLink>
             {isOnline && !course && <NavLink to="/entrar">Entrar al curso</NavLink>}
           </nav>
@@ -43,6 +47,9 @@ export function App() {
           <Route path="/medallas" element={<Medals />} />
           <Route path="/galeria" element={<Gallery />} />
           <Route path="/robot/:robotId" element={<RobotSheet />} />
+          <Route path="/votar" element={<Vote />} />
+          <Route path="/arena" element={<Arena />} />
+          <Route path="/pantalla" element={<Screen />} />
           <Route path="/profesor" element={<TeacherLogin />} />
           <Route path="/profesor/panel" element={<TeacherPanel />} />
           <Route path="*" element={<Navigate to="/" replace />} />
