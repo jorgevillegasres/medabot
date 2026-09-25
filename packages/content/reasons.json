@@ -1,0 +1,36 @@
+{
+  "reasons": [
+    {
+      "s": 1,
+      "x": "Para que no lo castiguen ni lo desactiven"
+    },
+    {
+      "s": 2,
+      "x": "Porque es lo que más le conviene"
+    },
+    {
+      "s": 3,
+      "x": "Porque eso esperan de un buen robot"
+    },
+    {
+      "s": 4,
+      "x": "Porque la regla o la ley lo dicen"
+    },
+    {
+      "s": 5,
+      "x": "Porque es lo que todos aceptarían si pudieran pactarlo"
+    },
+    {
+      "s": 6,
+      "x": "Porque hay un principio que vale para cualquiera, diga lo que diga la regla"
+    }
+  ],
+  "stageNames": {
+    "1": "Obediencia y castigo",
+    "2": "Interés propio",
+    "3": "Aprobación social",
+    "4": "Ley y orden",
+    "5": "Contrato social",
+    "6": "Principios universales"
+  }
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "c": "CST",
+    "n": "Custodio",
+    "d": "Cuida personas vulnerables: mayores, pacientes, niños.",
+    "fit": ["S", "L"]
+  },
+  {
+    "c": "GRD",
+    "n": "Guardián",
+    "d": "Vigila espacios y hace cumplir reglas.",
+    "fit": ["S", "O"]
+  },
+  {
+    "c": "EXP",
+    "n": "Explorador",
+    "d": "Opera lejos de supervisión humana: rescate, ambientes hostiles.",
+    "fit": ["A", "S"]
+  },
+  {
+    "c": "MDR",
+    "n": "Mediador",
+    "d": "Resuelve conflictos entre personas.",
+    "fit": ["H", "S"]
+  },
+  {
+    "c": "ORC",
+    "n": "Oráculo",
+    "d": "Aconseja y recomienda decisiones a humanos.",
+    "fit": ["H", "P"]
+  },
+  {
+    "c": "ARC",
+    "n": "Archivista",
+    "d": "Recoge, guarda y entrega información.",
+    "fit": ["P", "H"]
+  },
+  {
+    "c": "TUT",
+    "n": "Tutor",
+    "d": "Enseña y acompaña el aprendizaje.",
+    "fit": ["H", "L"]
+  }
+]

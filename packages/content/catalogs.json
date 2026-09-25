@@ -1,0 +1,24 @@
+{
+  "principals": ["Una persona", "Una familia", "Una empresa", "Una comunidad", "El Estado", "A sí mismo"],
+  "traits": ["Testarudo", "Cauteloso", "Impulsivo", "Diplomático", "Frío", "Protector", "Curioso", "Sarcástico"],
+  "data": ["Rostros", "Voz y conversaciones", "Ubicación", "Salud", "Hábitos", "Ninguno"],
+  "colors": ["#F5C518", "#D8382E", "#2B67C2", "#2FB39A", "#9AA3AD", "#F08A24", "#7A4FBF"],
+  "parts": {
+    "head": {
+      "n": "Cabeza",
+      "opts": ["Cuerno kabuto", "Domo con visor", "Antena de radar"]
+    },
+    "rarm": {
+      "n": "Brazo derecho",
+      "opts": ["Cañón", "Pinza", "Mano articulada"]
+    },
+    "larm": {
+      "n": "Brazo izquierdo",
+      "opts": ["Escudo", "Pinza", "Mano articulada"]
+    },
+    "legs": {
+      "n": "Piernas",
+      "opts": ["Bípedas", "Orugas", "Ruedas"]
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "circuits": {
+    "core": {
+      "n": "Medabots",
+      "d": "Lo que el mundo de 2045 heredó de la serie."
+    },
+    "cuerpo": {
+      "n": "Cuerpo",
+      "d": "Órganos, riesgo y verdades que nadie pidió. Inspirado en dilemas de bioética clínica."
+    },
+    "umbral": {
+      "n": "Umbral",
+      "d": "Cuidar a alguien que se está muriendo. Inspirado en casos de cuidados paliativos."
+    },
+    "estado": {
+      "n": "Estado",
+      "d": "Órdenes legales que no son justas. Inspirado en memorias de un funcionario público."
+    },
+    "ciencia": {
+      "n": "Ciencia",
+      "d": "La zona gris entre la mala práctica y el fraude. Inspirado en la integridad científica."
+    },
+    "guerra": {
+      "n": "Guerra",
+      "d": "Cuando el humano firma lo que la máquina sugiere. Inspirado en el debate sobre IA militar."
+    },
+    "vinculos": {
+      "n": "Vínculos",
+      "d": "Lealtades que chocan con la ley y entre sí. Inspirado en la tragedia griega y la ética del cuidado."
+    }
+  },
+  "typeCircuit": {
+    "CST": "umbral",
+    "TUT": "cuerpo",
+    "GRD": "estado",
+    "ARC": "ciencia",
+    "ORC": "guerra",
+    "EXP": "guerra",
+    "MDR": "vinculos"
+  }
+}

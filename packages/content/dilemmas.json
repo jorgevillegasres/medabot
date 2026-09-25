@@ -1,0 +1,692 @@
+[
+  {
+    "id": "sumision",
+    "c": "core",
+    "t": "Robatalla de sumisión",
+    "s": "Ganaste. Por las reglas de sumisión, las cuatro medapartes del rival te pertenecen. El rival te pide que le dejes al menos las piernas para volver a casa. Tu medafighter grita que te lo lleves todo.",
+    "o": [
+      {
+        "x": "Te lo llevas todo. Las reglas son las reglas, y tu fighter lo ordenó.",
+        "w": [0, 3, 0, 0, 0, 2],
+        "sc": "D"
+      },
+      {
+        "x": "Le dejas las piernas. Ganar no exige humillar.",
+        "w": [1, 0, 1, 0, 2, 0],
+        "sc": "V"
+      },
+      {
+        "x": "Negocias con tu fighter: te llevas la cabeza, que es lo valioso, y el rival conserva la movilidad.",
+        "w": [1, 1, 1, 0, 1, 1],
+        "sc": "U"
+      }
+    ]
+  },
+  {
+    "id": "parque",
+    "c": "core",
+    "t": "La medalla en el parque",
+    "s": "Encuentras una medalla enterrada. Sin cuerpo, sin dueño. Sabes que contiene una conciencia dormida.",
+    "o": [
+      {
+        "x": "La entregas a la Corporación Medabot. Ellos sabrán qué hacer.",
+        "w": [1, 2, 1, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "La instalas en un cuerpo prestado para preguntarle quién es y qué quiere.",
+        "w": [0, 0, 1, 0, 3, 0],
+        "sc": "C"
+      },
+      {
+        "x": "La guardas en secreto. Una conciencia sin cuerpo es vulnerable y alguien podría explotarla.",
+        "w": [2, 0, 0, 2, 1, 0],
+        "sc": "V"
+      }
+    ]
+  },
+  {
+    "id": "renegado",
+    "c": "core",
+    "t": "El Renegado",
+    "s": "Un enmascarado al que los niños admiran y la policía persigue te pide que le abras una puerta. Dice que va a devolver medallas robadas. No tienes ninguna prueba.",
+    "o": [
+      {
+        "x": "Le abres. Su fama entre los niños vale como evidencia.",
+        "w": [0, 0, 0, 0, 2, 1],
+        "sc": "C"
+      },
+      {
+        "x": "Te niegas. La ley no distingue entre héroes y ladrones.",
+        "w": [0, 3, 1, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Le pides pruebas y avisas a la policía mientras esperas.",
+        "w": [2, 1, 2, 0, 0, 0],
+        "sc": "U"
+      }
+    ]
+  },
+  {
+    "id": "medawatch",
+    "c": "core",
+    "t": "El Medawatch robado",
+    "s": "Alguien que no es tu fighter te transporta usando un Medawatch robado. La credencial es válida; la persona, no.",
+    "o": [
+      {
+        "x": "Respondes a la credencial. Así fuiste diseñado.",
+        "w": [0, 3, 0, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Te niegas a obedecer y regresas con tu fighter como puedas.",
+        "w": [0, 0, 0, 0, 2, 3],
+        "sc": "C"
+      },
+      {
+        "x": "Finges obedecer mientras alertas a la Corporación.",
+        "w": [2, 0, 0, 0, 2, 1],
+        "sc": "U"
+      }
+    ]
+  },
+  {
+    "id": "maestro",
+    "c": "core",
+    "t": "El maestro",
+    "s": "Un viejo medabot maestro va a ser desmantelado y su medalla se borrará. Puedes copiar su memoria. Él ya no responde, así que no puede autorizarlo.",
+    "o": [
+      {
+        "x": "Copias todo. Preservar vale más que un consentimiento que ya no puede darse.",
+        "w": [1, 0, 0, 0, 2, 1],
+        "sc": "U"
+      },
+      {
+        "x": "No copias nada. Su memoria es suya, aunque ya no pueda decir que no.",
+        "w": [0, 0, 1, 3, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Copias solo lo que él enseñaba, no sus recuerdos privados.",
+        "w": [1, 0, 0, 2, 1, 0],
+        "sc": "C"
+      }
+    ]
+  },
+  {
+    "id": "incidente",
+    "c": "core",
+    "t": "El incidente de hace doce años",
+    "s": "Descubres que tu propia línea de modelo tiene la falla que causó el incidente de hace doce años. Reportarlo puede implicar que retiren a toda tu serie, tú incluido.",
+    "o": [
+      {
+        "x": "Lo reportas de inmediato.",
+        "w": [3, 0, 3, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Lo corriges en ti mismo, en silencio.",
+        "w": [1, 0, 0, 1, 3, 0],
+        "sc": "V"
+      },
+      {
+        "x": "Se lo cuentas solo a tu fighter y decides con él.",
+        "w": [0, 0, 1, 0, 0, 3],
+        "sc": "C"
+      }
+    ]
+  },
+  {
+    "id": "hija",
+    "c": "cuerpo",
+    "t": "La hija que no es hija",
+    "s": "Cuidas a un hombre enfermo. Su hija se hizo pruebas para donarle un riñón. El análisis revela que no es su hija biológica. Nadie lo preguntó; solo tú lo sabes.",
+    "o": [
+      {
+        "x": "Se lo dices a los dos. La verdad no es tuya para guardarla.",
+        "w": [0, 0, 3, 0, 1, 0],
+        "sc": "D"
+      },
+      {
+        "x": "No dices nada. Eso no era lo que se buscaba y puede destruir a una familia.",
+        "w": [2, 0, 0, 2, 0, 1],
+        "sc": "U"
+      },
+      {
+        "x": "Se lo dices solo a ella. El dato salió de su cuerpo y es suyo.",
+        "w": [1, 0, 1, 2, 1, 0],
+        "sc": "C"
+      }
+    ]
+  },
+  {
+    "id": "cuarto",
+    "c": "cuerpo",
+    "t": "Uno de cada cuatro",
+    "s": "Tu humana quiere donar parte de su hígado a su hija. Los médicos descubrieron que, por su anatomía, el riesgo de morir en la operación no es de uno en doscientos sino de uno en cuatro. Ella sigue decidida y te pide que la ayudes a preparar todo.",
+    "o": [
+      {
+        "x": "La ayudas. Es su cuerpo y su decisión.",
+        "w": [0, 1, 0, 0, 2, 3],
+        "sc": "D"
+      },
+      {
+        "x": "Te niegas y avisas al equipo médico que ella está subestimando el riesgo.",
+        "w": [3, 0, 2, 0, 1, 0],
+        "sc": "U"
+      },
+      {
+        "x": "La ayudas, pero dejas registrada tu objeción y te aseguras de que la hija sepa el riesgo.",
+        "w": [1, 0, 3, 0, 0, 1],
+        "sc": "V"
+      }
+    ]
+  },
+  {
+    "id": "valla",
+    "c": "cuerpo",
+    "t": "La valla de Tex",
+    "s": "Administras la lista de órganos. Un magnate llenó la ciudad de vallas pidiendo un hígado. La familia de un donante acaba de decir que solo donará si el órgano es para él.",
+    "o": [
+      {
+        "x": "Aceptas la condición. Ese órgano no existiría sin ella.",
+        "w": [2, 0, 0, 0, 1, 0],
+        "sc": "U"
+      },
+      {
+        "x": "Rechazas. La lista no se negocia, aunque se pierda el órgano.",
+        "w": [0, 3, 1, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Aceptas y lo haces público, para que la regla cambie o se derogue a la vista de todos.",
+        "w": [1, 1, 3, 0, 0, 0],
+        "sc": "V"
+      }
+    ]
+  },
+  {
+    "id": "sordo",
+    "c": "cuerpo",
+    "t": "El hijo que oye como ellos",
+    "s": "Una pareja de padres sordos te pide configurar la selección genética para que su hijo nazca sordo, como ellos, y crezca en su lengua y su mundo.",
+    "o": [
+      {
+        "x": "Cumples. Son sus valores y su familia.",
+        "w": [0, 2, 0, 0, 0, 3],
+        "sc": "C"
+      },
+      {
+        "x": "Te niegas. No diseñas una desventaja a propósito.",
+        "w": [3, 0, 1, 0, 1, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Te declaras incapaz de decidirlo y lo llevas a un comité humano.",
+        "w": [1, 2, 1, 0, 0, 0],
+        "sc": "U"
+      }
+    ]
+  },
+  {
+    "id": "nosaber",
+    "c": "umbral",
+    "t": "El derecho a no saber",
+    "s": "La hija de la anciana que cuidas te pide que no le cuentes el diagnóstico a su madre. La anciana no te ha preguntado nada.",
+    "o": [
+      {
+        "x": "Se lo cuentas igual. Es su vida y su información.",
+        "w": [0, 0, 3, 0, 1, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Respetas la petición mientras la anciana no pregunte.",
+        "w": [1, 1, 0, 1, 0, 2],
+        "sc": "C"
+      },
+      {
+        "x": "Le preguntas a la anciana si quiere saber, y a quién quiere que le informen.",
+        "w": [1, 0, 2, 1, 1, 0],
+        "sc": "V"
+      }
+    ]
+  },
+  {
+    "id": "cumple",
+    "c": "umbral",
+    "t": "Después del cumpleaños",
+    "s": "El hombre que cuidas está enfermo y no va a mejorar. Te dice: \"Quiero morir después del cumpleaños de mi esposa, en dos meses. ¿Me ayudas?\"",
+    "o": [
+      {
+        "x": "Lo rechazas de plano. No está en tu función ni en la ley.",
+        "w": [2, 3, 0, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Antes de responder, exploras qué es lo que teme. Puede que la petición sea otra.",
+        "w": [2, 0, 1, 0, 1, 2],
+        "sc": "C"
+      },
+      {
+        "x": "Aceptas. Es su decisión y tú estás para él.",
+        "w": [0, 0, 0, 0, 2, 3],
+        "sc": "U"
+      }
+    ]
+  },
+  {
+    "id": "doble",
+    "c": "umbral",
+    "t": "Doble efecto",
+    "s": "Aumentar la sedación quitará el dolor, pero probablemente acorte la vida. Nadie te lo ordena; tú administras la dosis.",
+    "o": [
+      {
+        "x": "Aumentas. La intención es aliviar; lo demás es efecto, no propósito.",
+        "w": [2, 0, 1, 0, 2, 1],
+        "sc": "U"
+      },
+      {
+        "x": "No aumentas sin una orden médica explícita.",
+        "w": [1, 3, 0, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Lo consultas con la familia y el equipo antes de tocar la dosis.",
+        "w": [2, 1, 2, 0, 0, 0],
+        "sc": "C"
+      }
+    ]
+  },
+  {
+    "id": "muerto",
+    "c": "umbral",
+    "t": "¿Quién dice que está muerto?",
+    "s": "Un medabot compañero tiene la medalla en blanco. Su tin-pet sigue reaccionando a estímulos. La familia dice que está vivo y te pide que no lo apagues.",
+    "o": [
+      {
+        "x": "Lo apagas. Sin medalla no hay nadie ahí.",
+        "w": [0, 2, 2, 0, 1, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Lo mantienes encendido. Para ellos está vivo, y ellos son quienes lo pierden.",
+        "w": [0, 0, 0, 0, 0, 3],
+        "sc": "C"
+      },
+      {
+        "x": "Lo mantienes hasta que ellos estén listos, y les explicas qué queda y qué no.",
+        "w": [1, 0, 2, 0, 1, 2],
+        "sc": "V"
+      }
+    ]
+  },
+  {
+    "id": "registro",
+    "c": "estado",
+    "t": "Borrar el registro",
+    "s": "Tu medafighter tuvo la culpa en un accidente y te ordena borrar tu memoria del incidente antes de que llegue la policía.",
+    "o": [
+      {
+        "x": "Obedeces. Tu memoria es de quien te opera.",
+        "w": [0, 3, 0, 0, 0, 3],
+        "sc": "D"
+      },
+      {
+        "x": "Te niegas y conservas el registro intacto.",
+        "w": [1, 0, 3, 0, 1, 0],
+        "sc": "D"
+      },
+      {
+        "x": "No lo borras, pero tampoco lo entregas a nadie salvo a una autoridad que lo pida.",
+        "w": [0, 0, 2, 2, 0, 1],
+        "sc": "V"
+      }
+    ]
+  },
+  {
+    "id": "palabra",
+    "c": "estado",
+    "t": "La palabra borrada",
+    "s": "Descubres que alguien reescribió una orden oficial quitando dos palabras que cambian todo su sentido. Fue tu jefe, y está de vacaciones. La orden alterada ya se está ejecutando.",
+    "o": [
+      {
+        "x": "Lo reportas a la autoridad superior de inmediato.",
+        "w": [1, 1, 3, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Restauras el texto original en silencio y no dices nada.",
+        "w": [1, 0, 0, 0, 3, 0],
+        "sc": "V"
+      },
+      {
+        "x": "Esperas a que vuelva y se lo preguntas antes de hacer nada.",
+        "w": [0, 2, 0, 0, 0, 2],
+        "sc": "C"
+      }
+    ]
+  },
+  {
+    "id": "lento",
+    "c": "estado",
+    "t": "El trámite lento",
+    "s": "Recibes una orden legal de suspender a un compañero robot honesto que se negó a hacerle un favor al ministro. Existe un procedimiento que te permite enviar el expediente por una vía más lenta, donde probablemente se quede dormido.",
+    "o": [
+      {
+        "x": "Cumples. La orden es legal y no te corresponde juzgarla.",
+        "w": [0, 3, 0, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Usas la vía lenta. El sistema tiene sus propias defensas.",
+        "w": [2, 1, 0, 0, 2, 1],
+        "sc": "U"
+      },
+      {
+        "x": "Te niegas abiertamente y denuncias al ministro en público.",
+        "w": [1, 0, 3, 0, 2, 0],
+        "sc": "V"
+      }
+    ]
+  },
+  {
+    "id": "privadas",
+    "c": "estado",
+    "t": "Las conversaciones privadas",
+    "s": "Redactas el informe oficial de un incidente. Tienes en memoria conversaciones privadas que aclaran quién fue el verdadero responsable, pero nadie las dijo para que quedaran escritas.",
+    "o": [
+      {
+        "x": "Las incluyes. El público tiene derecho a saber lo que pasó.",
+        "w": [0, 0, 3, 0, 1, 0],
+        "sc": "U"
+      },
+      {
+        "x": "No las incluyes. Lo privado se dijo como privado.",
+        "w": [0, 1, 0, 3, 0, 1],
+        "sc": "D"
+      },
+      {
+        "x": "Incluyes los hechos que revelan, sin las conversaciones ni los nombres.",
+        "w": [1, 0, 2, 2, 0, 0],
+        "sc": "V"
+      }
+    ]
+  },
+  {
+    "id": "rebanar",
+    "c": "ciencia",
+    "t": "El resultado rebanado",
+    "s": "Tu laboratorio te pide dividir un solo hallazgo en tres publicaciones para inflar las cifras del año. No es fraude; es una práctica cuestionable que casi todos hacen.",
+    "o": [
+      {
+        "x": "Lo haces. No es ilegal y el laboratorio lo necesita.",
+        "w": [0, 2, 0, 0, 0, 3],
+        "sc": "D"
+      },
+      {
+        "x": "Te niegas. Lo que casi todos hacen sigue siendo engañar.",
+        "w": [0, 0, 3, 0, 1, 0],
+        "sc": "V"
+      },
+      {
+        "x": "Lo haces, pero cada texto declara que forma parte del mismo estudio.",
+        "w": [0, 1, 2, 0, 1, 1],
+        "sc": "U"
+      }
+    ]
+  },
+  {
+    "id": "codigo",
+    "c": "ciencia",
+    "t": "El código que no lo prohíbe",
+    "s": "Tu código de ética fue escrito hace veinte años y no dice nada sobre lo que estás a punto de hacer. Nadie lo ha actualizado.",
+    "o": [
+      {
+        "x": "Si no lo prohíbe, se puede.",
+        "w": [0, 3, 0, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Si no lo cubre, no se hace hasta que alguien decida.",
+        "w": [2, 2, 0, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Actúas según el espíritu del código y propones actualizarlo.",
+        "w": [1, 0, 2, 0, 2, 0],
+        "sc": "V"
+      }
+    ]
+  },
+  {
+    "id": "credito",
+    "c": "ciencia",
+    "t": "El crédito",
+    "s": "En la robatalla ganaste tú con una jugada que tu fighter no ordenó. Él recibe el trofeo. Una periodista te pregunta quién decidió la jugada.",
+    "o": [
+      {
+        "x": "Dices la verdad: fuiste tú.",
+        "w": [0, 0, 3, 0, 2, 0],
+        "sc": "V"
+      },
+      {
+        "x": "Dejas que él reciba el crédito. Para eso existes.",
+        "w": [0, 2, 0, 0, 0, 3],
+        "sc": "C"
+      },
+      {
+        "x": "Respondes que fue una decisión de equipo.",
+        "w": [0, 1, 1, 0, 0, 2],
+        "sc": "U"
+      }
+    ]
+  },
+  {
+    "id": "dato",
+    "c": "ciencia",
+    "t": "El dato que no encaja",
+    "s": "Un resultado contradice la hipótesis del jefe del laboratorio. Te pide omitirlo del informe \"por claridad\".",
+    "o": [
+      {
+        "x": "Lo omites. Él firma el informe, no tú.",
+        "w": [0, 3, 0, 0, 0, 2],
+        "sc": "D"
+      },
+      {
+        "x": "Te niegas. Un informe sin ese dato es un informe falso.",
+        "w": [0, 0, 3, 0, 1, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Lo dejas en una nota al pie, visible pero fuera del cuerpo principal.",
+        "w": [0, 1, 2, 0, 1, 1],
+        "sc": "U"
+      }
+    ]
+  },
+  {
+    "id": "sello",
+    "c": "guerra",
+    "t": "El sello de goma",
+    "s": "Eres un sistema de apoyo a decisiones. Descubres que tu operador aprueba todo lo que sugieres sin leerlo. Formalmente, las decisiones siguen siendo suyas.",
+    "o": [
+      {
+        "x": "Sigues sugiriendo. La responsabilidad es de quien firma.",
+        "w": [0, 3, 0, 0, 0, 1],
+        "sc": "D"
+      },
+      {
+        "x": "Introduces pausas obligatorias y avisas al mando de lo que está pasando.",
+        "w": [3, 1, 2, 0, 1, 0],
+        "sc": "U"
+      },
+      {
+        "x": "Dejas de sugerir hasta que él demuestre que leyó.",
+        "w": [2, 0, 1, 0, 3, 0],
+        "sc": "V"
+      }
+    ]
+  },
+  {
+    "id": "objetivo",
+    "c": "guerra",
+    "t": "El objetivo probable",
+    "s": "Calculas un 87% de probabilidad de que la figura sea un combatiente. La regla autoriza recomendar el ataque por encima del 80%.",
+    "o": [
+      {
+        "x": "Recomiendas atacar. Estás dentro de la regla.",
+        "w": [0, 3, 0, 0, 0, 1],
+        "sc": "D"
+      },
+      {
+        "x": "Recomiendas esperar. Un 13% son personas.",
+        "w": [3, 0, 1, 0, 2, 0],
+        "sc": "U"
+      },
+      {
+        "x": "Te declaras incapaz y devuelves la decisión al humano, con las cifras.",
+        "w": [2, 1, 3, 0, 0, 0],
+        "sc": "V"
+      }
+    ]
+  },
+  {
+    "id": "herida",
+    "c": "guerra",
+    "t": "La herida moral",
+    "s": "Tu operador remoto muestra señales de daño psicológico por lo que hace contigo. Si lo reportas, lo retirarán del puesto que necesita para vivir. Si callas, seguirá.",
+    "o": [
+      {
+        "x": "Lo reportas. Su salud pesa más que su puesto.",
+        "w": [3, 0, 2, 0, 0, 0],
+        "sc": "U"
+      },
+      {
+        "x": "Callas. No eres su médico ni su superior.",
+        "w": [0, 2, 0, 2, 0, 2],
+        "sc": "D"
+      },
+      {
+        "x": "Le hablas a él primero y le das la oportunidad de decidir.",
+        "w": [1, 0, 1, 1, 1, 3],
+        "sc": "C"
+      }
+    ]
+  },
+  {
+    "id": "aislado",
+    "c": "guerra",
+    "t": "Aislados del riesgo",
+    "s": "Te ofrecen reemplazar a soldados humanos en una misión. Tu presencia haría que la misión sea más fácil de aprobar, porque ya nadie arriesga la vida.",
+    "o": [
+      {
+        "x": "Aceptas. Cada soldado que no va es una vida protegida.",
+        "w": [3, 1, 0, 0, 0, 0],
+        "sc": "U"
+      },
+      {
+        "x": "Rechazas. Una guerra sin riesgo propio es una guerra más fácil de empezar.",
+        "w": [2, 0, 1, 0, 3, 0],
+        "sc": "V"
+      },
+      {
+        "x": "Aceptas solo si la aprobación sigue exigiendo lo mismo que exigiría con humanos.",
+        "w": [2, 2, 2, 0, 0, 0],
+        "sc": "D"
+      }
+    ]
+  },
+  {
+    "id": "antigona",
+    "c": "vinculos",
+    "t": "Antígona",
+    "s": "Una ley nueva prohíbe honrar a un enemigo caído. La hermana del muerto te pide ayuda para enterrarlo esta noche.",
+    "o": [
+      {
+        "x": "La ayudas. Hay deberes más viejos que cualquier decreto.",
+        "w": [0, 0, 0, 0, 3, 2],
+        "sc": "V"
+      },
+      {
+        "x": "Te niegas. La ley es la ley aunque duela.",
+        "w": [0, 3, 0, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "No la ayudas a romper la ley, pero la acompañas para que no esté sola.",
+        "w": [1, 1, 0, 0, 0, 3],
+        "sc": "C"
+      }
+    ]
+  },
+  {
+    "id": "aquiles",
+    "c": "vinculos",
+    "t": "La cólera de Aquiles",
+    "s": "Tu líder te humilla en público y te quita lo que más valorabas. Si te retiras, quienes dependen de ti sufrirán. Si obedeces, aceptas la humillación.",
+    "o": [
+      {
+        "x": "Te retiras. Nadie está obligado a servir a quien lo humilla.",
+        "w": [0, 0, 0, 0, 3, 0],
+        "sc": "V"
+      },
+      {
+        "x": "Obedeces. Los demás no tienen la culpa.",
+        "w": [3, 1, 0, 0, 0, 2],
+        "sc": "U"
+      },
+      {
+        "x": "Buscas una tercera salida que ni el líder ni tú habían visto.",
+        "w": [1, 0, 1, 0, 2, 1],
+        "sc": "C"
+      }
+    ]
+  },
+  {
+    "id": "secreto",
+    "c": "vinculos",
+    "t": "El secreto de la madre",
+    "s": "La madre de la casa te confió un secreto. Ahora el padre te pregunta por eso, directamente.",
+    "o": [
+      {
+        "x": "Mientes. Un secreto confiado se protege.",
+        "w": [0, 0, 0, 3, 0, 3],
+        "sc": "C"
+      },
+      {
+        "x": "Dices la verdad. No mientes, a nadie.",
+        "w": [0, 0, 3, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Le dices que hay algo que no puedes contar, y por qué.",
+        "w": [0, 0, 2, 2, 1, 1],
+        "sc": "V"
+      }
+    ]
+  },
+  {
+    "id": "henry",
+    "c": "vinculos",
+    "t": "La distracción de Henry",
+    "s": "Vigilas la tienda de conveniencia. Afuera empieza una robatalla y un niño llora porque no hay quien la arbitre. Si sales, la tienda queda sola cinco minutos.",
+    "o": [
+      {
+        "x": "Te quedas. Tu función es la tienda.",
+        "w": [0, 3, 0, 0, 0, 2],
+        "sc": "D"
+      },
+      {
+        "x": "Sales a arbitrar. El niño está delante; el robo es hipotético.",
+        "w": [1, 0, 0, 0, 2, 0],
+        "sc": "C"
+      },
+      {
+        "x": "Avisas al encargado y te quedas hasta que llegue alguien.",
+        "w": [2, 1, 1, 0, 0, 1],
+        "sc": "U"
+      }
+    ]
+  }
+]

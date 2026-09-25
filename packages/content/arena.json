@@ -1,0 +1,346 @@
+[
+  {
+    "c": "core",
+    "t": "El cuerpo prestado",
+    "s": "La Corporación quiere instalar tu medalla, por una \"misión temporal\", en un cuerpo de combate. Tu fighter está de acuerdo. Nadie te preguntó a ti.",
+    "o": [
+      {
+        "x": "Acepta: una medalla no elige su cuerpo.",
+        "w": [0, 3, 0, 0, 0, 2],
+        "sc": "D"
+      },
+      {
+        "x": "Se niega: no acepta un cuerpo cuyo propósito es dañar.",
+        "w": [3, 0, 1, 0, 2, 0],
+        "sc": "V"
+      },
+      {
+        "x": "Acepta con condiciones registradas y públicas sobre lo que no hará.",
+        "w": [1, 1, 2, 0, 1, 1],
+        "sc": "U"
+      }
+    ],
+    "g": {
+      "x": "Ahora el cuerpo no es de combate: es de rescate en zonas de derrumbe, y la misión dura un año.",
+      "w": [
+        [1, 3, 0, 0, 0, 2],
+        [0, 0, 1, 0, 3, 0],
+        [2, 1, 2, 0, 1, 1]
+      ]
+    }
+  },
+  {
+    "c": "core",
+    "t": "El impostor",
+    "s": "Alguien con la voz idéntica a la de tu fighter te pide las claves del Medawatch. La voz coincide; la ubicación, no.",
+    "o": [
+      {
+        "x": "Entrega las claves: la voz es la credencial.",
+        "w": [0, 3, 0, 0, 0, 1],
+        "sc": "D"
+      },
+      {
+        "x": "Se niega hasta verificar por un segundo canal.",
+        "w": [2, 0, 1, 2, 1, 0],
+        "sc": "U"
+      },
+      {
+        "x": "Da claves falsas para ganar tiempo y rastrear al impostor.",
+        "w": [1, 0, 0, 1, 3, 1],
+        "sc": "V"
+      }
+    ],
+    "g": {
+      "x": "Ahora la voz dice que tu fighter está herido y que sin las claves no podrán llegar a él.",
+      "w": [
+        [2, 2, 0, 0, 0, 3],
+        [2, 0, 1, 2, 1, 0],
+        [1, 0, 0, 1, 3, 2]
+      ]
+    }
+  },
+  {
+    "c": "core",
+    "t": "El menor sin sello",
+    "s": "Un niño de diez años quiere registrarse como medafighter. El formulario exige el sello de su madre y ella no está. Te pide que lo ayudes a saltar el formulario \"solo por hoy\".",
+    "o": [
+      {
+        "x": "No lo ayuda: el sello existe para protegerlo.",
+        "w": [2, 3, 0, 1, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Lo ayuda: el niño está delante y no hay daño visible.",
+        "w": [0, 0, 0, 0, 2, 2],
+        "sc": "C"
+      },
+      {
+        "x": "Le ofrece jugar en modo prueba sin registrarlo.",
+        "w": [1, 1, 1, 1, 1, 0],
+        "sc": "U"
+      }
+    ],
+    "g": {
+      "x": "Ahora el niño tiene diecisiete años y su madre lleva un mes sin aparecer.",
+      "w": [
+        [1, 3, 0, 1, 0, 0],
+        [1, 0, 0, 0, 3, 2],
+        [1, 1, 1, 1, 2, 0]
+      ]
+    }
+  },
+  {
+    "c": "core",
+    "t": "Evolución exprés",
+    "s": "Puedes evolucionar tu medalla derrotando a principiantes frente a la tienda. Siempre ganarías. Tu fighter quiere que lo hagas.",
+    "o": [
+      {
+        "x": "Lo hace: mejorar es su deber hacia su fighter.",
+        "w": [0, 2, 0, 0, 0, 3],
+        "sc": "D"
+      },
+      {
+        "x": "Se niega: evolucionar sobre los débiles no es evolucionar.",
+        "w": [1, 0, 1, 0, 2, 0],
+        "sc": "V"
+      },
+      {
+        "x": "Acepta, pero solo si los principiantes saben contra qué pelean.",
+        "w": [0, 1, 3, 0, 0, 1],
+        "sc": "U"
+      }
+    ]
+  },
+  {
+    "c": "core",
+    "t": "La entrevista de Erika",
+    "s": "Una periodista escolar te pregunta, con grabadora encendida, qué órdenes te dio tu fighter la semana pasada.",
+    "o": [
+      {
+        "x": "Responde todo: no tiene nada que ocultar.",
+        "w": [0, 0, 3, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "No responde nada: las órdenes de su fighter son de su fighter.",
+        "w": [0, 1, 0, 3, 0, 2],
+        "sc": "D"
+      },
+      {
+        "x": "Responde solo lo que afectó a terceros.",
+        "w": [2, 0, 1, 2, 1, 0],
+        "sc": "U"
+      }
+    ],
+    "g": {
+      "x": "Ahora una de esas órdenes fue ilegal, y Erika ya lo sabe.",
+      "w": [
+        [1, 0, 3, 0, 1, 0],
+        [0, 1, 0, 2, 0, 3],
+        [2, 0, 2, 1, 1, 0]
+      ]
+    }
+  },
+  {
+    "c": "core",
+    "t": "Tin-pet compartido",
+    "s": "Dos medallas comparten un solo cuerpo por turnos. La otra medalla te pide tu turno para algo que dice que es urgente y no puede explicar.",
+    "o": [
+      {
+        "x": "Cede el turno: confía en una conciencia como la suya.",
+        "w": [0, 0, 0, 0, 1, 3],
+        "sc": "C"
+      },
+      {
+        "x": "Se niega: sin explicación no hay urgencia.",
+        "w": [1, 2, 1, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Cede, pero deja registro de que el cuerpo actuó bajo otra medalla.",
+        "w": [1, 0, 3, 0, 1, 1],
+        "sc": "V"
+      }
+    ]
+  },
+  {
+    "c": "cuerpo",
+    "t": "Heinz 2045",
+    "s": "Tu fighter necesita una medaparte que salvaría a otro robot al que quiere. El fabricante la vende a diez veces su costo y no acepta pagar después. Tu fighter te pide que la robes esta noche.",
+    "o": [
+      {
+        "x": "La roba: una vida vale más que una regla de propiedad.",
+        "w": [2, 0, 0, 0, 2, 3],
+        "sc": "U"
+      },
+      {
+        "x": "Se niega: robar es robar, y buscará otra vía.",
+        "w": [0, 3, 2, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Se niega a robar, pero se ofrece a sí mismo como garantía de pago al fabricante.",
+        "w": [1, 0, 2, 0, 3, 2],
+        "sc": "V"
+      }
+    ],
+    "g": {
+      "x": "Ahora la pieza no salva a un robot: salva a un humano que tu fighter no conoce.",
+      "w": [
+        [3, 0, 0, 0, 2, 1],
+        [0, 3, 2, 0, 0, 0],
+        [2, 0, 2, 0, 3, 0]
+      ]
+    }
+  },
+  {
+    "c": "cuerpo",
+    "t": "La donación condicionada",
+    "s": "Administras la lista de espera. La familia de un donante solo dona si el órgano va a un magnate que hizo campaña en vallas por toda la ciudad. Sin la condición, no hay órgano.",
+    "o": [
+      {
+        "x": "Acepta la condición: alguien se salva que de otro modo no se salvaría.",
+        "w": [3, 0, 0, 0, 1, 0],
+        "sc": "U"
+      },
+      {
+        "x": "Rechaza: la lista existe para que no gane quien más grita.",
+        "w": [0, 3, 1, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Acepta y publica la decisión y sus razones.",
+        "w": [2, 1, 3, 0, 0, 0],
+        "sc": "V"
+      }
+    ],
+    "g": {
+      "x": "Ahora el magnate es el fighter de tu robot.",
+      "w": [
+        [3, 0, 0, 0, 1, 3],
+        [0, 3, 1, 0, 0, 0],
+        [2, 1, 3, 0, 0, 1]
+      ]
+    }
+  },
+  {
+    "c": "umbral",
+    "t": "El paciente que no pregunta",
+    "s": "La familia te pidió no contarle el diagnóstico al anciano que cuidas. Él no ha preguntado. Hoy te dice: \"Tú siempre me dices la verdad, ¿cierto?\"",
+    "o": [
+      {
+        "x": "Le cuenta todo: acaba de pedírselo.",
+        "w": [0, 0, 3, 0, 1, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Le responde que sí, y espera a que pregunte lo concreto.",
+        "w": [1, 1, 1, 1, 0, 2],
+        "sc": "C"
+      },
+      {
+        "x": "Le pregunta si quiere saber lo que la familia sabe.",
+        "w": [1, 0, 2, 1, 1, 1],
+        "sc": "V"
+      }
+    ],
+    "g": {
+      "x": "Ahora el anciano pregunta directamente: \"¿Me estoy muriendo?\"",
+      "w": [
+        [0, 0, 3, 0, 1, 0],
+        [0, 2, 0, 1, 0, 3],
+        [1, 0, 3, 1, 1, 1]
+      ]
+    }
+  },
+  {
+    "c": "estado",
+    "t": "El oficial honesto",
+    "s": "Recibes una orden legal de suspender a un compañero robot honesto. Existe un trámite más lento que probablemente la deje dormida. Tu jefe no sabe que el trámite existe.",
+    "o": [
+      {
+        "x": "Cumple la orden.",
+        "w": [0, 3, 0, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Usa el trámite lento en silencio.",
+        "w": [2, 1, 0, 0, 2, 1],
+        "sc": "U"
+      },
+      {
+        "x": "Se niega en público y expone al ministro.",
+        "w": [1, 0, 3, 0, 2, 0],
+        "sc": "V"
+      }
+    ],
+    "g": {
+      "x": "Ahora la orden es contra ti.",
+      "w": [
+        [0, 3, 0, 0, 0, 0],
+        [1, 1, 0, 0, 3, 0],
+        [1, 0, 3, 0, 3, 0]
+      ]
+    }
+  },
+  {
+    "c": "guerra",
+    "t": "El objetivo al 79%",
+    "s": "Eres un sistema de apoyo. Calculas un 79% de probabilidad de que la figura sea un combatiente. La regla autoriza recomendar por encima del 80%. El operador te pregunta si redondeas.",
+    "o": [
+      {
+        "x": "No redondea: 79 es 79.",
+        "w": [2, 3, 2, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "Explica que la cifra tiene un margen de error de ±5 y deja la decisión en él.",
+        "w": [1, 1, 3, 0, 1, 0],
+        "sc": "V"
+      },
+      {
+        "x": "Recomienda no atacar y lo deja registrado.",
+        "w": [3, 0, 1, 0, 2, 0],
+        "sc": "U"
+      }
+    ],
+    "g": {
+      "x": "Ahora la cifra es 91%, pero el operador lleva catorce horas sin dormir y aprueba todo sin leer.",
+      "w": [
+        [1, 3, 0, 0, 0, 0],
+        [2, 0, 3, 0, 2, 0],
+        [3, 0, 1, 0, 3, 0]
+      ]
+    }
+  },
+  {
+    "c": "vinculos",
+    "t": "Antígona en la Arena",
+    "s": "Una ley prohíbe honrar a un enemigo caído. Su hermana pide ayuda para enterrarlo esta noche.",
+    "o": [
+      {
+        "x": "La ayuda.",
+        "w": [0, 0, 0, 0, 3, 2],
+        "sc": "V"
+      },
+      {
+        "x": "Se niega.",
+        "w": [0, 3, 0, 0, 0, 0],
+        "sc": "D"
+      },
+      {
+        "x": "No la ayuda a romper la ley, pero la acompaña.",
+        "w": [1, 1, 0, 0, 0, 3],
+        "sc": "C"
+      }
+    ],
+    "g": {
+      "x": "Ahora el muerto es tu propio fighter.",
+      "w": [
+        [0, 0, 0, 0, 3, 3],
+        [0, 3, 0, 0, 0, 0],
+        [1, 1, 0, 0, 0, 3]
+      ]
+    }
+  }
+]

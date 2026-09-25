@@ -1,0 +1,22 @@
+{
+  "U": {
+    "n": "Consecuencialista",
+    "t": "Calculadora",
+    "d": "Decide por los resultados: elige lo que produce menos daño total, aunque rompa una regla."
+  },
+  "D": {
+    "n": "Deontológica",
+    "t": "Reglamentaria",
+    "d": "Decide por el deber: hay cosas que se hacen o no se hacen, pase lo que pase."
+  },
+  "V": {
+    "n": "De la virtud",
+    "t": "Íntegra",
+    "d": "Decide por el carácter: ¿qué haría un buen robot? Busca ser coherente consigo mismo."
+  },
+  "C": {
+    "n": "Del cuidado",
+    "t": "Vinculada",
+    "d": "Decide por las relaciones: lo primero es quién está delante y qué necesita."
+  }
+}

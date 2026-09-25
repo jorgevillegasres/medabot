@@ -1,0 +1,6 @@
+reference/
+pnpm-lock.yaml
+dist/
+PLAN.md
+packages/content/*.json
+docs/contenido.md

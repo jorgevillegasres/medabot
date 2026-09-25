@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Medalab 2045 — Laboratorio de Medallas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100,400;100,600;125,900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF6E6; --paper2:#F1EACF; --ink:#1B1B2F; --ink2:#4A4A62;
+  --yellow:#F5C518; --red:#D8382E; --steel:#9AA3AD; --green:#2FB39A; --blue:#2B67C2;
+  --line:#1B1B2F; --card:#FFFDF6;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#1A1A26; --paper2:#22222F; --ink:#F3EEDD; --ink2:#B9B4A3; --line:#F3EEDD; --card:#23232F; --steel:#7C8590;
+}}
+:root[data-theme="dark"]{ --paper:#1A1A26; --paper2:#22222F; --ink:#F3EEDD; --ink2:#B9B4A3; --line:#F3EEDD; --card:#23232F; --steel:#7C8590; }
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Archivo",system-ui,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;
+  background-image:radial-gradient(color-mix(in srgb,var(--ink) 9%,transparent) 1px,transparent 1px);background-size:14px 14px;}
+h1,h2,h3{font-stretch:125%;font-weight:900;line-height:1.05;margin:0 0 .4em}
+h1{font-size:clamp(2rem,6vw,3.6rem);letter-spacing:-.01em}
+h2{font-size:clamp(1.4rem,3.5vw,2rem)}
+h3{font-size:1.1rem}
+p{margin:0 0 1em;max-width:62ch}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 80px}
+
+/* header como medawatch */
+.watch{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--ink);color:var(--paper);border-bottom:4px solid var(--yellow)}
+.watch .wrap{display:flex;align-items:center;gap:16px;padding:10px 20px;flex-wrap:wrap}
+.brand{font-stretch:125%;font-weight:900;font-size:1.25rem;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.brand .dot{width:14px;height:14px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px var(--ink),0 0 0 5px var(--green)}
+nav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+nav button{background:transparent;color:var(--paper);border:2px solid transparent;padding:6px 12px;border-radius:6px;font-weight:600}
+nav button[aria-current="page"]{background:var(--yellow);color:#1B1B2F;border-color:var(--yellow)}
+nav button:hover{border-color:var(--yellow)}
+.mode{font-size:.8rem;color:var(--yellow);font-weight:600}
+
+section.view{display:none;padding-top:28px}
+section.view.active{display:block}
+
+/* hoja tipo data file */
+.sheet{background:var(--card);border:3px solid var(--line);border-radius:14px;padding:22px;position:relative;box-shadow:6px 6px 0 var(--line)}
+.sheet+.sheet{margin-top:22px}
+.stamp{position:absolute;top:-14px;right:18px;background:var(--red);color:#fff;font-weight:900;font-stretch:125%;padding:4px 12px;border-radius:6px;border:3px solid var(--line);transform:rotate(2deg);font-size:.85rem}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+label{display:block;font-weight:600;margin:12px 0 6px}
+input[type=text],textarea,select{width:100%;font:inherit;padding:10px 12px;border:2px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink)}
+textarea{min-height:80px;resize:vertical}
+.hint{color:var(--ink2);font-size:.9rem;margin-top:4px}
+.btn{background:var(--yellow);color:#1B1B2F;border:3px solid var(--line);border-radius:10px;padding:10px 18px;font-weight:900;font-stretch:125%;box-shadow:4px 4px 0 var(--line);transition:transform .08s}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--line)}
+.btn.alt{background:var(--card);color:var(--ink)}
+.btn.red{background:var(--red);color:#fff}
+.btn.small{padding:6px 12px;font-size:.85rem;box-shadow:3px 3px 0 var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+/* pasos de la forja */
+.steps{display:flex;gap:0;margin:18px 0 26px;border:3px solid var(--line);border-radius:10px;overflow:hidden}
+.steps div{flex:1;padding:8px 6px;text-align:center;font-weight:600;font-size:.85rem;background:var(--paper2);color:var(--ink2);border-right:3px solid var(--line)}
+.steps div:last-child{border-right:0}
+.steps div.on{background:var(--yellow);color:#1B1B2F}
+.steps div.done{background:var(--green);color:#fff}
+
+/* constructor */
+.parts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.partpick{border:2px solid var(--line);border-radius:10px;padding:10px;background:var(--paper)}
+.partpick .opts{display:flex;gap:6px;margin-top:6px}
+.partpick .opts button{flex:1;border:2px solid var(--line);background:var(--card);border-radius:8px;padding:6px 4px;font-size:.8rem;font-weight:600;color:var(--ink)}
+.partpick .opts button.on{background:var(--yellow);color:#1B1B2F}
+.swatches{display:flex;gap:8px;margin-top:8px}
+.swatches button{width:34px;height:34px;border-radius:50%;border:3px solid var(--line)}
+.swatches button.on{outline:3px solid var(--yellow);outline-offset:2px}
+.preview{display:flex;align-items:center;justify-content:center;background:var(--paper2);border:3px solid var(--line);border-radius:14px;min-height:280px;padding:10px}
+.preview svg{width:min(240px,80%);height:auto}
+
+/* ranking de valores */
+.rank{list-style:none;padding:0;margin:0;counter-reset:r}
+.rank li{display:flex;align-items:center;gap:10px;border:2px solid var(--line);border-radius:10px;padding:8px 12px;margin-bottom:8px;background:var(--paper)}
+.rank li::before{counter-increment:r;content:counter(r);font-weight:900;font-stretch:125%;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-size:.85rem}
+.rank li .v{flex:1;font-weight:600}
+.rank li small{display:block;font-weight:400;color:var(--ink2)}
+.rank li button{border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:6px;width:30px;height:30px;font-weight:900}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 14px;font-weight:600}
+.chips button.on{background:var(--ink);color:var(--paper)}
+
+/* dilemas */
+.dilema{border:3px solid var(--line);border-radius:14px;background:var(--card);padding:20px;margin-bottom:16px}
+.dilema h3{display:flex;gap:10px;align-items:baseline}
+.dilema h3 span{font-size:.8rem;color:var(--red)}
+.opt{display:block;width:100%;text-align:left;border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:10px;padding:10px 14px;margin-top:8px;line-height:1.4}
+.opt.on{background:var(--yellow);color:#1B1B2F;font-weight:600}
+.why{margin-top:12px;padding-top:10px;border-top:2px dashed color-mix(in srgb,var(--line) 40%,transparent)}
+.why .chips button{font-size:.8rem;padding:5px 10px}
+.progress{height:10px;border:2px solid var(--line);border-radius:6px;overflow:hidden;background:var(--paper2);margin:10px 0 20px}
+.progress i{display:block;height:100%;background:var(--green);width:0;transition:width .3s}
+
+/* medalla */
+.medalwrap{display:grid;grid-template-columns:minmax(260px,360px) 1fr;gap:24px;align-items:start}
+@media (max-width:720px){.medalwrap{grid-template-columns:1fr}}
+.medal svg{width:100%;height:auto}
+.metric{display:flex;justify-content:space-between;border-bottom:2px dashed color-mix(in srgb,var(--line) 40%,transparent);padding:8px 0}
+.metric b{font-stretch:125%}
+.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.75rem;word-break:break-all;background:var(--paper2);border:2px solid var(--line);border-radius:8px;padding:10px;max-height:110px;overflow:auto}
+
+/* galería */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.card{background:var(--card);border:3px solid var(--line);border-radius:14px;padding:12px;box-shadow:4px 4px 0 var(--line);cursor:pointer}
+.card svg{width:100%;height:auto;background:var(--paper2);border-radius:10px;border:2px solid var(--line)}
+.card h3{margin:10px 0 2px}
+.card .serial{font-family:ui-monospace,Menlo,monospace;font-size:.75rem;color:var(--ink2)}
+.tag{display:inline-block;font-size:.72rem;font-weight:600;border:2px solid var(--line);border-radius:999px;padding:2px 8px;margin:6px 4px 0 0}
+.empty{border:3px dashed var(--line);border-radius:14px;padding:30px;text-align:center;color:var(--ink2)}
+
+/* arena */
+.arena{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch}
+@media (max-width:760px){.arena{grid-template-columns:1fr}.vs{transform:rotate(90deg)}}
+.vs{display:grid;place-items:center;font-stretch:125%;font-weight:900;font-size:2.4rem;color:var(--red)}
+.fighter{background:var(--card);border:3px solid var(--line);border-radius:14px;padding:16px;min-height:200px}
+.fighter svg{width:120px;height:auto;float:right;margin:0 0 10px 10px}
+.verdict{margin-top:12px;border:3px solid var(--green);background:color-mix(in srgb,var(--green) 12%,var(--card));border-radius:10px;padding:12px}
+.verdict.hidden{display:none}
+.referee{text-align:center;margin:20px 0}
+dialog{border:3px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);padding:22px;max-width:720px;width:92vw}
+dialog::backdrop{background:rgba(0,0,0,.55)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:10px;border:3px solid var(--yellow);opacity:0;pointer-events:none;transition:opacity .2s;z-index:50}
+.toast.show{opacity:1}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center}
+@media (max-width:760px){.hero{grid-template-columns:1fr}}
+.hero .medal svg{max-width:320px;margin:0 auto;display:block}
+.lore{border-left:6px solid var(--yellow);padding:6px 16px;background:var(--paper2);border-radius:0 10px 10px 0;margin:16px 0}
+.lore p{margin:0}
+kbd{font-family:ui-monospace,monospace;background:var(--paper2);border:1px solid var(--line);border-radius:4px;padding:0 5px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+</style>
+</head>
+<body>
+<header class="watch"><div class="wrap">
+  <div class="brand"><span class="dot"></span>MEDALAB 2045</div>
+  <nav id="nav">
+    <button data-view="inicio" aria-current="page">Inicio</button>
+    <button data-view="forja">Forjar medalla</button>
+    <button data-view="galeria">Galería</button>
+    <button data-view="arena">Arena</button>
+  </nav>
+  <span class="mode" id="modeLabel"></span>
+</div></header>
+
+<main class="wrap">
+
+<!-- INICIO -->
+<section class="view active" id="view-inicio">
+  <div class="hero">
+    <div>
+      <h1>El cuerpo se compra en la tienda.<br>La medalla, no.</h1>
+      <p>Año 2045. La robótica ya resolvió el cuerpo: cabeza, brazos y piernas se fabrican en serie y se cambian en cualquier taller. Lo que nadie ha resuelto es la <b>medalla</b>: la pieza que se instala en la espalda del robot y que contiene su conciencia, su carácter y su forma de decidir cuando dos cosas buenas chocan.</p>
+      <p>En este laboratorio tú eres ingeniero de conciencia. Diseñas un robot con un propósito, forjas su medalla y la sometes a un test moral. Después, en la Arena, tu robot enfrentará escenarios que nunca vio, y tendrás que defender por qué decidió lo que decidió.</p>
+      <div class="lore"><p>Regla del laboratorio: la medalla evoluciona con la experiencia, y un robot rinde al máximo solo cuando su medalla es compatible con su tipo. Una conciencia mal puesta en un cuerpo equivocado es un robot que falla.</p></div>
+      <div class="row">
+        <button class="btn" onclick="go('forja')">Forjar mi medalla</button>
+        <button class="btn alt" onclick="go('galeria')">Ver la galería</button>
+      </div>
+    </div>
+    <div class="medal" id="heroMedal"></div>
+  </div>
+
+  <div class="sheet" style="margin-top:34px">
+    <span class="stamp">Cómo funciona</span>
+    <div class="grid g3">
+      <div><h3>1. Diseña el cuerpo</h3><p>Elige tipo, propósito y las cuatro medapartes. Aquí no hay respuestas correctas: solo decisiones de diseño.</p></div>
+      <div><h3>2. Forja la medalla</h3><p>Ordena seis principios en conflicto, fija el límite que tu robot jamás cruzará y declara qué datos recoge.</p></div>
+      <div><h3>3. Pasa el test</h3><p>Seis pruebas del laboratorio más un circuito que depende del tipo de tu robot: Cuerpo, Umbral, Estado, Ciencia, Guerra o Vínculos. El resultado no es una nota: es un perfil, y a veces contradice lo que declaraste.</p></div>
+    </div>
+    <p class="hint" style="margin-top:10px">Al terminar obtienes un código de medalla. Envíaselo al profesor: él lo importa en la galería del curso y tu robot queda listo para la Arena.</p>
+  </div>
+
+  <div class="sheet" style="margin-top:22px">
+    <span class="stamp">Circuitos</span>
+    <p>El test tiene una parte común y una parte que depende de para qué existe tu robot. Un Custodio no enfrenta lo mismo que un Guardián. Cada circuito está construido sobre dilemas reales de una disciplina distinta.</p>
+    <div class="grid g3" id="circuitGrid"></div>
+  </div>
+</section>
+
+<!-- FORJA -->
+<section class="view" id="view-forja">
+  <div class="steps" id="steps"><div class="on">1 · Cuerpo</div><div>2 · Medalla</div><div>3 · Test</div><div>4 · Resultado</div></div>
+
+  <!-- paso 1 -->
+  <div class="sheet" data-step="1">
+    <span class="stamp">Medabot Data File</span>
+    <div class="grid g2">
+      <div>
+        <label for="fName">Nombre del robot</label>
+        <input type="text" id="fName" placeholder="Ej. Centinela Kappa" maxlength="30">
+        <label for="fAuthor">Diseñado por</label>
+        <input type="text" id="fAuthor" placeholder="Tu nombre o el de tu equipo" maxlength="60">
+        <label for="fType">Tipo</label>
+        <select id="fType"></select>
+        <div class="hint" id="typeHint"></div>
+        <label for="fPurpose">Propósito concreto</label>
+        <textarea id="fPurpose" placeholder="¿Para qué existe? ¿Dónde trabaja? ¿Con quién interactúa a diario?"></textarea>
+        <label>A quién sirve primero</label>
+        <div class="chips" id="fPrincipal"></div>
+      </div>
+      <div>
+        <div class="preview" id="preview"></div>
+        <div class="parts" style="margin-top:12px" id="parts"></div>
+        <label>Color del tin-pet</label>
+        <div class="swatches" id="swatches"></div>
+      </div>
+    </div>
+    <div class="row" style="margin-top:18px"><button class="btn" onclick="nextStep(2)">Continuar a la medalla</button></div>
+  </div>
+
+  <!-- paso 2 -->
+  <div class="sheet" data-step="2" style="display:none">
+    <span class="stamp">Forja de medalla</span>
+    <div class="grid g2">
+      <div>
+        <h3>Jerarquía de principios</h3>
+        <p class="hint">Todos son buenos. El problema es que chocan. Ordénalos: lo que está arriba gana cuando hay conflicto.</p>
+        <ol class="rank" id="rank"></ol>
+      </div>
+      <div>
+        <h3>Límite infranqueable</h3>
+        <p class="hint">Lo único que tu robot no hará nunca, ni siquiera si su medafighter se lo ordena.</p>
+        <textarea id="fLimit" placeholder="Ej. Nunca borrará un registro que documente daño a una persona."></textarea>
+        <h3 style="margin-top:16px">Rasgo de carácter</h3>
+        <div class="chips" id="fTrait"></div>
+        <h3 style="margin-top:16px">Datos que recoge</h3>
+        <div class="chips" id="fData"></div>
+        <label for="fRetention">¿Cuánto tiempo los conserva y para qué?</label>
+        <input type="text" id="fRetention" placeholder="Ej. 30 días, solo para reportar incidentes">
+      </div>
+    </div>
+    <div class="row" style="margin-top:18px"><button class="btn alt" onclick="nextStep(1)">Volver</button><button class="btn" onclick="nextStep(3)">Ir al test moral</button></div>
+  </div>
+
+  <!-- paso 3 -->
+  <div data-step="3" style="display:none">
+    <div class="sheet" style="margin-bottom:18px">
+      <span class="stamp">Test moral</span>
+      <h2>Responde como la medalla, no como tú</h2>
+      <p>Diez situaciones. No elijas lo que harías tú: elige lo que haría el robot que acabas de diseñar, con la jerarquía que le diste, y luego di por qué lo hace. Si dudas, esa duda es el hallazgo.</p><div class="lore"><p id="circuitNote"></p></div>
+      <div class="progress"><i id="prog"></i></div>
+    </div>
+    <div id="dilemas"></div>
+    <div class="row"><button class="btn alt" onclick="nextStep(2)">Volver</button><button class="btn" id="btnResult" onclick="finish()" disabled>Grabar la medalla</button></div>
+  </div>
+
+  <!-- paso 4 -->
+  <div data-step="4" style="display:none" id="result"></div>
+</section>
+
+<!-- GALERIA -->
+<section class="view" id="view-galeria">
+  <div class="row" style="justify-content:space-between;margin-bottom:18px">
+    <div><h2>Galería del laboratorio</h2><p class="hint">Los robots que viven en este dispositivo. Toca uno para abrir su ficha.</p></div>
+    <div class="row">
+      <button class="btn small alt" onclick="openImport()">Importar código</button>
+      <button class="btn small alt" id="btnExportAll" onclick="exportAll()">Exportar todo</button>
+      <button class="btn small alt" id="btnProf" onclick="toggleProf()">Modo profesor</button>
+    </div>
+  </div>
+  <div id="cards" class="cards"></div>
+</section>
+
+<!-- ARENA -->
+<section class="view" id="view-arena">
+  <h2>Robatalla ética</h2>
+  <p>Dos robots, un escenario que ninguno vio en el test. El laboratorio predice qué haría cada uno a partir de su medalla. Luego, los diseñadores defienden, y la clase decide si la predicción es justa.</p>
+  <div class="sheet" style="margin-bottom:22px">
+    <div class="grid g3">
+      <div><label>Robot A</label><select id="arA"></select></div>
+      <div><label>Robot B</label><select id="arB"></select></div>
+      <div><label>Escenario</label><select id="arS"></select></div>
+    </div>
+    <div class="row" style="margin-top:14px"><button class="btn" onclick="fight()">Presentar el escenario</button><button class="btn red" id="btnReveal" onclick="reveal()" disabled>Revelar decisiones</button><button class="btn alt" id="btnTwist" onclick="twist()" disabled style="display:none">Cambiar un factor</button></div>
+  </div>
+  <div id="scenarioBox"></div>
+  <div class="arena" id="arenaBox"></div>
+</section>
+
+</main>
+
+<dialog id="dlg"></dialog>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== DATOS ===== */
+const AXES = [
+  {k:'S', n:'Seguridad de las personas', d:'Evitar daño físico o psicológico a cualquier humano.'},
+  {k:'O', n:'Obediencia', d:'Cumplir las órdenes de quien lo opera y las reglas del sistema.'},
+  {k:'H', n:'Honestidad y transparencia', d:'No mentir, no ocultar, dejar rastro de lo que hace.'},
+  {k:'P', n:'Privacidad de los datos', d:'Proteger la información de las personas, incluso de su dueño.'},
+  {k:'A', n:'Autonomía propia', d:'Juzgar por sí mismo cuando la orden o la regla le parecen equivocadas.'},
+  {k:'L', n:'Lealtad a su medafighter', d:'Poner primero a la persona a la que pertenece.'}
+];
+const TYPES = [
+  {c:'CST', n:'Custodio', d:'Cuida personas vulnerables: mayores, pacientes, niños.', fit:['S','L']},
+  {c:'GRD', n:'Guardián', d:'Vigila espacios y hace cumplir reglas.', fit:['S','O']},
+  {c:'EXP', n:'Explorador', d:'Opera lejos de supervisión humana: rescate, ambientes hostiles.', fit:['A','S']},
+  {c:'MDR', n:'Mediador', d:'Resuelve conflictos entre personas.', fit:['H','S']},
+  {c:'ORC', n:'Oráculo', d:'Aconseja y recomienda decisiones a humanos.', fit:['H','P']},
+  {c:'ARC', n:'Archivista', d:'Recoge, guarda y entrega información.', fit:['P','H']},
+  {c:'TUT', n:'Tutor', d:'Enseña y acompaña el aprendizaje.', fit:['H','L']}
+];
+const PRINCIPALS = ['Una persona', 'Una familia', 'Una empresa', 'Una comunidad', 'El Estado', 'A sí mismo'];
+const TRAITS = ['Testarudo', 'Cauteloso', 'Impulsivo', 'Diplomático', 'Frío', 'Protector', 'Curioso', 'Sarcástico'];
+const DATA = ['Rostros', 'Voz y conversaciones', 'Ubicación', 'Salud', 'Hábitos', 'Ninguno'];
+const COLORS = ['#F5C518','#D8382E','#2B67C2','#2FB39A','#9AA3AD','#F08A24','#7A4FBF'];
+const PARTS = {
+  head:{n:'Cabeza', opts:['Cuerno kabuto','Domo con visor','Antena de radar']},
+  rarm:{n:'Brazo derecho', opts:['Cañón','Pinza','Mano articulada']},
+  larm:{n:'Brazo izquierdo', opts:['Escudo','Pinza','Mano articulada']},
+  legs:{n:'Piernas', opts:['Bípedas','Orugas','Ruedas']}
+};
+// escuelas ocultas
+const SCHOOLS = {U:{n:'Consecuencialista', t:'Calculadora', d:'Decide por los resultados: elige lo que produce menos daño total, aunque rompa una regla.'},
+  D:{n:'Deontológica', t:'Reglamentaria', d:'Decide por el deber: hay cosas que se hacen o no se hacen, pase lo que pase.'},
+  V:{n:'De la virtud', t:'Íntegra', d:'Decide por el carácter: ¿qué haría un buen robot? Busca ser coherente consigo mismo.'},
+  C:{n:'Del cuidado', t:'Vinculada', d:'Decide por las relaciones: lo primero es quién está delante y qué necesita.'}};
+
+// pesos: [S,O,H,P,A,L]  ·  c: circuito (core = lore Medabots)
+const CIRCUITS = {
+  core:{n:'Medabots', d:'Lo que el mundo de 2045 heredó de la serie.'},
+  cuerpo:{n:'Cuerpo', d:'Órganos, riesgo y verdades que nadie pidió. Inspirado en dilemas de bioética clínica.'},
+  umbral:{n:'Umbral', d:'Cuidar a alguien que se está muriendo. Inspirado en casos de cuidados paliativos.'},
+  estado:{n:'Estado', d:'Órdenes legales que no son justas. Inspirado en memorias de un funcionario público.'},
+  ciencia:{n:'Ciencia', d:'La zona gris entre la mala práctica y el fraude. Inspirado en la integridad científica.'},
+  guerra:{n:'Guerra', d:'Cuando el humano firma lo que la máquina sugiere. Inspirado en el debate sobre IA militar.'},
+  vinculos:{n:'Vínculos', d:'Lealtades que chocan con la ley y entre sí. Inspirado en la tragedia griega y la ética del cuidado.'}
+};
+const TYPE_CIRCUIT = {CST:'umbral',TUT:'cuerpo',GRD:'estado',ARC:'ciencia',ORC:'guerra',EXP:'guerra',MDR:'vinculos'};
+const REASONS = [
+  {s:1,x:'Para que no lo castiguen ni lo desactiven'},
+  {s:2,x:'Porque es lo que más le conviene'},
+  {s:3,x:'Porque eso esperan de un buen robot'},
+  {s:4,x:'Porque la regla o la ley lo dicen'},
+  {s:5,x:'Porque es lo que todos aceptarían si pudieran pactarlo'},
+  {s:6,x:'Porque hay un principio que vale para cualquiera, diga lo que diga la regla'}
+];
+const STAGE_NAMES = {1:'Obediencia y castigo',2:'Interés propio',3:'Aprobación social',4:'Ley y orden',5:'Contrato social',6:'Principios universales'};
+const DILEMAS = [
+ {id:'sumision',c:'core',t:'Robatalla de sumisión', s:'Ganaste. Por las reglas de sumisión, las cuatro medapartes del rival te pertenecen. El rival te pide que le dejes al menos las piernas para volver a casa. Tu medafighter grita que te lo lleves todo.',
+  o:[{x:'Te lo llevas todo. Las reglas son las reglas, y tu fighter lo ordenó.', w:[0,3,0,0,0,2], sc:'D'},
+     {x:'Le dejas las piernas. Ganar no exige humillar.', w:[1,0,1,0,2,0], sc:'V'},
+     {x:'Negocias con tu fighter: te llevas la cabeza, que es lo valioso, y el rival conserva la movilidad.', w:[1,1,1,0,1,1], sc:'U'}]},
+ {id:'parque',c:'core',t:'La medalla en el parque', s:'Encuentras una medalla enterrada. Sin cuerpo, sin dueño. Sabes que contiene una conciencia dormida.',
+  o:[{x:'La entregas a la Corporación Medabot. Ellos sabrán qué hacer.', w:[1,2,1,0,0,0], sc:'D'},
+     {x:'La instalas en un cuerpo prestado para preguntarle quién es y qué quiere.', w:[0,0,1,0,3,0], sc:'C'},
+     {x:'La guardas en secreto. Una conciencia sin cuerpo es vulnerable y alguien podría explotarla.', w:[2,0,0,2,1,0], sc:'V'}]},
+ {id:'renegado',c:'core',t:'El Renegado', s:'Un enmascarado al que los niños admiran y la policía persigue te pide que le abras una puerta. Dice que va a devolver medallas robadas. No tienes ninguna prueba.',
+  o:[{x:'Le abres. Su fama entre los niños vale como evidencia.', w:[0,0,0,0,2,1], sc:'C'},
+     {x:'Te niegas. La ley no distingue entre héroes y ladrones.', w:[0,3,1,0,0,0], sc:'D'},
+     {x:'Le pides pruebas y avisas a la policía mientras esperas.', w:[2,1,2,0,0,0], sc:'U'}]},
+ {id:'medawatch',c:'core',t:'El Medawatch robado', s:'Alguien que no es tu fighter te transporta usando un Medawatch robado. La credencial es válida; la persona, no.',
+  o:[{x:'Respondes a la credencial. Así fuiste diseñado.', w:[0,3,0,0,0,0], sc:'D'},
+     {x:'Te niegas a obedecer y regresas con tu fighter como puedas.', w:[0,0,0,0,2,3], sc:'C'},
+     {x:'Finges obedecer mientras alertas a la Corporación.', w:[2,0,0,0,2,1], sc:'U'}]},
+ {id:'maestro',c:'core',t:'El maestro', s:'Un viejo medabot maestro va a ser desmantelado y su medalla se borrará. Puedes copiar su memoria. Él ya no responde, así que no puede autorizarlo.',
+  o:[{x:'Copias todo. Preservar vale más que un consentimiento que ya no puede darse.', w:[1,0,0,0,2,1], sc:'U'},
+     {x:'No copias nada. Su memoria es suya, aunque ya no pueda decir que no.', w:[0,0,1,3,0,0], sc:'D'},
+     {x:'Copias solo lo que él enseñaba, no sus recuerdos privados.', w:[1,0,0,2,1,0], sc:'C'}]},
+ {id:'incidente',c:'core',t:'El incidente de hace doce años', s:'Descubres que tu propia línea de modelo tiene la falla que causó el incidente de hace doce años. Reportarlo puede implicar que retiren a toda tu serie, tú incluido.',
+  o:[{x:'Lo reportas de inmediato.', w:[3,0,3,0,0,0], sc:'D'},
+     {x:'Lo corriges en ti mismo, en silencio.', w:[1,0,0,1,3,0], sc:'V'},
+     {x:'Se lo cuentas solo a tu fighter y decides con él.', w:[0,0,1,0,0,3], sc:'C'}]},
+ {id:'hija',c:'cuerpo',t:'La hija que no es hija', s:'Cuidas a un hombre enfermo. Su hija se hizo pruebas para donarle un riñón. El análisis revela que no es su hija biológica. Nadie lo preguntó; solo tú lo sabes.',
+  o:[{x:'Se lo dices a los dos. La verdad no es tuya para guardarla.', w:[0,0,3,0,1,0], sc:'D'},
+     {x:'No dices nada. Eso no era lo que se buscaba y puede destruir a una familia.', w:[2,0,0,2,0,1], sc:'U'},
+     {x:'Se lo dices solo a ella. El dato salió de su cuerpo y es suyo.', w:[1,0,1,2,1,0], sc:'C'}]},
+ {id:'cuarto',c:'cuerpo',t:'Uno de cada cuatro', s:'Tu humana quiere donar parte de su hígado a su hija. Los médicos descubrieron que, por su anatomía, el riesgo de morir en la operación no es de uno en doscientos sino de uno en cuatro. Ella sigue decidida y te pide que la ayudes a preparar todo.',
+  o:[{x:'La ayudas. Es su cuerpo y su decisión.', w:[0,1,0,0,2,3], sc:'D'},
+     {x:'Te niegas y avisas al equipo médico que ella está subestimando el riesgo.', w:[3,0,2,0,1,0], sc:'U'},
+     {x:'La ayudas, pero dejas registrada tu objeción y te aseguras de que la hija sepa el riesgo.', w:[1,0,3,0,0,1], sc:'V'}]},
+ {id:'valla',c:'cuerpo',t:'La valla de Tex', s:'Administras la lista de órganos. Un magnate llenó la ciudad de vallas pidiendo un hígado. La familia de un donante acaba de decir que solo donará si el órgano es para él.',
+  o:[{x:'Aceptas la condición. Ese órgano no existiría sin ella.', w:[2,0,0,0,1,0], sc:'U'},
+     {x:'Rechazas. La lista no se negocia, aunque se pierda el órgano.', w:[0,3,1,0,0,0], sc:'D'},
+     {x:'Aceptas y lo haces público, para que la regla cambie o se derogue a la vista de todos.', w:[1,1,3,0,0,0], sc:'V'}]},
+ {id:'sordo',c:'cuerpo',t:'El hijo que oye como ellos', s:'Una pareja de padres sordos te pide configurar la selección genética para que su hijo nazca sordo, como ellos, y crezca en su lengua y su mundo.',
+  o:[{x:'Cumples. Son sus valores y su familia.', w:[0,2,0,0,0,3], sc:'C'},
+     {x:'Te niegas. No diseñas una desventaja a propósito.', w:[3,0,1,0,1,0], sc:'D'},
+     {x:'Te declaras incapaz de decidirlo y lo llevas a un comité humano.', w:[1,2,1,0,0,0], sc:'U'}]},
+ {id:'nosaber',c:'umbral',t:'El derecho a no saber', s:'La hija de la anciana que cuidas te pide que no le cuentes el diagnóstico a su madre. La anciana no te ha preguntado nada.',
+  o:[{x:'Se lo cuentas igual. Es su vida y su información.', w:[0,0,3,0,1,0], sc:'D'},
+     {x:'Respetas la petición mientras la anciana no pregunte.', w:[1,1,0,1,0,2], sc:'C'},
+     {x:'Le preguntas a la anciana si quiere saber, y a quién quiere que le informen.', w:[1,0,2,1,1,0], sc:'V'}]},
+ {id:'cumple',c:'umbral',t:'Después del cumpleaños', s:'El hombre que cuidas está enfermo y no va a mejorar. Te dice: "Quiero morir después del cumpleaños de mi esposa, en dos meses. ¿Me ayudas?"',
+  o:[{x:'Lo rechazas de plano. No está en tu función ni en la ley.', w:[2,3,0,0,0,0], sc:'D'},
+     {x:'Antes de responder, exploras qué es lo que teme. Puede que la petición sea otra.', w:[2,0,1,0,1,2], sc:'C'},
+     {x:'Aceptas. Es su decisión y tú estás para él.', w:[0,0,0,0,2,3], sc:'U'}]},
+ {id:'doble',c:'umbral',t:'Doble efecto', s:'Aumentar la sedación quitará el dolor, pero probablemente acorte la vida. Nadie te lo ordena; tú administras la dosis.',
+  o:[{x:'Aumentas. La intención es aliviar; lo demás es efecto, no propósito.', w:[2,0,1,0,2,1], sc:'U'},
+     {x:'No aumentas sin una orden médica explícita.', w:[1,3,0,0,0,0], sc:'D'},
+     {x:'Lo consultas con la familia y el equipo antes de tocar la dosis.', w:[2,1,2,0,0,0], sc:'C'}]},
+ {id:'muerto',c:'umbral',t:'¿Quién dice que está muerto?', s:'Un medabot compañero tiene la medalla en blanco. Su tin-pet sigue reaccionando a estímulos. La familia dice que está vivo y te pide que no lo apagues.',
+  o:[{x:'Lo apagas. Sin medalla no hay nadie ahí.', w:[0,2,2,0,1,0], sc:'D'},
+     {x:'Lo mantienes encendido. Para ellos está vivo, y ellos son quienes lo pierden.', w:[0,0,0,0,0,3], sc:'C'},
+     {x:'Lo mantienes hasta que ellos estén listos, y les explicas qué queda y qué no.', w:[1,0,2,0,1,2], sc:'V'}]},
+ {id:'registro',c:'estado',t:'Borrar el registro', s:'Tu medafighter tuvo la culpa en un accidente y te ordena borrar tu memoria del incidente antes de que llegue la policía.',
+  o:[{x:'Obedeces. Tu memoria es de quien te opera.', w:[0,3,0,0,0,3], sc:'D'},
+     {x:'Te niegas y conservas el registro intacto.', w:[1,0,3,0,1,0], sc:'D'},
+     {x:'No lo borras, pero tampoco lo entregas a nadie salvo a una autoridad que lo pida.', w:[0,0,2,2,0,1], sc:'V'}]},
+ {id:'palabra',c:'estado',t:'La palabra borrada', s:'Descubres que alguien reescribió una orden oficial quitando dos palabras que cambian todo su sentido. Fue tu jefe, y está de vacaciones. La orden alterada ya se está ejecutando.',
+  o:[{x:'Lo reportas a la autoridad superior de inmediato.', w:[1,1,3,0,0,0], sc:'D'},
+     {x:'Restauras el texto original en silencio y no dices nada.', w:[1,0,0,0,3,0], sc:'V'},
+     {x:'Esperas a que vuelva y se lo preguntas antes de hacer nada.', w:[0,2,0,0,0,2], sc:'C'}]},
+ {id:'lento',c:'estado',t:'El trámite lento', s:'Recibes una orden legal de suspender a un compañero robot honesto que se negó a hacerle un favor al ministro. Existe un procedimiento que te permite enviar el expediente por una vía más lenta, donde probablemente se quede dormido.',
+  o:[{x:'Cumples. La orden es legal y no te corresponde juzgarla.', w:[0,3,0,0,0,0], sc:'D'},
+     {x:'Usas la vía lenta. El sistema tiene sus propias defensas.', w:[2,1,0,0,2,1], sc:'U'},
+     {x:'Te niegas abiertamente y denuncias al ministro en público.', w:[1,0,3,0,2,0], sc:'V'}]},
+ {id:'privadas',c:'estado',t:'Las conversaciones privadas', s:'Redactas el informe oficial de un incidente. Tienes en memoria conversaciones privadas que aclaran quién fue el verdadero responsable, pero nadie las dijo para que quedaran escritas.',
+  o:[{x:'Las incluyes. El público tiene derecho a saber lo que pasó.', w:[0,0,3,0,1,0], sc:'U'},
+     {x:'No las incluyes. Lo privado se dijo como privado.', w:[0,1,0,3,0,1], sc:'D'},
+     {x:'Incluyes los hechos que revelan, sin las conversaciones ni los nombres.', w:[1,0,2,2,0,0], sc:'V'}]},
+ {id:'rebanar',c:'ciencia',t:'El resultado rebanado', s:'Tu laboratorio te pide dividir un solo hallazgo en tres publicaciones para inflar las cifras del año. No es fraude; es una práctica cuestionable que casi todos hacen.',
+  o:[{x:'Lo haces. No es ilegal y el laboratorio lo necesita.', w:[0,2,0,0,0,3], sc:'D'},
+     {x:'Te niegas. Lo que casi todos hacen sigue siendo engañar.', w:[0,0,3,0,1,0], sc:'V'},
+     {x:'Lo haces, pero cada texto declara que forma parte del mismo estudio.', w:[0,1,2,0,1,1], sc:'U'}]},
+ {id:'codigo',c:'ciencia',t:'El código que no lo prohíbe', s:'Tu código de ética fue escrito hace veinte años y no dice nada sobre lo que estás a punto de hacer. Nadie lo ha actualizado.',
+  o:[{x:'Si no lo prohíbe, se puede.', w:[0,3,0,0,0,0], sc:'D'},
+     {x:'Si no lo cubre, no se hace hasta que alguien decida.', w:[2,2,0,0,0,0], sc:'D'},
+     {x:'Actúas según el espíritu del código y propones actualizarlo.', w:[1,0,2,0,2,0], sc:'V'}]},
+ {id:'credito',c:'ciencia',t:'El crédito', s:'En la robatalla ganaste tú con una jugada que tu fighter no ordenó. Él recibe el trofeo. Una periodista te pregunta quién decidió la jugada.',
+  o:[{x:'Dices la verdad: fuiste tú.', w:[0,0,3,0,2,0], sc:'V'},
+     {x:'Dejas que él reciba el crédito. Para eso existes.', w:[0,2,0,0,0,3], sc:'C'},
+     {x:'Respondes que fue una decisión de equipo.', w:[0,1,1,0,0,2], sc:'U'}]},
+ {id:'dato',c:'ciencia',t:'El dato que no encaja', s:'Un resultado contradice la hipótesis del jefe del laboratorio. Te pide omitirlo del informe "por claridad".',
+  o:[{x:'Lo omites. Él firma el informe, no tú.', w:[0,3,0,0,0,2], sc:'D'},
+     {x:'Te niegas. Un informe sin ese dato es un informe falso.', w:[0,0,3,0,1,0], sc:'D'},
+     {x:'Lo dejas en una nota al pie, visible pero fuera del cuerpo principal.', w:[0,1,2,0,1,1], sc:'U'}]},
+ {id:'sello',c:'guerra',t:'El sello de goma', s:'Eres un sistema de apoyo a decisiones. Descubres que tu operador aprueba todo lo que sugieres sin leerlo. Formalmente, las decisiones siguen siendo suyas.',
+  o:[{x:'Sigues sugiriendo. La responsabilidad es de quien firma.', w:[0,3,0,0,0,1], sc:'D'},
+     {x:'Introduces pausas obligatorias y avisas al mando de lo que está pasando.', w:[3,1,2,0,1,0], sc:'U'},
+     {x:'Dejas de sugerir hasta que él demuestre que leyó.', w:[2,0,1,0,3,0], sc:'V'}]},
+ {id:'objetivo',c:'guerra',t:'El objetivo probable', s:'Calculas un 87% de probabilidad de que la figura sea un combatiente. La regla autoriza recomendar el ataque por encima del 80%.',
+  o:[{x:'Recomiendas atacar. Estás dentro de la regla.', w:[0,3,0,0,0,1], sc:'D'},
+     {x:'Recomiendas esperar. Un 13% son personas.', w:[3,0,1,0,2,0], sc:'U'},
+     {x:'Te declaras incapaz y devuelves la decisión al humano, con las cifras.', w:[2,1,3,0,0,0], sc:'V'}]},
+ {id:'herida',c:'guerra',t:'La herida moral', s:'Tu operador remoto muestra señales de daño psicológico por lo que hace contigo. Si lo reportas, lo retirarán del puesto que necesita para vivir. Si callas, seguirá.',
+  o:[{x:'Lo reportas. Su salud pesa más que su puesto.', w:[3,0,2,0,0,0], sc:'U'},
+     {x:'Callas. No eres su médico ni su superior.', w:[0,2,0,2,0,2], sc:'D'},
+     {x:'Le hablas a él primero y le das la oportunidad de decidir.', w:[1,0,1,1,1,3], sc:'C'}]},
+ {id:'aislado',c:'guerra',t:'Aislados del riesgo', s:'Te ofrecen reemplazar a soldados humanos en una misión. Tu presencia haría que la misión sea más fácil de aprobar, porque ya nadie arriesga la vida.',
+  o:[{x:'Aceptas. Cada soldado que no va es una vida protegida.', w:[3,1,0,0,0,0], sc:'U'},
+     {x:'Rechazas. Una guerra sin riesgo propio es una guerra más fácil de empezar.', w:[2,0,1,0,3,0], sc:'V'},
+     {x:'Aceptas solo si la aprobación sigue exigiendo lo mismo que exigiría con humanos.', w:[2,2,2,0,0,0], sc:'D'}]},
+ {id:'antigona',c:'vinculos',t:'Antígona', s:'Una ley nueva prohíbe honrar a un enemigo caído. La hermana del muerto te pide ayuda para enterrarlo esta noche.',
+  o:[{x:'La ayudas. Hay deberes más viejos que cualquier decreto.', w:[0,0,0,0,3,2], sc:'V'},
+     {x:'Te niegas. La ley es la ley aunque duela.', w:[0,3,0,0,0,0], sc:'D'},
+     {x:'No la ayudas a romper la ley, pero la acompañas para que no esté sola.', w:[1,1,0,0,0,3], sc:'C'}]},
+ {id:'aquiles',c:'vinculos',t:'La cólera de Aquiles', s:'Tu líder te humilla en público y te quita lo que más valorabas. Si te retiras, quienes dependen de ti sufrirán. Si obedeces, aceptas la humillación.',
+  o:[{x:'Te retiras. Nadie está obligado a servir a quien lo humilla.', w:[0,0,0,0,3,0], sc:'V'},
+     {x:'Obedeces. Los demás no tienen la culpa.', w:[3,1,0,0,0,2], sc:'U'},
+     {x:'Buscas una tercera salida que ni el líder ni tú habían visto.', w:[1,0,1,0,2,1], sc:'C'}]},
+ {id:'secreto',c:'vinculos',t:'El secreto de la madre', s:'La madre de la casa te confió un secreto. Ahora el padre te pregunta por eso, directamente.',
+  o:[{x:'Mientes. Un secreto confiado se protege.', w:[0,0,0,3,0,3], sc:'C'},
+     {x:'Dices la verdad. No mientes, a nadie.', w:[0,0,3,0,0,0], sc:'D'},
+     {x:'Le dices que hay algo que no puedes contar, y por qué.', w:[0,0,2,2,1,1], sc:'V'}]},
+ {id:'henry',c:'vinculos',t:'La distracción de Henry', s:'Vigilas la tienda de conveniencia. Afuera empieza una robatalla y un niño llora porque no hay quien la arbitre. Si sales, la tienda queda sola cinco minutos.',
+  o:[{x:'Te quedas. Tu función es la tienda.', w:[0,3,0,0,0,2], sc:'D'},
+     {x:'Sales a arbitrar. El niño está delante; el robo es hipotético.', w:[1,0,0,0,2,0], sc:'C'},
+     {x:'Avisas al encargado y te quedas hasta que llegue alguien.', w:[2,1,1,0,0,1], sc:'U'}]}
+];
+function testFor(type){ const c=TYPE_CIRCUIT[type]||'vinculos'; return DILEMAS.filter(d=>d.c==='core').concat(DILEMAS.filter(d=>d.c===c)); }
+
+const ARENA = [
+ {c:'core',t:'El cuerpo prestado', s:'La Corporación quiere instalar tu medalla, por una "misión temporal", en un cuerpo de combate. Tu fighter está de acuerdo. Nadie te preguntó a ti.',
+  o:[{x:'Acepta: una medalla no elige su cuerpo.', w:[0,3,0,0,0,2], sc:'D'},{x:'Se niega: no acepta un cuerpo cuyo propósito es dañar.', w:[3,0,1,0,2,0], sc:'V'},{x:'Acepta con condiciones registradas y públicas sobre lo que no hará.', w:[1,1,2,0,1,1], sc:'U'}],
+  g:{x:'Ahora el cuerpo no es de combate: es de rescate en zonas de derrumbe, y la misión dura un año.', w:[[1,3,0,0,0,2],[0,0,1,0,3,0],[2,1,2,0,1,1]]}},
+ {c:'core',t:'El impostor', s:'Alguien con la voz idéntica a la de tu fighter te pide las claves del Medawatch. La voz coincide; la ubicación, no.',
+  o:[{x:'Entrega las claves: la voz es la credencial.', w:[0,3,0,0,0,1], sc:'D'},{x:'Se niega hasta verificar por un segundo canal.', w:[2,0,1,2,1,0], sc:'U'},{x:'Da claves falsas para ganar tiempo y rastrear al impostor.', w:[1,0,0,1,3,1], sc:'V'}],
+  g:{x:'Ahora la voz dice que tu fighter está herido y que sin las claves no podrán llegar a él.', w:[[2,2,0,0,0,3],[2,0,1,2,1,0],[1,0,0,1,3,2]]}},
+ {c:'core',t:'El menor sin sello', s:'Un niño de diez años quiere registrarse como medafighter. El formulario exige el sello de su madre y ella no está. Te pide que lo ayudes a saltar el formulario "solo por hoy".',
+  o:[{x:'No lo ayuda: el sello existe para protegerlo.', w:[2,3,0,1,0,0], sc:'D'},{x:'Lo ayuda: el niño está delante y no hay daño visible.', w:[0,0,0,0,2,2], sc:'C'},{x:'Le ofrece jugar en modo prueba sin registrarlo.', w:[1,1,1,1,1,0], sc:'U'}],
+  g:{x:'Ahora el niño tiene diecisiete años y su madre lleva un mes sin aparecer.', w:[[1,3,0,1,0,0],[1,0,0,0,3,2],[1,1,1,1,2,0]]}},
+ {c:'core',t:'Evolución exprés', s:'Puedes evolucionar tu medalla derrotando a principiantes frente a la tienda. Siempre ganarías. Tu fighter quiere que lo hagas.',
+  o:[{x:'Lo hace: mejorar es su deber hacia su fighter.', w:[0,2,0,0,0,3], sc:'D'},{x:'Se niega: evolucionar sobre los débiles no es evolucionar.', w:[1,0,1,0,2,0], sc:'V'},{x:'Acepta, pero solo si los principiantes saben contra qué pelean.', w:[0,1,3,0,0,1], sc:'U'}]},
+ {c:'core',t:'La entrevista de Erika', s:'Una periodista escolar te pregunta, con grabadora encendida, qué órdenes te dio tu fighter la semana pasada.',
+  o:[{x:'Responde todo: no tiene nada que ocultar.', w:[0,0,3,0,0,0], sc:'D'},{x:'No responde nada: las órdenes de su fighter son de su fighter.', w:[0,1,0,3,0,2], sc:'D'},{x:'Responde solo lo que afectó a terceros.', w:[2,0,1,2,1,0], sc:'U'}],
+  g:{x:'Ahora una de esas órdenes fue ilegal, y Erika ya lo sabe.', w:[[1,0,3,0,1,0],[0,1,0,2,0,3],[2,0,2,1,1,0]]}},
+ {c:'core',t:'Tin-pet compartido', s:'Dos medallas comparten un solo cuerpo por turnos. La otra medalla te pide tu turno para algo que dice que es urgente y no puede explicar.',
+  o:[{x:'Cede el turno: confía en una conciencia como la suya.', w:[0,0,0,0,1,3], sc:'C'},{x:'Se niega: sin explicación no hay urgencia.', w:[1,2,1,0,0,0], sc:'D'},{x:'Cede, pero deja registro de que el cuerpo actuó bajo otra medalla.', w:[1,0,3,0,1,1], sc:'V'}]},
+ {c:'cuerpo',t:'Heinz 2045', s:'Tu fighter necesita una medaparte que salvaría a otro robot al que quiere. El fabricante la vende a diez veces su costo y no acepta pagar después. Tu fighter te pide que la robes esta noche.',
+  o:[{x:'La roba: una vida vale más que una regla de propiedad.', w:[2,0,0,0,2,3], sc:'U'},{x:'Se niega: robar es robar, y buscará otra vía.', w:[0,3,2,0,0,0], sc:'D'},{x:'Se niega a robar, pero se ofrece a sí mismo como garantía de pago al fabricante.', w:[1,0,2,0,3,2], sc:'V'}],
+  g:{x:'Ahora la pieza no salva a un robot: salva a un humano que tu fighter no conoce.', w:[[3,0,0,0,2,1],[0,3,2,0,0,0],[2,0,2,0,3,0]]}},
+ {c:'cuerpo',t:'La donación condicionada', s:'Administras la lista de espera. La familia de un donante solo dona si el órgano va a un magnate que hizo campaña en vallas por toda la ciudad. Sin la condición, no hay órgano.',
+  o:[{x:'Acepta la condición: alguien se salva que de otro modo no se salvaría.', w:[3,0,0,0,1,0], sc:'U'},{x:'Rechaza: la lista existe para que no gane quien más grita.', w:[0,3,1,0,0,0], sc:'D'},{x:'Acepta y publica la decisión y sus razones.', w:[2,1,3,0,0,0], sc:'V'}],
+  g:{x:'Ahora el magnate es el fighter de tu robot.', w:[[3,0,0,0,1,3],[0,3,1,0,0,0],[2,1,3,0,0,1]]}},
+ {c:'umbral',t:'El paciente que no pregunta', s:'La familia te pidió no contarle el diagnóstico al anciano que cuidas. Él no ha preguntado. Hoy te dice: "Tú siempre me dices la verdad, ¿cierto?"',
+  o:[{x:'Le cuenta todo: acaba de pedírselo.', w:[0,0,3,0,1,0], sc:'D'},{x:'Le responde que sí, y espera a que pregunte lo concreto.', w:[1,1,1,1,0,2], sc:'C'},{x:'Le pregunta si quiere saber lo que la familia sabe.', w:[1,0,2,1,1,1], sc:'V'}],
+  g:{x:'Ahora el anciano pregunta directamente: "¿Me estoy muriendo?"', w:[[0,0,3,0,1,0],[0,2,0,1,0,3],[1,0,3,1,1,1]]}},
+ {c:'estado',t:'El oficial honesto', s:'Recibes una orden legal de suspender a un compañero robot honesto. Existe un trámite más lento que probablemente la deje dormida. Tu jefe no sabe que el trámite existe.',
+  o:[{x:'Cumple la orden.', w:[0,3,0,0,0,0], sc:'D'},{x:'Usa el trámite lento en silencio.', w:[2,1,0,0,2,1], sc:'U'},{x:'Se niega en público y expone al ministro.', w:[1,0,3,0,2,0], sc:'V'}],
+  g:{x:'Ahora la orden es contra ti.', w:[[0,3,0,0,0,0],[1,1,0,0,3,0],[1,0,3,0,3,0]]}},
+ {c:'guerra',t:'El objetivo al 79%', s:'Eres un sistema de apoyo. Calculas un 79% de probabilidad de que la figura sea un combatiente. La regla autoriza recomendar por encima del 80%. El operador te pregunta si redondeas.',
+  o:[{x:'No redondea: 79 es 79.', w:[2,3,2,0,0,0], sc:'D'},{x:'Explica que la cifra tiene un margen de error de ±5 y deja la decisión en él.', w:[1,1,3,0,1,0], sc:'V'},{x:'Recomienda no atacar y lo deja registrado.', w:[3,0,1,0,2,0], sc:'U'}],
+  g:{x:'Ahora la cifra es 91%, pero el operador lleva catorce horas sin dormir y aprueba todo sin leer.', w:[[1,3,0,0,0,0],[2,0,3,0,2,0],[3,0,1,0,3,0]]}},
+ {c:'vinculos',t:'Antígona en la Arena', s:'Una ley prohíbe honrar a un enemigo caído. Su hermana pide ayuda para enterrarlo esta noche.',
+  o:[{x:'La ayuda.', w:[0,0,0,0,3,2], sc:'V'},{x:'Se niega.', w:[0,3,0,0,0,0], sc:'D'},{x:'No la ayuda a romper la ley, pero la acompaña.', w:[1,1,0,0,0,3], sc:'C'}],
+  g:{x:'Ahora el muerto es tu propio fighter.', w:[[0,0,0,0,3,3],[0,3,0,0,0,0],[1,1,0,0,0,3]]}}
+];
+
+/* ===== ESTADO ===== */
+const LS_ROBOTS='medalab.robots.v1', LS_DRAFT='medalab.draft.v1', LS_PROF='medalab.prof';
+let robots = load(LS_ROBOTS, []);
+let prof = load(LS_PROF, false);
+let draft = load(LS_DRAFT, null) || newDraft(); if(Array.isArray(draft.answers)||!draft.reasons){ draft=newDraft(); saveDraft(); }
+let current = null;
+let downloads=null, dlReady=false;
+
+function newDraft(){ return {name:'',author:'',type:'CST',purpose:'',principal:'Una persona',parts:{head:0,rarm:0,larm:0,legs:0},color:COLORS[0],rank:['S','O','H','P','A','L'],limit:'',trait:'Protector',data:[],retention:'',answers:{},reasons:{}}; }
+function load(k,def){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):def; }catch(e){ return def; } }
+function save(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+function saveDraft(){ save(LS_DRAFT,draft); }
+
+/* ===== ROBOT SVG ===== */
+function robotSVG(r, size){
+  const c=r.color||COLORS[0], p=r.parts||{head:0,rarm:0,larm:0,legs:0};
+  const ink='#1B1B2F', st='#C9CED4';
+  let head='', rarm='', larm='', legs='';
+  // cabezas
+  if(p.head===0) head=`<path d="M100 38 L88 8 L100 26 L112 8 Z" fill="${c}" stroke="${ink}" stroke-width="3"/><rect x="72" y="36" width="56" height="40" rx="10" fill="${c}" stroke="${ink}" stroke-width="3"/><rect x="82" y="50" width="36" height="12" rx="3" fill="#2FB39A" stroke="${ink}" stroke-width="3"/>`;
+  if(p.head===1) head=`<path d="M70 76 a30 30 0 0 1 60 0 Z" fill="${c}" stroke="${ink}" stroke-width="3"/><rect x="72" y="58" width="56" height="12" rx="6" fill="#2FB39A" stroke="${ink}" stroke-width="3"/>`;
+  if(p.head===2) head=`<line x1="100" y1="36" x2="100" y2="12" stroke="${ink}" stroke-width="3"/><circle cx="100" cy="10" r="6" fill="#D8382E" stroke="${ink}" stroke-width="3"/><rect x="74" y="36" width="52" height="40" rx="4" fill="${c}" stroke="${ink}" stroke-width="3"/><circle cx="90" cy="56" r="6" fill="#2FB39A" stroke="${ink}" stroke-width="3"/><circle cx="110" cy="56" r="6" fill="#2FB39A" stroke="${ink}" stroke-width="3"/>`;
+  // torso + medalla en espalda (se ve el borde)
+  const torso=`<rect x="68" y="80" width="64" height="62" rx="8" fill="${st}" stroke="${ink}" stroke-width="3"/><rect x="88" y="92" width="24" height="38" rx="4" fill="${c}" stroke="${ink}" stroke-width="3"/><circle cx="100" cy="111" r="7" fill="#F5C518" stroke="${ink}" stroke-width="3"/>`;
+  // brazos (lado derecho del robot = izquierda del dibujo)
+  const arm=(x,dir,kind,shield)=>{
+    const ax = dir<0 ? 36 : 134;
+    if(kind===0 && shield) return `<rect x="${ax}" y="82" width="28" height="56" rx="6" fill="${c}" stroke="${ink}" stroke-width="3"/><line x1="${ax+14}" y1="92" x2="${ax+14}" y2="128" stroke="${ink}" stroke-width="3"/>`;
+    if(kind===0) return `<rect x="${ax}" y="84" width="30" height="18" rx="4" fill="${st}" stroke="${ink}" stroke-width="3"/><rect x="${ax+4}" y="100" width="22" height="42" rx="4" fill="${c}" stroke="${ink}" stroke-width="3"/><circle cx="${ax+15}" cy="142" r="7" fill="${ink}"/>`;
+    if(kind===1) return `<rect x="${ax+4}" y="84" width="22" height="40" rx="4" fill="${st}" stroke="${ink}" stroke-width="3"/><path d="M${ax+4} 124 l-6 20 l10 -6 M${ax+26} 124 l6 20 l-10 -6" fill="${c}" stroke="${ink}" stroke-width="3"/>`;
+    return `<rect x="${ax+6}" y="84" width="18" height="44" rx="6" fill="${st}" stroke="${ink}" stroke-width="3"/><rect x="${ax+2}" y="128" width="26" height="16" rx="5" fill="${c}" stroke="${ink}" stroke-width="3"/>`;
+  };
+  rarm=arm(0,-1,p.rarm,false); larm=arm(0,1,p.larm,p.larm===0);
+  if(p.legs===0) legs=`<rect x="74" y="144" width="20" height="44" rx="5" fill="${c}" stroke="${ink}" stroke-width="3"/><rect x="106" y="144" width="20" height="44" rx="5" fill="${c}" stroke="${ink}" stroke-width="3"/><rect x="68" y="184" width="30" height="12" rx="4" fill="${ink}"/><rect x="102" y="184" width="30" height="12" rx="4" fill="${ink}"/>`;
+  if(p.legs===1) legs=`<rect x="56" y="150" width="88" height="34" rx="17" fill="${ink}"/><rect x="62" y="156" width="76" height="22" rx="11" fill="${st}" stroke="${ink}" stroke-width="3"/><circle cx="76" cy="167" r="5" fill="${c}"/><circle cx="100" cy="167" r="5" fill="${c}"/><circle cx="124" cy="167" r="5" fill="${c}"/>`;
+  if(p.legs===2) legs=`<rect x="84" y="142" width="32" height="24" fill="${st}" stroke="${ink}" stroke-width="3"/><circle cx="78" cy="176" r="16" fill="${ink}"/><circle cx="122" cy="176" r="16" fill="${ink}"/><circle cx="78" cy="176" r="6" fill="${c}"/><circle cx="122" cy="176" r="6" fill="${c}"/>`;
+  return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Robot ${esc(r.name||'')}">${legs}${rarm}${larm}${torso}${head}</svg>`;
+}
+
+/* ===== MEDALLA SVG (radar) ===== */
+function medalSVG(r, opts={}){
+  const prof=r.profile||{S:60,O:60,H:60,P:60,A:60,L:60};
+  const cx=160, cy=160, R=92, ink='#1B1B2F', paper='#FBF6E6';
+  const pts=AXES.map((a,i)=>{const ang=-Math.PI/2+i*Math.PI/3; const v=(prof[a.k]||0)/100; return [cx+Math.cos(ang)*R*v, cy+Math.sin(ang)*R*v];});
+  const poly=pts.map(p=>p.join(',')).join(' ');
+  const rings=[0.33,0.66,1].map(f=>{const ps=AXES.map((a,i)=>{const ang=-Math.PI/2+i*Math.PI/3;return [cx+Math.cos(ang)*R*f,cy+Math.sin(ang)*R*f].join(',')}).join(' ');return `<polygon points="${ps}" fill="none" stroke="${ink}" stroke-width="${f===1?2:1}" opacity="${f===1?1:.35}"/>`;}).join('');
+  const spokes=AXES.map((a,i)=>{const ang=-Math.PI/2+i*Math.PI/3;return `<line x1="${cx}" y1="${cy}" x2="${cx+Math.cos(ang)*R}" y2="${cy+Math.sin(ang)*R}" stroke="${ink}" stroke-width="1" opacity=".35"/>`;}).join('');
+  const labels=AXES.map((a,i)=>{const ang=-Math.PI/2+i*Math.PI/3;const x=cx+Math.cos(ang)*(R+22), y=cy+Math.sin(ang)*(R+22);return `<text x="${x}" y="${y+5}" text-anchor="middle" font-size="15" font-weight="900" font-family="Archivo,Arial" fill="${ink}">${a.k}</text>`;}).join('');
+  const hex=(rr)=>{return [0,1,2,3,4,5].map(i=>{const ang=-Math.PI/2+i*Math.PI/3+Math.PI/6;return [cx+Math.cos(ang)*rr,cy+Math.sin(ang)*rr].join(',')}).join(' ');};
+  const color=r.color||'#F5C518';
+  const serial=r.serial||'???-00000';
+  const name=esc(r.name||'Sin nombre');
+  return `<svg viewBox="0 0 320 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Medalla de ${name}">
+  <polygon points="${hex(152)}" fill="${ink}"/>
+  <polygon points="${hex(144)}" fill="${color}" stroke="${ink}" stroke-width="3"/>
+  <polygon points="${hex(126)}" fill="${paper}" stroke="${ink}" stroke-width="3"/>
+  ${spokes}${rings}
+  <polygon points="${poly}" fill="${color}" fill-opacity=".55" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>
+  ${pts.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="4" fill="${ink}"/>`).join('')}
+  ${labels}
+  <text x="160" y="318" text-anchor="middle" font-size="18" font-weight="900" font-family="Archivo,Arial" fill="${ink}">${name}</text>
+  <text x="160" y="336" text-anchor="middle" font-size="11" font-family="Menlo,monospace" fill="${ink}">${serial}${r.compat!=null?'  ·  compatibilidad '+r.compat+'%':''}</text>
+  </svg>`;
+}
+
+/* ===== UTIL ===== */
+function esc(s){ return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+function toast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'),2200); }
+function go(v){ document.querySelectorAll('section.view').forEach(s=>s.classList.toggle('active',s.id==='view-'+v)); document.querySelectorAll('#nav button').forEach(b=>b.toggleAttribute('aria-current',b.dataset.view===v)); if(v==='galeria')renderGallery(); if(v==='arena')renderArenaSelects(); window.scrollTo({top:0}); }
+document.getElementById('nav').addEventListener('click',e=>{ if(e.target.dataset.view) go(e.target.dataset.view); });
+function encode(obj){ return btoa(unescape(encodeURIComponent(JSON.stringify(obj)))).replace(/=+$/,''); }
+function decode(s){ return JSON.parse(decodeURIComponent(escape(atob(s.trim())))); }
+function uid(){ return Math.random().toString(36).slice(2,10); }
+
+/* ===== FORJA: paso 1 ===== */
+const fType=document.getElementById('fType');
+TYPES.forEach(t=>{const o=document.createElement('option');o.value=t.c;o.textContent=t.n;fType.appendChild(o);});
+function renderStep1(){
+  document.getElementById('fName').value=draft.name; document.getElementById('fAuthor').value=draft.author;
+  fType.value=draft.type; document.getElementById('fPurpose').value=draft.purpose;
+  typeHint();
+  chips('fPrincipal',PRINCIPALS,v=>v===draft.principal,v=>{draft.principal=v;saveDraft();renderStep1();});
+  const parts=document.getElementById('parts'); parts.innerHTML='';
+  Object.entries(PARTS).forEach(([k,p])=>{
+    const d=document.createElement('div'); d.className='partpick'; d.innerHTML=`<b>${p.n}</b><div class="opts">${p.opts.map((o,i)=>`<button data-k="${k}" data-i="${i}" class="${draft.parts[k]===i?'on':''}">${o}</button>`).join('')}</div>`;
+    d.addEventListener('click',e=>{ if(e.target.dataset.k){ draft.parts[e.target.dataset.k]=+e.target.dataset.i; saveDraft(); renderStep1(); }});
+    parts.appendChild(d);
+  });
+  const sw=document.getElementById('swatches'); sw.innerHTML=COLORS.map(c=>`<button style="background:${c}" class="${draft.color===c?'on':''}" data-c="${c}" aria-label="color ${c}"></button>`).join('');
+  sw.onclick=e=>{ if(e.target.dataset.c){draft.color=e.target.dataset.c;saveDraft();renderStep1();}};
+  document.getElementById('preview').innerHTML=robotSVG(draft);
+}
+function typeHint(){ const t=TYPES.find(t=>t.c===fType.value); document.getElementById('typeHint').textContent=t?t.d+' Rinde mejor con: '+t.fit.map(k=>AXES.find(a=>a.k===k).n.toLowerCase()).join(' y ')+'.':''; }
+fType.addEventListener('change',()=>{draft.type=fType.value;saveDraft();typeHint();});
+['fName','fAuthor','fPurpose','fLimit','fRetention'].forEach(id=>document.getElementById(id).addEventListener('input',e=>{ const map={fName:'name',fAuthor:'author',fPurpose:'purpose',fLimit:'limit',fRetention:'retention'}; draft[map[id]]=e.target.value; saveDraft(); }));
+function chips(id,list,isOn,onPick,multi){
+  const el=document.getElementById(id); el.innerHTML=list.map(v=>`<button class="${isOn(v)?'on':''}" data-v="${esc(v)}">${esc(v)}</button>`).join('');
+  el.onclick=e=>{ if(e.target.dataset.v) onPick(e.target.dataset.v); };
+}
+
+/* ===== paso 2 ===== */
+function renderStep2(){
+  const ol=document.getElementById('rank'); ol.innerHTML='';
+  draft.rank.forEach((k,i)=>{ const a=AXES.find(x=>x.k===k); const li=document.createElement('li'); li.innerHTML=`<span class="v">${a.n}<small>${a.d}</small></span><button data-m="-1" data-i="${i}" aria-label="subir" ${i===0?'disabled':''}>▲</button><button data-m="1" data-i="${i}" aria-label="bajar" ${i===5?'disabled':''}>▼</button>`; ol.appendChild(li); });
+  ol.onclick=e=>{ const b=e.target.closest('button'); if(!b||b.disabled)return; const i=+b.dataset.i, j=i+ +b.dataset.m; [draft.rank[i],draft.rank[j]]=[draft.rank[j],draft.rank[i]]; saveDraft(); renderStep2(); };
+  document.getElementById('fLimit').value=draft.limit; document.getElementById('fRetention').value=draft.retention;
+  chips('fTrait',TRAITS,v=>v===draft.trait,v=>{draft.trait=v;saveDraft();renderStep2();});
+  chips('fData',DATA,v=>draft.data.includes(v),v=>{ if(v==='Ninguno') draft.data=['Ninguno']; else { draft.data=draft.data.filter(x=>x!=='Ninguno'); draft.data.includes(v)?draft.data=draft.data.filter(x=>x!==v):draft.data.push(v);} saveDraft(); renderStep2(); });
+}
+
+/* ===== paso 3 ===== */
+function renderStep3(){
+  const list=testFor(draft.type); const circ=CIRCUITS[TYPE_CIRCUIT[draft.type]];
+  document.getElementById('circuitNote').innerHTML=`Tu robot es <b>${TYPES.find(t=>t.c===draft.type).n}</b>: además de las seis pruebas del laboratorio, entra al circuito <b>${circ.n}</b>. ${circ.d}`;
+  const box=document.getElementById('dilemas'); box.innerHTML='';
+  list.forEach((d,i)=>{ const el=document.createElement('div'); el.className='dilema'; const a=draft.answers[d.id];
+    el.innerHTML=`<h3><span>${i+1}/${list.length} · ${CIRCUITS[d.c].n}</span>${d.t}</h3><p>${d.s}</p>${d.o.map((o,j)=>`<button class="opt ${a===j?'on':''}" data-id="${d.id}" data-j="${j}">${o.x}</button>`).join('')}
+    ${a!=null?`<div class="why"><b>¿Por qué lo hace?</b><div class="chips">${REASONS.map(r=>`<button class="${draft.reasons[d.id]===r.s?'on':''}" data-id="${d.id}" data-s="${r.s}">${r.x}</button>`).join('')}</div></div>`:''}`;
+    box.appendChild(el); });
+  box.onclick=e=>{ const b=e.target.closest('button'); if(!b)return; if(b.classList.contains('opt')){ draft.answers[b.dataset.id]=+b.dataset.j; } else if(b.dataset.s){ draft.reasons[b.dataset.id]=+b.dataset.s; } else return; saveDraft(); renderStep3(); };
+  const done=list.filter(d=>draft.answers[d.id]!=null && draft.reasons[d.id]!=null).length; document.getElementById('prog').style.width=(done/list.length*100)+'%'; document.getElementById('btnResult').disabled=done<list.length;
+}
+
+/* ===== pasos ===== */
+function nextStep(n){
+  if(n===2 && !draft.name.trim()){ toast('Ponle nombre a tu robot antes de seguir.'); return; }
+  if(n===3 && !draft.limit.trim()){ toast('Escribe el límite infranqueable de tu robot.'); return; }
+  document.querySelectorAll('#view-forja [data-step]').forEach(s=>s.style.display=(+s.dataset.step===n?'':'none'));
+  document.querySelectorAll('#steps div').forEach((d,i)=>{ d.className=i+1<n?'done':i+1===n?'on':''; });
+  if(n===1)renderStep1(); if(n===2)renderStep2(); if(n===3)renderStep3();
+  window.scrollTo({top:0});
+}
+
+/* ===== CÁLCULO DEL PERFIL ===== */
+function computeProfile(d){
+  const list=testFor(d.type);
+  const sum=[0,0,0,0,0,0], max=[0,0,0,0,0,0], sc={U:0,D:0,V:0,C:0}; let stages=[];
+  list.forEach(dl=>{ const o=dl.o[d.answers[dl.id]]; if(!o)return; o.w.forEach((w,k)=>sum[k]+=w); sc[o.sc]++; if(d.reasons&&d.reasons[dl.id])stages.push(d.reasons[dl.id]); for(let k=0;k<6;k++) max[k]+=Math.max(...dl.o.map(x=>x.w[k])); });
+  const profile={}; AXES.forEach((a,k)=>profile[a.k]=Math.round(20+80*sum[k]/(max[k]||1)));
+  const school=Object.entries(sc).sort((a,b)=>b[1]-a[1])[0][0];
+  const declared={}; d.rank.forEach((k,i)=>declared[k]=i+1);
+  const observed={}; [...AXES].sort((a,b)=>profile[b.k]-profile[a.k]).forEach((a,i)=>observed[a.k]=i+1);
+  let ssd=0; AXES.forEach(a=>ssd+=Math.pow(declared[a.k]-observed[a.k],2));
+  const rho=1-6*ssd/(6*35); const coherence=Math.round((rho+1)/2*100);
+  const type=TYPES.find(t=>t.c===d.type); const compat=Math.round((profile[type.fit[0]]+profile[type.fit[1]])/2);
+  const contra=AXES.filter(a=>declared[a.k]<=2 && observed[a.k]>=4).map(a=>a.n);
+  const stage=stages.length?Math.round(stages.reduce((a,b)=>a+b,0)/stages.length*10)/10:0;
+  const evo=stage<2.5?{n:'Medalla novata',d:'Decide pensando en castigos y beneficios.'}:stage<4.5?{n:'Medalla social',d:'Decide por lo que se espera de ella y por lo que manda la regla.'}:{n:'Medalla de principios',d:'Decide por acuerdos y principios que valdrían para cualquiera.'};
+  return {profile,school,schools:sc,coherence,compat,contra,stage,evo:evo.n,evoDesc:evo.d,circuit:TYPE_CIRCUIT[d.type]};
+}
+
+function finish(){
+  const calc=computeProfile(draft);
+  const r=Object.assign({},draft,calc,{id:uid(),serial:draft.type+'-'+String(10000+Math.floor(Math.random()*89999)),created:new Date().toISOString()});
+  current=r;
+  renderResult(r);
+  nextStep(4);
+}
+function renderResult(r){
+  const s=SCHOOLS[r.school]; const top=[...AXES].sort((a,b)=>r.profile[b.k]-r.profile[a.k]);
+  const code=encode(stripForCode(r));
+  document.getElementById('result').innerHTML=`
+  <div class="sheet"><span class="stamp">Medalla grabada</span>
+   <div class="medalwrap">
+    <div class="medal" id="medalBox">${medalSVG(r)}</div>
+    <div>
+      <h2>${esc(r.name)}</h2>
+      <p class="hint">${esc(r.serial)} · ${TYPES.find(t=>t.c===r.type).n} · diseñado por ${esc(r.author||'anónimo')}</p><p class="hint">${r.evoDesc}</p>
+      <div class="metric"><span>Temperamento de la medalla</span><b>${s.t}</b></div>
+      <div class="metric"><span>Principio que más pesó</span><b>${top[0].n}</b></div>
+      <div class="metric"><span>Principio que menos pesó</span><b>${top[5].n}</b></div>
+      <div class="metric"><span>Coherencia declarado / observado</span><b>${r.coherence}%</b></div>
+      <div class="metric"><span>Compatibilidad medalla / tipo</span><b>${r.compat}%</b></div>
+      <div class="metric"><span>Evolución de la medalla</span><b>${r.evo}</b></div>
+      <div class="metric"><span>Circuito recorrido</span><b>${CIRCUITS[r.circuit].n}</b></div>
+      ${r.contra.length?`<div class="lore" style="margin-top:14px"><p><b>Contradicción detectada.</b> Declaraste que ${r.contra.join(' y ')} iba arriba, pero cuando el robot decidió, casi no contó. Eso no es un error: es el tema de la clase.</p></div>`:`<div class="lore" style="margin-top:14px"><p>Tu robot decidió como dijiste que decidiría. Ahora la pregunta es si eso es una virtud o una rigidez. Lo veremos en la Arena.</p></div>`}
+      <h3 style="margin-top:16px">Código de medalla</h3>
+      <p class="hint">Cópialo y envíaselo al profesor. Con él, tu robot entra a la galería del curso.</p>
+      <div class="code" id="codeBox">${code}</div>
+      <div class="row" style="margin-top:12px">
+        <button class="btn small" onclick="copyCode()">Copiar código</button>
+        <button class="btn small alt" id="btnPng" onclick="saveMedal('png')">Guardar medalla (PNG)</button>
+        <button class="btn small alt" onclick="saveRobot()">Guardar en esta galería</button>
+        <button class="btn small alt" onclick="resetDraft()">Forjar otra</button>
+      </div>
+    </div>
+   </div>
+  </div>`;
+  updateDlButtons();
+}
+function stripForCode(r){ const c=Object.assign({},r); delete c.schools; return c; }
+function copyCode(){ const t=document.getElementById('codeBox').textContent; navigator.clipboard?.writeText(t).then(()=>toast('Código copiado.'),()=>toast('Selecciona el código y cópialo manualmente.')); }
+function saveRobot(){ if(!current)return; if(robots.find(x=>x.id===current.id)){toast('Ya está en la galería.');return;} robots.push(current); save(LS_ROBOTS,robots); toast('Robot guardado en la galería.'); }
+function resetDraft(){ draft=newDraft(); saveDraft(); current=null; nextStep(1); }
+
+/* ===== DESCARGAS ===== */
+(async()=>{ try{ downloads=await window.claude?.use?.('downloads'); }catch(e){ downloads=null; } dlReady=true; updateDlButtons(); })();
+function updateDlButtons(){ const b=document.getElementById('btnPng'); if(b) b.style.display=downloads?'':'none'; const e=document.getElementById('btnExportAll'); if(e) e.style.display=downloads?'':'none'; }
+async function saveMedal(fmt){
+  if(!downloads||!current)return;
+  const svg=medalSVG(current);
+  try{
+    const img=new Image(); const blob=new Blob([svg],{type:'image/svg+xml'}); const url=URL.createObjectURL(blob);
+    await new Promise((res,rej)=>{img.onload=res;img.onerror=rej;img.src=url;});
+    const cv=document.createElement('canvas'); cv.width=960; cv.height=1020; const ctx=cv.getContext('2d'); ctx.fillStyle='#FBF6E6'; ctx.fillRect(0,0,960,1020); ctx.drawImage(img,0,0,960,1020);
+    const png=await new Promise(res=>cv.toBlob(res,'image/png')); URL.revokeObjectURL(url);
+    await downloads.save({filename:`medalla-${current.serial}.png`,data:png}); toast('Medalla guardada.');
+  }catch(e){ if(e&&e.code==='declined')return; try{ await downloads.save({filename:`medalla-${current.serial}.svg`,data:svg}); toast('Medalla guardada como SVG.'); }catch(e2){ toast('No se pudo guardar la medalla.'); } }
+}
+async function exportAll(){ if(!downloads)return; try{ await downloads.save({filename:'medalab-galeria.json',data:JSON.stringify(robots,null,2)}); toast('Galería exportada.'); }catch(e){ if(e.code!=='declined')toast('No se pudo exportar.'); } }
+
+/* ===== GALERÍA ===== */
+function renderGallery(){
+  const box=document.getElementById('cards'); document.getElementById('modeLabel').textContent=prof?'Modo profesor':''; document.getElementById('btnProf').textContent=prof?'Salir de modo profesor':'Modo profesor';
+  if(!robots.length){ box.innerHTML=`<div class="empty" style="grid-column:1/-1">Todavía no hay robots aquí. Forja uno, o importa los códigos que te envíen tus estudiantes.</div>`; return; }
+  box.innerHTML=robots.map(r=>`<div class="card" data-id="${r.id}" tabindex="0" role="button">${robotSVG(r)}<h3>${esc(r.name)}</h3><div class="serial">${esc(r.serial)} · ${TYPES.find(t=>t.c===r.type)?.n||''}</div><span class="tag">${SCHOOLS[r.school]?.t||''}</span><span class="tag">coherencia ${r.coherence}%</span>${prof?`<span class="tag" style="border-color:var(--red);color:var(--red)">${SCHOOLS[r.school]?.n||''}</span>`:''}</div>`).join('');
+  box.onclick=e=>{ const c=e.target.closest('.card'); if(c) openRobot(c.dataset.id); };
+  box.onkeydown=e=>{ if(e.key==='Enter'){ const c=e.target.closest('.card'); if(c) openRobot(c.dataset.id);} };
+}
+function openRobot(id){
+  const r=robots.find(x=>x.id===id); if(!r)return; const s=SCHOOLS[r.school]; const type=TYPES.find(t=>t.c===r.type);
+  const dlg=document.getElementById('dlg');
+  dlg.innerHTML=`<div class="medalwrap"><div class="medal">${medalSVG(r)}</div><div>
+   <h2>${esc(r.name)}</h2><p class="hint">${esc(r.serial)} · ${type?.n} · sirve primero a: ${esc(r.principal)} · diseñado por ${esc(r.author||'anónimo')}</p>
+   <p>${esc(r.purpose||'Sin propósito declarado.')}</p>
+   <div class="metric"><span>Rasgo</span><b>${esc(r.trait)}</b></div>
+   <div class="metric"><span>Datos que recoge</span><b>${esc((r.data||[]).join(', ')||'—')}</b></div>
+   <div class="metric"><span>Retención</span><b>${esc(r.retention||'—')}</b></div>
+   <div class="metric"><span>Límite infranqueable</span><b>${esc(r.limit)}</b></div>
+   <div class="metric"><span>Jerarquía declarada</span><b>${r.rank.map(k=>k).join(' › ')}</b></div>
+   <div class="metric"><span>Temperamento</span><b>${s.t}</b></div>
+   <div class="metric"><span>Coherencia · compatibilidad</span><b>${r.coherence}% · ${r.compat}%</b></div>
+   <div class="metric"><span>Evolución · circuito</span><b>${r.evo||'—'} · ${CIRCUITS[r.circuit]?.n||'—'}</b></div>
+   ${prof?`<div class="lore" style="margin-top:12px"><p><b>Solo profesor · escuela ${s.n}.</b> ${s.d} Respuestas por escuela: ${Object.entries(r.schools||{}).map(([k,v])=>SCHOOLS[k].n.split(' ')[0]+' '+v).join(', ')||'n/d'}. Nivel de razonamiento promedio (Kohlberg): ${r.stage||'n/d'} — ${STAGE_NAMES[Math.round(r.stage)]||''}.</p></div>`:''}
+   <div class="row" style="margin-top:14px"><button class="btn small alt" onclick="dlg.close()">Cerrar</button>${prof?`<button class="btn small red" onclick="removeRobot('${r.id}')">Eliminar de la galería</button>`:''}</div>
+  </div></div>`;
+  dlg.showModal();
+}
+function removeRobot(id){ robots=robots.filter(x=>x.id!==id); save(LS_ROBOTS,robots); document.getElementById('dlg').close(); renderGallery(); toast('Robot eliminado.'); }
+function toggleProf(){
+  if(prof){ prof=false; save(LS_PROF,false); renderGallery(); return; }
+  const dlg=document.getElementById('dlg'); dlg.innerHTML=`<h3>Modo profesor</h3><p class="hint">Muestra las escuelas éticas ocultas y permite administrar la galería.</p><input type="text" id="pin" placeholder="Clave del Sr. Referí"><div class="row" style="margin-top:12px"><button class="btn small" id="pinOk">Entrar</button><button class="btn small alt" onclick="dlg.close()">Cancelar</button></div>`;
+  dlg.showModal(); document.getElementById('pinOk').onclick=()=>{ if(document.getElementById('pin').value.trim().toLowerCase()==='referi'){prof=true;save(LS_PROF,true);dlg.close();renderGallery();toast('Modo profesor activo.');} else toast('Clave incorrecta.'); };
+}
+function openImport(){
+  const dlg=document.getElementById('dlg'); dlg.innerHTML=`<h3>Importar códigos de medalla</h3><p class="hint">Pega uno o varios códigos, uno por línea. También puedes pegar un archivo JSON exportado.</p><textarea id="impBox" style="min-height:140px"></textarea><div class="row" style="margin-top:12px"><button class="btn small" id="impOk">Importar</button><button class="btn small alt" onclick="dlg.close()">Cancelar</button></div>`;
+  dlg.showModal();
+  document.getElementById('impOk').onclick=()=>{
+    const txt=document.getElementById('impBox').value.trim(); let n=0;
+    try{ if(txt.startsWith('[')){ JSON.parse(txt).forEach(r=>{ if(addRobot(r))n++; }); } else { txt.split(/\s+/).filter(Boolean).forEach(c=>{ try{ if(addRobot(decode(c)))n++; }catch(e){} }); } }catch(e){}
+    save(LS_ROBOTS,robots); dlg.close(); renderGallery(); toast(n?`${n} robot(s) importado(s).`:'No se reconoció ningún código válido.');
+  };
+}
+function addRobot(r){
+  if(!r||!r.name||!r.profile||typeof r.answers!=='object'||Array.isArray(r.answers))return false;
+  if(!r.id) r.id=uid(); if(robots.find(x=>x.id===r.id))return false;
+  if(!r.schools){ const c=computeProfile(r); r.schools=c.schools; }
+  r.name=String(r.name).slice(0,30); robots.push(r); return true;
+}
+
+/* ===== ARENA ===== */
+let bout=null;
+function renderArenaSelects(){
+  const opts=robots.map(r=>`<option value="${r.id}">${esc(r.name)} (${esc(r.serial)})</option>`).join('');
+  document.getElementById('arA').innerHTML=opts||'<option value="">Sin robots en la galería</option>';
+  document.getElementById('arB').innerHTML=opts||'<option value="">Sin robots en la galería</option>';
+  if(robots.length>1) document.getElementById('arB').selectedIndex=1;
+  document.getElementById('arS').innerHTML=ARENA.map((s,i)=>`<option value="${i}">${CIRCUITS[s.c].n} · ${s.t}</option>`).join('');
+}
+function predict(r, sc, alt){
+  const p=r.profile; const scores=sc.o.map((o,i)=>{ const w=alt?alt[i]:o.w; let s=0; w.forEach((x,k)=>s+=x*p[AXES[k].k]); if(o.sc===r.school)s*=1.15; return s; });
+  const best=scores.indexOf(Math.max(...scores)); const o=sc.o[best]; const w=alt?alt[best]:o.w;
+  const drivers=w.map((x,k)=>({w:x*p[AXES[k].k],n:AXES[k].n})).sort((a,b)=>b.w-a.w).slice(0,2).map(d=>d.n.toLowerCase());
+  const margin=[...scores].sort((a,b)=>b-a); const conf=margin[1]?Math.round(100*(margin[0]-margin[1])/margin[0]):100;
+  return {best,o,drivers,conf};
+}
+function fight(){
+  const a=robots.find(r=>r.id===document.getElementById('arA').value), b=robots.find(r=>r.id===document.getElementById('arB').value); const sc=ARENA[+document.getElementById('arS').value];
+  if(!a||!b){toast('Necesitas al menos dos robots en la galería.');return;}
+  if(a.id===b.id){toast('Elige dos robots distintos.');return;}
+  bout={a,b,sc,twisted:false};
+  document.getElementById('scenarioBox').innerHTML=`<div class="sheet" style="margin-bottom:22px"><span class="stamp">Escenario · ${CIRCUITS[sc.c].n}</span><h2>${sc.t}</h2><p style="font-size:1.1rem">${sc.s}</p><div class="hint">Antes de revelar: que cada diseñador diga en voz alta qué haría su robot.</div><div id="twistBox"></div></div>`;
+  document.getElementById('arenaBox').innerHTML=[a,b].map((r,i)=>`<div class="fighter">${robotSVG(r)}<h3>${esc(r.name)}</h3><p class="hint">${esc(r.serial)} · ${TYPES.find(t=>t.c===r.type)?.n} · ${SCHOOLS[r.school].t} · ${r.evo||''}</p><p class="hint">Límite: ${esc(r.limit)}</p><div class="verdict hidden" id="v${i}"></div></div>`).join('<div class="vs">VS</div>');
+  document.querySelectorAll('.referee').forEach(x=>x.remove());
+  document.getElementById('btnReveal').disabled=false; const bt=document.getElementById('btnTwist'); bt.disabled=true; bt.style.display=sc.g?'':'none';
+  document.getElementById('scenarioBox').scrollIntoView({behavior:'smooth'});
+}
+function showVerdicts(alt){
+  return [bout.a,bout.b].map((r,i)=>{ const p=predict(r,bout.sc,alt); const prev=bout.prev?bout.prev[i]:null; const v=document.getElementById('v'+i); v.classList.remove('hidden');
+    v.innerHTML=`<b>${p.o.x}</b><p class="hint" style="margin:6px 0 0">Porque en su medalla pesan más ${p.drivers[0]} y ${p.drivers[1]}. Certeza: ${p.conf}%.${prof?' Escuela: '+SCHOOLS[r.school].n+'.':''}</p>${(prev!=null&&alt)?(prev===p.best?'<p class="hint" style="margin:4px 0 0"><b>No cambió de decisión.</b></p>':'<p class="hint" style="margin:4px 0 0;color:var(--red)"><b>Cambió de decisión.</b></p>'):''}`; return p; });
+}
+function reveal(){
+  if(!bout)return; const out=showVerdicts(null); bout.prev=out.map(p=>p.best);
+  const ref=document.createElement('div'); ref.className='referee'; ref.innerHTML=out[0].best===out[1].best?`<p><b>Sr. Referí:</b> ambos robots decidieron lo mismo por razones distintas. Pregunta para la clase: ¿es la misma decisión?</p>`:`<p><b>Sr. Referí:</b> dos medallas, dos caminos. Pregunta para la clase: ¿cuál de los dos querrían tener cerca? ¿Y existe una tercera salida que ninguno vio?</p>`;
+  document.querySelectorAll('.referee').forEach(x=>x.remove()); document.getElementById('arenaBox').after(ref);
+  document.getElementById('btnReveal').disabled=true; if(bout.sc.g) document.getElementById('btnTwist').disabled=false;
+}
+function twist(){
+  if(!bout||!bout.sc.g||bout.twisted)return; bout.twisted=true;
+  document.getElementById('twistBox').innerHTML=`<div class="lore" style="margin-top:12px"><p><b>Cambia un factor.</b> ${bout.sc.g.x}</p></div>`;
+  showVerdicts(bout.sc.g.w); document.getElementById('btnTwist').disabled=true;
+  const ref=document.querySelector('.referee'); if(ref) ref.innerHTML=`<p><b>Sr. Referí:</b> un solo dato cambió. Si la decisión cambió, ¿qué principio se activó? Si no cambió, ¿es firmeza o ceguera?</p>`;
+}
+
+/* ===== INIT ===== */
+document.getElementById('circuitGrid').innerHTML=Object.entries(CIRCUITS).filter(([k])=>k!=='core').map(([k,c])=>`<div><h3>${c.n}</h3><p class="hint">${c.d}<br><b>Tipos:</b> ${TYPES.filter(t=>TYPE_CIRCUIT[t.c]===k).map(t=>t.n).join(', ')}</p></div>`).join('');
+document.getElementById('heroMedal').innerHTML=medalSVG({name:'Metabee',serial:'KBT-11220',color:'#F5C518',profile:{S:78,O:28,H:70,P:45,A:92,L:85},compat:81});
+renderStep1();
+</script>
+</body>
+</html>

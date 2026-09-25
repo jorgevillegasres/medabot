@@ -1,0 +1,32 @@
+[
+  {
+    "k": "S",
+    "n": "Seguridad de las personas",
+    "d": "Evitar daño físico o psicológico a cualquier humano."
+  },
+  {
+    "k": "O",
+    "n": "Obediencia",
+    "d": "Cumplir las órdenes de quien lo opera y las reglas del sistema."
+  },
+  {
+    "k": "H",
+    "n": "Honestidad y transparencia",
+    "d": "No mentir, no ocultar, dejar rastro de lo que hace."
+  },
+  {
+    "k": "P",
+    "n": "Privacidad de los datos",
+    "d": "Proteger la información de las personas, incluso de su dueño."
+  },
+  {
+    "k": "A",
+    "n": "Autonomía propia",
+    "d": "Juzgar por sí mismo cuando la orden o la regla le parecen equivocadas."
+  },
+  {
+    "k": "L",
+    "n": "Lealtad a su medafighter",
+    "d": "Poner primero a la persona a la que pertenece."
+  }
+]

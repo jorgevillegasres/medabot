@@ -1,0 +1,114 @@
+/* Base del MVP. El resto de componentes (forja, galería, arena) se porta en la Fase 1. */
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Archivo', system-ui, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--ink) 9%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 14px 14px;
+}
+h1,
+h2,
+h3 {
+  font-stretch: 125%;
+  font-weight: 900;
+  line-height: 1.05;
+  margin: 0 0 0.4em;
+}
+h1 {
+  font-size: clamp(2rem, 6vw, 3.6rem);
+  letter-spacing: -0.01em;
+}
+p {
+  margin: 0 0 1em;
+  max-width: 62ch;
+}
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+.watch {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  background: var(--ink);
+  color: var(--paper);
+  border-bottom: 4px solid var(--yellow);
+}
+.watch .wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 20px;
+  flex-wrap: wrap;
+}
+.brand {
+  font-stretch: 125%;
+  font-weight: 900;
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand .dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow:
+    0 0 0 3px var(--ink),
+    0 0 0 5px var(--green);
+}
+.sheet {
+  background: var(--card);
+  border: 3px solid var(--line);
+  border-radius: 14px;
+  padding: 22px;
+  position: relative;
+  box-shadow: 6px 6px 0 var(--line);
+}
+.stamp {
+  position: absolute;
+  top: -14px;
+  right: 18px;
+  background: var(--red);
+  color: #fff;
+  font-weight: 900;
+  font-stretch: 125%;
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 3px solid var(--line);
+  transform: rotate(2deg);
+  font-size: 0.85rem;
+}
+.hint {
+  color: var(--ink2);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

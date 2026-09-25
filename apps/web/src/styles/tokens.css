@@ -1,0 +1,34 @@
+/* Tokens portados sin cambios de reference/medalab-mvp.html */
+:root {
+  --paper: #fbf6e6;
+  --paper2: #f1eacf;
+  --ink: #1b1b2f;
+  --ink2: #4a4a62;
+  --yellow: #f5c518;
+  --red: #d8382e;
+  --steel: #9aa3ad;
+  --green: #2fb39a;
+  --blue: #2b67c2;
+  --line: #1b1b2f;
+  --card: #fffdf6;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #1a1a26;
+    --paper2: #22222f;
+    --ink: #f3eedd;
+    --ink2: #b9b4a3;
+    --line: #f3eedd;
+    --card: #23232f;
+    --steel: #7c8590;
+  }
+}
+:root[data-theme='dark'] {
+  --paper: #1a1a26;
+  --paper2: #22222f;
+  --ink: #f3eedd;
+  --ink2: #b9b4a3;
+  --line: #f3eedd;
+  --card: #23232f;
+  --steel: #7c8590;
+}
