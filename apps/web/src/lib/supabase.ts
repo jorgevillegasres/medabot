@@ -39,6 +39,8 @@ export function explain(error: unknown): string {
   if (e.code === '23505') return 'Ya existe un registro igual.';
   if (/anonymous sign-ins are disabled/i.test(e.message ?? ''))
     return 'El curso aún no admite estudiantes: el profesor debe activar el acceso anónimo en Supabase.';
+  if (/rate limit/i.test(e.message ?? '') || (e as { status?: number }).status === 429)
+    return 'Se enviaron demasiados correos en poco tiempo. Usa el enlace del último correo que recibiste o espera una hora e inténtalo de nuevo.';
   if (/fetch/i.test(e.message ?? '')) return 'Sin conexión con el servidor. Intenta de nuevo.';
   return e.message ?? 'Error desconocido.';
 }
