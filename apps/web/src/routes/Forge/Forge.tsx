@@ -8,6 +8,7 @@ import { ResultView } from '../Result';
 import { StepBody } from './StepBody';
 import { StepMedal } from './StepMedal';
 import { StepTest } from './StepTest';
+import { SceneBoundary } from './scenes/SceneBoundary';
 
 // Las escenas se cargan bajo demanda: el celular no descarga la Ceremonia en el Taller.
 const Workshop = lazy(() => import('./scenes/Workshop').then((m) => ({ default: m.Workshop })));
@@ -33,16 +34,24 @@ export function Forge() {
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, [step]);
-  useEffect(() => {
-    if (step >= 1 && step <= 4) setAct(step as Act);
-  }, [step, setAct]);
 
-  if (![1, 2, 3, 4].includes(step)) return <Navigate to="/forja/1" replace />;
-  // Tras la Ceremonia la medalla está grabada: los actos 1–3 quedan cerrados.
-  if (forged && step < 4) return <Navigate to="/forja/4" replace />;
-  if (step >= 2 && !draft.name.trim()) return <Navigate to="/forja/1" replace />;
-  if (step === 3 && !draft.limit.trim()) return <Navigate to="/forja/2" replace />;
-  if (step === 4 && !forged) return <Navigate to="/forja/3" replace />;
+  const redirect = ![1, 2, 3, 4].includes(step)
+    ? '/forja/1'
+    : forged && step < 4
+      ? '/forja/4' // Tras la Ceremonia la medalla está grabada: los actos 1–3 quedan cerrados.
+      : step >= 2 && !draft.name.trim()
+        ? '/forja/1'
+        : step === 3 && !draft.limit.trim()
+          ? '/forja/2'
+          : step === 4 && !forged
+            ? '/forja/3'
+            : null;
+
+  useEffect(() => {
+    if (!redirect) setAct(step as Act);
+  }, [redirect, step, setAct]);
+
+  if (redirect) return <Navigate to={redirect} replace />;
 
   const forgeAnother = () => {
     resetDraft();
@@ -66,12 +75,14 @@ export function Forge() {
           {step === 4 && forged && <ResultView robot={forged} onForgeAnother={forgeAnother} />}
         </>
       ) : (
-        <Suspense fallback={<div className="empty">Cargando escena…</div>}>
-          {step === 1 && <Workshop />}
-          {step === 2 && <Anvil />}
-          {step === 3 && <City />}
-          {step === 4 && forged && <Ceremony robot={forged} onForgeAnother={forgeAnother} />}
-        </Suspense>
+        <SceneBoundary key={step} onClassic={() => setClassic(true)}>
+          <Suspense fallback={<div className="empty">Cargando escena…</div>}>
+            {step === 1 && <Workshop />}
+            {step === 2 && <Anvil />}
+            {step === 3 && <City />}
+            {step === 4 && forged && <Ceremony robot={forged} onForgeAnother={forgeAnother} />}
+          </Suspense>
+        </SceneBoundary>
       )}
     </section>
   );
