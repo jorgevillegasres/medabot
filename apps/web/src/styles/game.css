@@ -1,0 +1,402 @@
+/* Ciudad 2045 — escenas de la forja jugada. Usa los tokens de tokens.css. */
+
+.forge-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+.forge-top .steps {
+  flex: 1;
+  min-width: min(100%, 420px);
+}
+.mode-toggle {
+  font-size: 0.9rem;
+}
+.scene-actions {
+  margin-top: 18px;
+}
+.act-stamp {
+  display: inline-block;
+  background: var(--red);
+  color: #fff;
+  font-weight: 900;
+  font-stretch: 125%;
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 3px solid var(--line);
+  transform: rotate(-2deg);
+  margin-bottom: 14px;
+}
+
+/* ===== Acto 1 · Taller ===== */
+.bench {
+  background: var(--paper2);
+  border: 3px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 6px 6px 0 var(--line);
+}
+.bench-robot {
+  width: min(240px, 80%);
+  margin: 0 auto 12px;
+}
+.bench-robot.spark {
+  animation: install 0.45s ease-out;
+}
+@keyframes install {
+  0% {
+    transform: translateY(-8px) scale(1.05);
+    filter: drop-shadow(0 0 10px var(--yellow));
+  }
+  60% {
+    transform: translateY(2px) scale(0.99);
+  }
+  100% {
+    transform: none;
+    filter: none;
+  }
+}
+.shelf .partpick {
+  background: var(--card);
+  border-top: 6px solid var(--steel);
+}
+.datafile {
+  transform: rotate(0.6deg);
+}
+
+/* ===== Acto 2 · Yunque ===== */
+.anvil-art {
+  display: block;
+  width: min(340px, 100%);
+  margin: 0 auto;
+}
+.anvil .rank li {
+  background: linear-gradient(180deg, var(--card), var(--paper2));
+  border-width: 3px;
+}
+.tray {
+  margin-top: 16px;
+}
+
+/* ===== Acto 3 · Ciudad ===== */
+.city-hud {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--card);
+  border: 3px solid var(--line);
+  border-radius: 12px;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  box-shadow: 4px 4px 0 var(--line);
+}
+.city-hud b {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mini-medal {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.mini-medal svg {
+  width: 34px;
+  height: 34px;
+}
+.mini-medal svg.flash {
+  animation: flash 1.2s ease-out;
+}
+@keyframes flash {
+  30% {
+    transform: scale(1.35);
+    filter: drop-shadow(0 0 8px var(--yellow));
+  }
+}
+.flash-label {
+  font-weight: 900;
+  font-size: 0.85rem;
+  color: var(--red);
+  animation: fadeout 2.4s forwards;
+}
+@keyframes fadeout {
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.city-map {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  background: var(--paper2);
+  border: 3px solid var(--line);
+  border-radius: 14px;
+}
+.street {
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-dasharray: 8 6;
+  opacity: 0.35;
+}
+.street.open {
+  opacity: 1;
+}
+.place {
+  cursor: pointer;
+}
+.place.locked {
+  cursor: not-allowed;
+}
+.building.locked {
+  opacity: 0.45;
+}
+.place:focus {
+  outline: none;
+}
+.place:focus-visible {
+  filter: drop-shadow(0 0 3px var(--blue)) drop-shadow(0 0 3px var(--blue));
+}
+.place-label {
+  font:
+    900 12px 'Archivo',
+    Arial,
+    sans-serif;
+  fill: var(--ink);
+}
+.robot-marker {
+  transition: transform 0.7s ease-in-out;
+}
+.place-panel {
+  margin-top: 16px;
+}
+.encounters {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: grid;
+  gap: 8px;
+}
+.encounter-btn {
+  width: 100%;
+  min-height: 44px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  border: 2px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 600;
+}
+.encounter-btn.done {
+  background: color-mix(in srgb, var(--green) 14%, var(--card));
+}
+.encounter-btn .tag {
+  margin: 0;
+  flex: none;
+}
+.city-nav {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 10px 0;
+  margin-top: 12px;
+  background: linear-gradient(transparent, var(--paper) 35%);
+}
+
+/* ===== Diálogos (encuentro, desbloqueo, puerta) ===== */
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.55);
+}
+.encounter,
+.unlock,
+.gate {
+  width: min(640px, 100%);
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+}
+.encounter {
+  position: relative;
+  background: var(--card);
+  border: 3px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 6px 6px 0 var(--line);
+  animation: pop 0.25s ease-out;
+}
+@keyframes pop {
+  from {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+}
+.cartel span {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--red);
+}
+.cartel h2 {
+  margin: 0.2em 2.4em 0.4em 0;
+}
+.cartel h2:focus {
+  outline: none;
+}
+.encounter .close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 900;
+}
+.panel-scene {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  margin: 8px 0 12px;
+}
+.silhouette {
+  width: 64px;
+  flex: none;
+}
+.bubble {
+  margin: 0;
+  background: var(--paper);
+  border: 3px solid var(--line);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-size: 1rem;
+}
+.action-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin-top: 8px;
+  border: 3px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 12px 14px;
+  font-size: 1rem;
+  line-height: 1.4;
+  box-shadow: 3px 3px 0 var(--line);
+}
+.action-card.on {
+  background: var(--yellow);
+  color: #1b1b2f;
+  font-weight: 600;
+}
+.reaction {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+.spark-axis {
+  font-weight: 900;
+  animation: pop 0.3s ease-out;
+}
+.stamp-solved {
+  background: var(--green);
+  color: #fff;
+  font-weight: 900;
+  font-stretch: 125%;
+  padding: 3px 10px;
+  border: 3px solid var(--line);
+  border-radius: 6px;
+  transform: rotate(-3deg);
+}
+
+/* ===== Acto 4 · Ceremonia ===== */
+.ceremony {
+  text-align: center;
+  min-height: 420px;
+}
+.ceremony-stage {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+}
+.ceremony-stage .anvil-art {
+  animation: melt 0.7s ease-in-out infinite alternate;
+}
+@keyframes melt {
+  to {
+    filter: brightness(1.35) saturate(1.4);
+  }
+}
+.ceremony-medal {
+  width: min(300px, 80%);
+  animation: pop 0.6s ease-out;
+}
+.install {
+  position: relative;
+  width: min(240px, 70%);
+}
+.install-medal {
+  position: absolute;
+  width: 36%;
+  right: -8%;
+  top: 34%;
+  animation: slidein 0.8s ease-out;
+}
+@keyframes slidein {
+  from {
+    transform: translateX(60%);
+    opacity: 0;
+  }
+}
+.ceremony-done .metric {
+  animation: fadein 0.45s both;
+}
+.ceremony-done .metric:nth-of-type(2) {
+  animation-delay: 0.25s;
+}
+.ceremony-done .metric:nth-of-type(3) {
+  animation-delay: 0.5s;
+}
+.ceremony-done .metric:nth-of-type(4) {
+  animation-delay: 0.75s;
+}
+.ceremony-done .metric:nth-of-type(5) {
+  animation-delay: 1s;
+}
+.ceremony-done .metric:nth-of-type(6) {
+  animation-delay: 1.25s;
+}
+.ceremony-done .metric:nth-of-type(7) {
+  animation-delay: 1.5s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game *,
+  .game *::before,
+  .game *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
