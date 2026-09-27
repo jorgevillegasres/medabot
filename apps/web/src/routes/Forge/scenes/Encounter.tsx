@@ -1,10 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { AXES, CIRCUITS, REASONS, type AxisKey, type Dilemma } from '@medalab/content';
 import { Chips } from '../../../components/Chips';
 import { placeOf } from '../../../game/city';
 import { dominantAxis } from '../../../game/reaction';
 import { useDraft } from '../../../store/draft';
 import { Silhouette } from './art/Silhouette';
+import { useDialog } from './useDialog';
 
 const REASON_ITEMS = REASONS.map((r) => ({ value: r.s, label: r.x }));
 
@@ -24,18 +25,9 @@ export function Encounter({ dilemma: d, index, total, onClose }: Props) {
   const chosen = useDraft((s) => s.draft.answers[d.id]);
   const why = useDraft((s) => s.draft.reasons[d.id]);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
-  // Con llaves: un efecto no debe devolver nada que no sea una función de limpieza.
-  useEffect(() => {
-    titleRef.current?.focus();
-  }, []);
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose(null);
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [onClose]);
+  useDialog(dialogRef, () => onClose(null), titleRef);
 
   const solved = chosen != null && why != null;
   const axis = solved ? dominantAxis(d.o[chosen]) : null;
@@ -49,6 +41,7 @@ export function Encounter({ dilemma: d, index, total, onClose }: Props) {
         aria-labelledby="enc-title"
         data-dilemma={d.id}
         data-index={index}
+        ref={dialogRef}
       >
         <div className="cartel">
           <span>

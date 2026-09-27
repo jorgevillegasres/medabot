@@ -258,8 +258,9 @@
 .cartel h2 {
   margin: 0.2em 2.4em 0.4em 0;
 }
-.cartel h2:focus {
-  outline: none;
+.cartel h2:focus-visible {
+  outline: 3px dashed var(--blue);
+  outline-offset: 4px;
 }
 .encounter .close {
   position: absolute;
