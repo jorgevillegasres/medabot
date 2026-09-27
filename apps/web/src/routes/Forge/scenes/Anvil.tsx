@@ -16,7 +16,7 @@ export function Anvil() {
 
   return (
     <div className="scene anvil">
-      <span className="act-stamp">Acto 2 · El Yunque</span>
+      <h2 className="act-stamp">Acto 2 · El Yunque</h2>
       <div className="grid g2">
         <div>
           <AnvilMedal color={draft.color} limit={draft.limit} />

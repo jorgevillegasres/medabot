@@ -19,7 +19,7 @@ export function Workshop() {
 
   return (
     <div className="scene workshop">
-      <span className="act-stamp">Acto 1 · El Taller</span>
+      <h2 className="act-stamp">Acto 1 · El Taller</h2>
       <div className="grid g2">
         <div className="bench">
           {/* key: cada pieza nueva vuelve a montar el robot y dispara la animación de encaje */}

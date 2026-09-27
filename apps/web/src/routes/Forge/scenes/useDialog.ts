@@ -44,7 +44,7 @@ export function useDialog(
     document.addEventListener('keydown', onKey);
     return () => {
       document.removeEventListener('keydown', onKey);
-      opener?.focus?.();
+      if (opener?.isConnected) opener.focus();
     };
     // Solo al abrir/cerrar: dialog/initial son refs estables.
     // eslint-disable-next-line react-hooks/exhaustive-deps

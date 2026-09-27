@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AXES, CIRCUITS, type AxisKey, type CircuitKey } from '@medalab/content';
 import { CORPORATION, placeOf } from '../../../game/city';
@@ -36,6 +36,18 @@ export function City() {
     ? [...city.plaza.encounters, ...home.encounters].find((e) => e.dilemma.id === open)
     : undefined;
 
+  // Si el tipo de robot cambió, location/lastVisited pueden apuntar a un distrito
+  // que ya no es el propio: se recalcula un lugar válido para el marcador.
+  const valid = (k: CircuitKey | null): k is CircuitKey =>
+    k === 'core' || (k === home.key && home.status !== 'locked');
+  const spot: CircuitKey = valid(location) ? location : valid(lastVisited) ? lastVisited : 'core';
+
+  useEffect(() => {
+    if (!flash) return;
+    const t = setTimeout(() => setFlash(null), 2400);
+    return () => clearTimeout(t);
+  }, [flash]);
+
   const visit = (key: CircuitKey) => {
     if (key === 'core') return goTo('core');
     if (key !== home.key) return toast(`El circuito ${CIRCUITS[key].n} se abre más adelante.`);
@@ -56,7 +68,7 @@ export function City() {
 
   return (
     <div className="scene city">
-      <span className="act-stamp">Acto 3 · Ciudad 2045</span>
+      <h2 className="act-stamp">Acto 3 · Ciudad 2045</h2>
       <header className="city-hud">
         <b>{draft.name}</b>
         <span>
@@ -71,7 +83,7 @@ export function City() {
 
       <CityMap
         state={city}
-        at={location ?? lastVisited}
+        at={spot}
         robot={draft}
         onVisit={visit}
         onCorporation={visitCorporation}
@@ -105,7 +117,7 @@ export function City() {
           onClose={closeEncounter}
         />
       )}
-      {!encounter && showUnlock && (
+      {!encounter && !gate && showUnlock && (
         <UnlockBanner
           place={home}
           onEnter={() => {
@@ -123,9 +135,19 @@ export function City() {
 function PlacePanel({ place, onOpen }: { place: PlaceState; onOpen: (id: string) => void }) {
   const p = placeOf(place.key);
   const title = place.key === 'core' ? `Plaza ${p.name}` : `Circuito ${p.name}`;
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const mounted = useRef(false);
+
+  useEffect(() => {
+    if (mounted.current) headingRef.current?.focus();
+    mounted.current = true;
+  }, [place.key]);
+
   return (
     <div className="sheet place-panel">
-      <h3>{title}</h3>
+      <h3 ref={headingRef} tabIndex={-1}>
+        {title}
+      </h3>
       <div className="lore">
         <p>{p.description}</p>
       </div>
@@ -184,6 +206,7 @@ function UnlockBanner(props: { place: PlaceState; onEnter: () => void; onLater: 
 function CorporationGate({ onEnter, onCancel }: { onEnter: () => void; onCancel: () => void }) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const enterRef = useRef<HTMLButtonElement>(null);
+  const [busy, setBusy] = useState(false);
   useDialog(dialogRef, onCancel, enterRef);
   return (
     <div className="dialog-backdrop">
@@ -198,7 +221,16 @@ function CorporationGate({ onEnter, onCancel }: { onEnter: () => void; onCancel:
         <h2 id="gate-title">¿Grabar la medalla?</h2>
         <p>Al entrar, la medalla se graba con tus respuestas y ya no podrás cambiarlas.</p>
         <div className="row">
-          <button ref={enterRef} type="button" className="btn" onClick={onEnter}>
+          <button
+            ref={enterRef}
+            type="button"
+            className="btn"
+            disabled={busy}
+            onClick={() => {
+              setBusy(true);
+              onEnter();
+            }}
+          >
             Grabar la medalla
           </button>
           <button type="button" className="btn alt" onClick={onCancel}>

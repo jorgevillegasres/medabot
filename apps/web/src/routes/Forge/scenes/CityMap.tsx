@@ -18,12 +18,11 @@ interface Props {
 const pending = (n: number) => (n === 1 ? '1 encuentro pendiente' : `${n} encuentros pendientes`);
 
 /** Un lugar tocable: botón accesible (teclado y lector de pantalla) dentro del SVG. */
-function asButton(label: string, disabled: boolean, onActivate: () => void) {
+function asButton(label: string, onActivate: () => void) {
   return {
     role: 'button' as const,
     tabIndex: 0,
     'aria-label': label,
-    'aria-disabled': disabled || undefined,
     onClick: onActivate,
     onKeyDown: (e: KeyboardEvent<SVGGElement>) => {
       if (e.key === 'Enter' || e.key === ' ') {
@@ -72,12 +71,21 @@ export function CityMap({ state, at, robot, onVisit, onCorporation }: Props) {
       />
 
       <g
+        className="place"
+        {...asButton(
+          `Ir a la Plaza ${PLAZA.name}: ${pending(state.plaza.encounters.length - state.plaza.solved)}`,
+          () => onVisit('core'),
+        )}
+      >
+        <Plaza place={PLAZA} status={state.plaza.status} />
+      </g>
+
+      <g
         className={state.corporationOpen ? 'place open' : 'place locked'}
         {...asButton(
           state.corporationOpen
             ? `Ir a la ${CORPORATION.name}`
             : `${CORPORATION.name}: resuelve los ${state.total} encuentros`,
-          !state.corporationOpen,
           onCorporation,
         )}
       >
@@ -93,22 +101,11 @@ export function CityMap({ state, at, robot, onVisit, onCorporation }: Props) {
         <g
           key={p.key}
           className={statusOf(p) === 'locked' ? 'place locked' : 'place'}
-          {...asButton(labelOf(p), statusOf(p) === 'locked', () => onVisit(p.key))}
+          {...asButton(labelOf(p), () => onVisit(p.key))}
         >
           <Building place={p} status={statusOf(p)} />
         </g>
       ))}
-
-      <g
-        className="place"
-        {...asButton(
-          `Ir a la Plaza ${PLAZA.name}: ${pending(state.plaza.encounters.length - state.plaza.solved)}`,
-          false,
-          () => onVisit('core'),
-        )}
-      >
-        <Plaza place={PLAZA} status={state.plaza.status} />
-      </g>
 
       <g
         className="robot-marker"

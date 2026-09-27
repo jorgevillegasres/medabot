@@ -11,7 +11,7 @@ interface Props {
 /** Mini-medalla de la interfaz fija: solo el hexágono y su color, sin radar (sin números). */
 export function MiniMedal({ color, flash, flashKey }: Props) {
   return (
-    <span className="mini-medal" aria-live="polite">
+    <span className="mini-medal">
       <svg viewBox="0 0 40 40" aria-hidden="true" key={flashKey} className={flash ? 'flash' : ''}>
         <polygon points={hexPoints(20, 20, 19)} fill="#1B1B2F" />
         <polygon points={hexPoints(20, 20, 16)} fill={color} />
