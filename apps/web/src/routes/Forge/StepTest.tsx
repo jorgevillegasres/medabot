@@ -1,15 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import { CIRCUITS, REASONS, circuitFor, getType, testFor } from '@medalab/content';
-import { forgeRobot, makeSerial } from '@medalab/engine';
 import { Chips } from '../../components/Chips';
 import { useDraft } from '../../store/draft';
-import { useRobots } from '../../store/robots';
+import { useFinishForge } from './useFinishForge';
 
 const REASON_ITEMS = REASONS.map((r) => ({ value: r.s, label: r.x }));
 
 export function StepTest() {
-  const { draft, answer, reason, setForged } = useDraft();
-  const addRobot = useRobots((s) => s.add);
+  const { draft, answer, reason } = useDraft();
+  const finishForge = useFinishForge();
   const navigate = useNavigate();
 
   const list = testFor(draft.type);
@@ -20,15 +19,7 @@ export function StepTest() {
   const complete = done === list.length;
 
   const finish = () => {
-    if (!complete) return;
-    const robot = forgeRobot(draft, {
-      id: crypto.randomUUID(),
-      serial: makeSerial(draft.type),
-      created: new Date().toISOString(),
-    });
-    addRobot(robot);
-    setForged(robot.id);
-    navigate('/forja/4');
+    if (complete) finishForge();
   };
 
   return (
