@@ -32,7 +32,8 @@ export function Ceremony({ robot, onForgeAnother }: { robot: Robot; onForgeAnoth
   useEffect(() => {
     if (stage >= FINAL) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.repeat || (e.target as HTMLElement | null)?.tagName === 'BUTTON') return; // tecla sostenida o un botón enfocado: que actúe el botón
+      if (e.repeat) return; // tecla sostenida: no salta sin querer
+      if (e.key !== 'Escape' && (e.target as HTMLElement | null)?.tagName === 'BUTTON') return; // Enter/Espacio en un botón: que actúe el botón
       if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') {
         e.preventDefault();
         setStage(FINAL);
