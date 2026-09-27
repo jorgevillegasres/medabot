@@ -33,7 +33,8 @@ const INITIAL = {
   seenUnlocks: [] as string[],
 };
 
-const isCircuit = (k: unknown): k is CircuitKey => typeof k === 'string' && k in CIRCUITS;
+const isCircuit = (k: unknown): k is CircuitKey =>
+  typeof k === 'string' && Object.prototype.hasOwnProperty.call(CIRCUITS, k);
 
 export const useGame = create<GameState>()(
   persist(
