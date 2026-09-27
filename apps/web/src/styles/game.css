@@ -130,17 +130,18 @@
     opacity: 0;
   }
 }
+/* El mapa y las siluetas son láminas impresas: paleta fija, como la medalla y el robot (legibles también en modo oscuro). */
 .city-map {
   display: block;
   width: 100%;
   max-width: 520px;
   margin: 0 auto;
-  background: var(--paper2);
+  background: #f1eacf;
   border: 3px solid var(--line);
   border-radius: 14px;
 }
 .street {
-  stroke: var(--ink);
+  stroke: #1b1b2f;
   stroke-width: 3;
   stroke-dasharray: 8 6;
   opacity: 0.35;
@@ -168,7 +169,7 @@
     900 12px 'Archivo',
     Arial,
     sans-serif;
-  fill: var(--ink);
+  fill: #1b1b2f;
 }
 .robot-marker {
   transition: transform 0.7s ease-in-out;
@@ -281,6 +282,9 @@
 .silhouette {
   width: 64px;
   flex: none;
+  background: #fbf6e6;
+  border-radius: 12px;
+  padding: 4px;
 }
 .bubble {
   margin: 0;
