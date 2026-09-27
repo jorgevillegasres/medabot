@@ -2,7 +2,7 @@ import { Link, NavLink, Navigate, Route, Routes } from 'react-router-dom';
 import { Toast } from './components/Toast';
 import { isOnline } from './lib/supabase';
 import { Arena } from './routes/Arena';
-import { Forge } from './routes/Forge/Forge';
+import { Forge, ForgeResume } from './routes/Forge/Forge';
 import { Gallery } from './routes/Gallery';
 import { Join } from './routes/Join';
 import { Landing } from './routes/Landing';
@@ -41,7 +41,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/entrar" element={<Join />} />
-          <Route path="/forja" element={<Navigate to="/forja/1" replace />} />
+          <Route path="/forja" element={<ForgeResume />} />
           <Route path="/forja/:step" element={<Forge />} />
           <Route path="/medalla/:robotId" element={<MedalRoute />} />
           <Route path="/medallas" element={<Medals />} />
