@@ -17,8 +17,23 @@ export interface ForgeInput {
 export const decodeCode = (code: string) =>
   JSON.parse(Buffer.from(code.trim(), 'base64').toString('utf8'));
 
+/** Fuerza la forja clásica (formulario) en esta página, en cada navegación. */
+export async function forceClassicForge(page: Page) {
+  await page.addInitScript(() => {
+    const key = 'medalab.game.v1';
+    let state = {};
+    try {
+      state = JSON.parse(localStorage.getItem(key) ?? 'null')?.state ?? {};
+    } catch {
+      /* dato corrupto: se reemplaza */
+    }
+    localStorage.setItem(key, JSON.stringify({ state: { ...state, classic: true }, version: 0 }));
+  });
+}
+
 /** Forja un robot en la app nueva y devuelve el código de medalla. */
 export async function forgeInApp(page: Page, f: ForgeInput) {
+  await forceClassicForge(page);
   await page.goto('/forja/1');
   await page.locator('#fName').fill(f.name);
   await page.locator('#fType').selectOption(f.type);

@@ -1,7 +1,10 @@
 import { expect, test } from '@playwright/test';
-import { decodeCode, pattern } from './helpers';
+import { decodeCode, forceClassicForge, pattern } from './helpers';
 
 const SHOTS = 'test-results/capturas';
+
+// Este archivo prueba la forja clásica; el juego se prueba en game.spec.ts.
+test.beforeEach(async ({ page }) => forceClassicForge(page));
 
 test('forja completa: cuerpo → medalla → test → resultado', async ({ page }, info) => {
   const shot = (n: string) =>
