@@ -62,7 +62,11 @@ export function Forge() {
   return (
     <section className={classic ? 'view' : 'view game'}>
       <div className="forge-top">
-        <Steps current={step} labels={classic ? undefined : GAME_LABELS} />
+        <Steps
+          current={step}
+          labels={classic ? undefined : GAME_LABELS}
+          noun={classic ? 'Paso' : 'Acto'}
+        />
         <button type="button" className="linkbtn mode-toggle" onClick={() => setClassic(!classic)}>
           {classic ? 'Ver como juego' : 'Ver como formulario'}
         </button>

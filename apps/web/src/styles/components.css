@@ -159,35 +159,54 @@ textarea {
 
 /* ===== Pasos de la forja ===== */
 .steps {
-  display: flex;
-  gap: 0;
-  margin: 18px 0 26px;
+  margin: var(--sp-4) 0 var(--sp-5);
+}
+.steps-now {
+  margin: 0 0 var(--sp-2);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  color: var(--ink2);
+}
+.steps ol {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-1);
+  margin: 0;
   padding: 0;
   list-style: none;
-  border: 3px solid var(--line);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
 }
 .steps li {
-  flex: 1;
-  padding: 8px 6px;
-  text-align: center;
-  font-weight: 600;
+  display: grid;
+  gap: var(--sp-1);
   font-size: var(--fs-xs);
-  background: var(--paper2);
+  font-weight: 600;
   color: var(--ink2);
-  border-right: 3px solid var(--line);
 }
-.steps li:last-child {
-  border-right: 0;
+.steps li::before {
+  content: '';
+  height: 8px;
+  border-radius: 4px;
+  background: var(--paper2);
+  border: 2px solid var(--line);
+}
+.steps li.done::before {
+  background: var(--red);
+}
+.steps li.on::before {
+  background: var(--yellow);
 }
 .steps li.on {
-  background: var(--yellow);
-  color: #1b1b2f;
+  color: var(--ink);
 }
-.steps li.done {
-  background: var(--green);
-  color: #fff;
+@media (max-width: 719px) {
+  .steps li span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
 }
 
 /* ===== Constructor ===== */

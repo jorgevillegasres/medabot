@@ -33,6 +33,14 @@ test.describe('cabecera', () => {
   });
 });
 
+test('la forja muestra el acto actual', async ({ page }) => {
+  await page.goto('/forja/1');
+  const steps = page.getByRole('group', { name: 'Pasos de la forja' });
+  await expect(steps).toContainText('Acto 1 de 4 · Taller');
+  await expect(steps.locator('li[aria-current="step"]')).toHaveCount(1);
+  await expect(page.getByRole('heading', { name: 'Acto 1 · El Taller' })).toBeAttached();
+});
+
 test('selector de piezas: pestañas con flechas y miniaturas', async ({ page }) => {
   await page.goto('/forja/1');
   const tabs = page.getByRole('tablist', { name: 'Medapartes' });
