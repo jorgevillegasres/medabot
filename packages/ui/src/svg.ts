@@ -3,6 +3,7 @@
 
 import { AXES, CATALOGS, type PartKey } from '@medalab/content';
 import type { Profile } from '@medalab/engine';
+import { HEX_RE } from './color';
 import { drawRobot, FIT, normalizeParts, STROKE } from './robotArt';
 
 export interface RobotLook {
@@ -28,9 +29,8 @@ export function esc(s: unknown): string {
 
 // Los robots importados vienen de códigos que cualquiera puede fabricar: los valores que
 // el MVP interpolaba sin escapar solo pasan si tienen el formato esperado.
-const COLOR_RE = /^#[0-9A-Fa-f]{3,8}$/;
 const SERIAL_SAFE_RE = /^[A-Za-z0-9?-]{1,20}$/;
-const safeColor = (c: unknown) => (typeof c === 'string' && COLOR_RE.test(c) ? c : '');
+const safeColor = (c: unknown) => (typeof c === 'string' && HEX_RE.test(c) ? c : '');
 const safeSerial = (s: unknown) => (typeof s === 'string' && SERIAL_SAFE_RE.test(s) ? s : '');
 
 export function robotSvg(r: RobotLook): string {

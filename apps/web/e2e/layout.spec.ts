@@ -74,12 +74,13 @@ async function overflow(page: import('@playwright/test').Page) {
       let p = el.parentElement;
       while (p) {
         const ov = getComputedStyle(p).overflowX;
-        if (ov === 'auto' || ov === 'scroll' || ov === 'hidden') return true;
+        if (ov === 'auto' || ov === 'scroll') return true;
         p = p.parentElement;
       }
       return false;
     };
     const out: string[] = [];
+    if (document.documentElement.scrollWidth > w) out.push('la página se desplaza a los lados');
     for (const el of document.querySelectorAll<HTMLElement>('main *')) {
       const r = el.getBoundingClientRect();
       if (r.width <= 1) continue;

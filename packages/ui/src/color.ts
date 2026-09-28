@@ -1,6 +1,7 @@
-// Sombras y brillos del arte del robot. Aceptan los mismos formatos que safeColor() deja pasar.
+// Sombras y brillos del arte del robot. HEX_RE es también el filtro de safeColor() y partSvg():
+// solo pasa lo que estas funciones saben leer.
 
-const HEX_RE = /^#([0-9A-Fa-f]{3,4}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$/;
+export const HEX_RE = /^#([0-9A-Fa-f]{3,4}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$/;
 
 function rgb(hex: string): [number, number, number] {
   if (!HEX_RE.test(hex)) throw new Error(`Color inválido: ${hex}`);

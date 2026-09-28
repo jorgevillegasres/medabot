@@ -4,7 +4,7 @@
 // ya pasaron por safeColor().
 
 import { CATALOGS, type PartKey } from '@medalab/content';
-import { shade, tint } from './color';
+import { HEX_RE, shade, tint } from './color';
 
 export type Palette = { c: string; dark: string; light: string };
 
@@ -222,7 +222,6 @@ export const PART_BOX: Record<PartKey, string> = {
   legs: '50 150 140 100',
 };
 
-const COLOR_RE = /^#[0-9A-Fa-f]{3,8}$/;
 const ok = (n: unknown) => (n === 0 || n === 1 || n === 2 ? n : 0);
 export const normalizeParts = (p?: Partial<Record<PartKey, unknown>>): Parts => ({
   head: ok(p?.head),
@@ -233,7 +232,7 @@ export const normalizeParts = (p?: Partial<Record<PartKey, unknown>>): Parts => 
 
 /** Miniatura decorativa de una medaparte (el nombre accesible lo pone el botón que la contiene). */
 export function partSvg(part: PartKey, option: number, color?: string): string {
-  const c = typeof color === 'string' && COLOR_RE.test(color) ? color : CATALOGS.colors[0]!;
+  const c = typeof color === 'string' && HEX_RE.test(color) ? color : CATALOGS.colors[0]!;
   const p = palette(c);
   const o = ok(option);
   const frag =

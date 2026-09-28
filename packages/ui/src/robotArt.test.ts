@@ -49,6 +49,14 @@ describe('robot estilo A', () => {
     expect(s).toContain(`fill="${CATALOGS.colors[0]}"`);
   });
 
+  it('colores hexadecimales de largo raro no rompen el dibujo (códigos importados)', () => {
+    for (const color of ['#12345', '#1234567', '#12']) {
+      expect(() => robotSvg({ name: 'R', color })).not.toThrow();
+      expect(robotSvg({ name: 'R', color })).toContain(`fill="${CATALOGS.colors[0]}"`);
+      expect(() => partSvg('legs', 1, color)).not.toThrow();
+    }
+  });
+
   it('cada opción de cada parte dibuja algo distinto', () => {
     for (const k of PARTS) {
       const out = [0, 1, 2].map((i) =>
