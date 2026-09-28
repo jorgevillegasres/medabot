@@ -94,7 +94,7 @@ describe('shade / tint', () => {
 
 - [ ] **Step 2: Correr y ver que falla**
 
-Run: `pnpm --filter @medalab/ui exec vitest run src/color.test.ts`
+Run: `pnpm vitest run packages/ui/src/color.test.ts`
 Expected: FAIL (`Cannot find module './color'`).
 
 - [ ] **Step 3: Implementar**
@@ -131,7 +131,7 @@ export function tint(hex: string, amount: number): string {
 
 - [ ] **Step 4: Correr y ver que pasa**
 
-Run: `pnpm --filter @medalab/ui exec vitest run src/color.test.ts`
+Run: `pnpm vitest run packages/ui/src/color.test.ts`
 Expected: PASS (6 tests). Nota: `0xFF * 0.75 = 191.25 → 191 = BF`; `0 + 255*0.5 = 127.5 → 128 = 80`.
 
 - [ ] **Step 5: Commit**
@@ -268,7 +268,7 @@ describe('partSvg', () => {
 ```
 
 - [ ] **Step 2:** En `packages/ui/src/svg.test.ts`, quitar del `describe('SVG idénticos a los del MVP')` las aserciones de robot: en el `it.each` de fixtures dejar solo `expect(medalSvg(f.robot)).toBe(f.medalSvg);`, borrar el `it('las 81 combinaciones de medapartes…')`, y renombrar el `describe` a `'Medalla idéntica a la del MVP'`. Mantener la importación de `robotSvg` solo si otra prueba del archivo la usa; si no, quitarla.
-- [ ] **Step 3:** Correr `pnpm --filter @medalab/ui exec vitest run` → FAIL (falta `robotArt`).
+- [ ] **Step 3:** Correr `pnpm vitest run packages/ui` → FAIL (falta `robotArt`).
 - [ ] **Step 4:** Implementar `robotArt.ts` y el nuevo `robotSvg`. Actualizar el comentario de cabecera de `svg.ts`: «medalSvg() es un port fiel del MVP; robotSvg() usa el arte propio de la Fase H (robotArt.ts)».
 - [ ] **Step 5:** Añadir a `RobotSvg.tsx`:
 
