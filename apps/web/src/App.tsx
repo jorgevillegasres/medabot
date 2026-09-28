@@ -1,7 +1,7 @@
+import { lazy, Suspense } from 'react';
 import { Link, NavLink, Navigate, Route, Routes } from 'react-router-dom';
 import { Toast } from './components/Toast';
 import { isOnline } from './lib/supabase';
-import { Arena } from './routes/Arena';
 import { Forge, ForgeResume } from './routes/Forge/Forge';
 import { Gallery } from './routes/Gallery';
 import { Join } from './routes/Join';
@@ -9,12 +9,24 @@ import { Landing } from './routes/Landing';
 import { Medals } from './routes/Medals';
 import { MedalRoute } from './routes/Result';
 import { RobotSheet } from './routes/RobotSheet';
-import { Screen } from './routes/Screen';
-import { CourseSheet, LocalSheet } from './routes/SheetRoutes';
-import { TeacherLogin } from './routes/Teacher/Login';
-import { TeacherPanel } from './routes/Teacher/Panel';
 import { Vote } from './routes/Vote';
 import { useCourse } from './store/course';
+
+// Pantallas del profesor y de impresión: los estudiantes no las descargan al entrar.
+const Arena = lazy(() => import('./routes/Arena').then((m) => ({ default: m.Arena })));
+const Screen = lazy(() => import('./routes/Screen').then((m) => ({ default: m.Screen })));
+const TeacherLogin = lazy(() =>
+  import('./routes/Teacher/Login').then((m) => ({ default: m.TeacherLogin })),
+);
+const TeacherPanel = lazy(() =>
+  import('./routes/Teacher/Panel').then((m) => ({ default: m.TeacherPanel })),
+);
+const CourseSheet = lazy(() =>
+  import('./routes/SheetRoutes').then((m) => ({ default: m.CourseSheet })),
+);
+const LocalSheet = lazy(() =>
+  import('./routes/SheetRoutes').then((m) => ({ default: m.LocalSheet })),
+);
 
 export function App() {
   const course = useCourse((s) => s.course);
@@ -39,24 +51,26 @@ export function App() {
         </div>
       </header>
       <main className="wrap">
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/entrar" element={<Join />} />
-          <Route path="/forja" element={<ForgeResume />} />
-          <Route path="/forja/:step" element={<Forge />} />
-          <Route path="/medalla/:robotId" element={<MedalRoute />} />
-          <Route path="/medallas" element={<Medals />} />
-          <Route path="/medallas/hoja" element={<LocalSheet />} />
-          <Route path="/galeria" element={<Gallery />} />
-          <Route path="/robot/:robotId" element={<RobotSheet />} />
-          <Route path="/votar" element={<Vote />} />
-          <Route path="/arena" element={<Arena />} />
-          <Route path="/pantalla" element={<Screen />} />
-          <Route path="/profesor" element={<TeacherLogin />} />
-          <Route path="/profesor/panel" element={<TeacherPanel />} />
-          <Route path="/profesor/hoja" element={<CourseSheet />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <Suspense fallback={<div className="empty">Cargando…</div>}>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/entrar" element={<Join />} />
+            <Route path="/forja" element={<ForgeResume />} />
+            <Route path="/forja/:step" element={<Forge />} />
+            <Route path="/medalla/:robotId" element={<MedalRoute />} />
+            <Route path="/medallas" element={<Medals />} />
+            <Route path="/medallas/hoja" element={<LocalSheet />} />
+            <Route path="/galeria" element={<Gallery />} />
+            <Route path="/robot/:robotId" element={<RobotSheet />} />
+            <Route path="/votar" element={<Vote />} />
+            <Route path="/arena" element={<Arena />} />
+            <Route path="/pantalla" element={<Screen />} />
+            <Route path="/profesor" element={<TeacherLogin />} />
+            <Route path="/profesor/panel" element={<TeacherPanel />} />
+            <Route path="/profesor/hoja" element={<CourseSheet />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Suspense>
       </main>
       <footer className="wrap foot">
         {isOnline && <Link to="/profesor">Acceso del profesor</Link>}
