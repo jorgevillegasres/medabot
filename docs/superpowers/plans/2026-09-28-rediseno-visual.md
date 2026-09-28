@@ -26,35 +26,36 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 ## Mapa de archivos
 
-| Archivo | Acción | Responsabilidad |
-|---|---|---|
-| `packages/ui/src/color.ts` | Crear | `shade()` y `tint()` para sombras y brillos |
-| `packages/ui/src/color.test.ts` | Crear | Pruebas de color |
-| `packages/ui/src/robotArt.ts` | Crear | Dibujo de las 12 piezas + torso, `partSvg()` |
-| `packages/ui/src/svg.ts` | Modificar | `robotSvg()` compone con `robotArt.ts`; `medalSvg` intacto |
-| `packages/ui/src/svg.test.ts` | Modificar | Reemplazar prueba de robot idéntico al MVP |
-| `packages/ui/src/robotArt.test.ts` | Crear | Pruebas del arte nuevo |
-| `packages/ui/src/RobotSvg.tsx` | Modificar | Añadir `<PartSvg>` |
-| `packages/ui/src/index.ts` | Modificar | Exportar `PartSvg`, `partSvg`, `shade`, `tint` |
-| `apps/web/src/styles/tokens.css` | Modificar | Tokens nuevos de tipografía, espacio, radios |
-| `apps/web/src/styles/base.css` | Modificar | Tokens aplicados, `.sr-only`, cabecera |
-| `apps/web/src/styles/components.css` | Modificar | Tokens aplicados, selector de piezas, pasos, escenario |
-| `apps/web/src/styles/game.css` | Modificar | Sello de acto oculto, HUD, estante |
-| `apps/web/src/App.tsx` | Modificar | Botón «Menú» en celular |
-| `apps/web/src/routes/Forge/fields.tsx` | Modificar | `PartsPicker` con pestañas y miniaturas |
-| `apps/web/src/components/Steps.tsx` | Modificar | Barra de progreso «Acto N de 4 · Nombre» |
-| `apps/web/src/routes/Forge/Forge.tsx` | Modificar | Pasar `noun` a `Steps` |
-| `apps/web/src/routes/{Gallery,Medals}.tsx`, `Forge/StepBody.tsx`, `Forge/scenes/Workshop.tsx` | Modificar | Clase `robot-stage` en el contenedor del robot |
-| `apps/web/e2e/helpers.ts` | Modificar | `navTo()` (abre el menú en celular), `pickPart()` |
-| `apps/web/e2e/*.spec.ts` | Modificar | Usar `navTo`/`pickPart` donde hoy se hace clic directo |
-| `apps/web/e2e/layout.spec.ts` | Crear | Sin desbordes a 375 px; menú accesible |
-| `CLAUDE.md` | Modificar | Registrar la excepción del arte del robot |
+| Archivo                                                                                       | Acción    | Responsabilidad                                            |
+| --------------------------------------------------------------------------------------------- | --------- | ---------------------------------------------------------- |
+| `packages/ui/src/color.ts`                                                                    | Crear     | `shade()` y `tint()` para sombras y brillos                |
+| `packages/ui/src/color.test.ts`                                                               | Crear     | Pruebas de color                                           |
+| `packages/ui/src/robotArt.ts`                                                                 | Crear     | Dibujo de las 12 piezas + torso, `partSvg()`               |
+| `packages/ui/src/svg.ts`                                                                      | Modificar | `robotSvg()` compone con `robotArt.ts`; `medalSvg` intacto |
+| `packages/ui/src/svg.test.ts`                                                                 | Modificar | Reemplazar prueba de robot idéntico al MVP                 |
+| `packages/ui/src/robotArt.test.ts`                                                            | Crear     | Pruebas del arte nuevo                                     |
+| `packages/ui/src/RobotSvg.tsx`                                                                | Modificar | Añadir `<PartSvg>`                                         |
+| `packages/ui/src/index.ts`                                                                    | Modificar | Exportar `PartSvg`, `partSvg`, `shade`, `tint`             |
+| `apps/web/src/styles/tokens.css`                                                              | Modificar | Tokens nuevos de tipografía, espacio, radios               |
+| `apps/web/src/styles/base.css`                                                                | Modificar | Tokens aplicados, `.sr-only`, cabecera                     |
+| `apps/web/src/styles/components.css`                                                          | Modificar | Tokens aplicados, selector de piezas, pasos, escenario     |
+| `apps/web/src/styles/game.css`                                                                | Modificar | Sello de acto oculto, HUD, estante                         |
+| `apps/web/src/App.tsx`                                                                        | Modificar | Botón «Menú» en celular                                    |
+| `apps/web/src/routes/Forge/fields.tsx`                                                        | Modificar | `PartsPicker` con pestañas y miniaturas                    |
+| `apps/web/src/components/Steps.tsx`                                                           | Modificar | Barra de progreso «Acto N de 4 · Nombre»                   |
+| `apps/web/src/routes/Forge/Forge.tsx`                                                         | Modificar | Pasar `noun` a `Steps`                                     |
+| `apps/web/src/routes/{Gallery,Medals}.tsx`, `Forge/StepBody.tsx`, `Forge/scenes/Workshop.tsx` | Modificar | Clase `robot-stage` en el contenedor del robot             |
+| `apps/web/e2e/helpers.ts`                                                                     | Modificar | `navTo()` (abre el menú en celular), `pickPart()`          |
+| `apps/web/e2e/*.spec.ts`                                                                      | Modificar | Usar `navTo`/`pickPart` donde hoy se hace clic directo     |
+| `apps/web/e2e/layout.spec.ts`                                                                 | Crear     | Sin desbordes a 375 px; menú accesible                     |
+| `CLAUDE.md`                                                                                   | Modificar | Registrar la excepción del arte del robot                  |
 
 ---
 
 ### Task 1: Utilidades de color
 
 **Files:**
+
 - Create: `packages/ui/src/color.ts`
 - Test: `packages/ui/src/color.test.ts`
 
@@ -114,7 +115,11 @@ function rgb(hex: string): [number, number, number] {
 
 const clamp01 = (n: number) => Math.min(1, Math.max(0, n));
 const toHex = (c: number[]) =>
-  '#' + c.map((v) => Math.round(v).toString(16).padStart(2, '0')).join('').toUpperCase();
+  '#' +
+  c
+    .map((v) => Math.round(v).toString(16).padStart(2, '0'))
+    .join('')
+    .toUpperCase();
 
 /** Mezcla el color con negro. amount 0 = igual, 1 = negro. */
 export function shade(hex: string, amount: number): string {
@@ -148,6 +153,7 @@ git commit -m "feat(faseH): utilidades shade/tint para el arte del robot"
 Esta tarea es de dirección de arte y requiere iterar mirando el resultado; la hace el controlador (no un subagente), con este contrato y estas pruebas.
 
 **Files:**
+
 - Create: `packages/ui/src/robotArt.ts`, `packages/ui/src/robotArt.test.ts`
 - Modify: `packages/ui/src/svg.ts` (solo `robotSvg`), `packages/ui/src/svg.test.ts`, `packages/ui/src/RobotSvg.tsx`, `packages/ui/src/index.ts`, `CLAUDE.md`
 
@@ -229,7 +235,11 @@ describe('robot estilo A', () => {
   it('cada opción de cada parte dibuja algo distinto', () => {
     for (const k of PARTS) {
       const out = [0, 1, 2].map((i) =>
-        robotSvg({ name: 'R', color: '#2FB39A', parts: { head: 0, rarm: 0, larm: 0, legs: 0, [k]: i } }),
+        robotSvg({
+          name: 'R',
+          color: '#2FB39A',
+          parts: { head: 0, rarm: 0, larm: 0, legs: 0, [k]: i },
+        }),
       );
       expect(new Set(out).size, k).toBe(3);
     }
@@ -277,14 +287,27 @@ import type { PartKey } from '@medalab/content';
 import { partSvg } from './robotArt';
 
 /** Miniatura decorativa de una medaparte: el nombre accesible lo pone el botón que la contiene. */
-export function PartSvg({ part, option, color }: { part: PartKey; option: number; color?: string }) {
+export function PartSvg({
+  part,
+  option,
+  color,
+}: {
+  part: PartKey;
+  option: number;
+  color?: string;
+}) {
   return (
-    <span className="partsvg" aria-hidden="true" dangerouslySetInnerHTML={{ __html: partSvg(part, option, color) }} />
+    <span
+      className="partsvg"
+      aria-hidden="true"
+      dangerouslySetInnerHTML={{ __html: partSvg(part, option, color) }}
+    />
   );
 }
 ```
 
 y en `index.ts`: `export { RobotSvg, PartSvg } from './RobotSvg';`, `export { partSvg } from './robotArt';`, `export { shade, tint } from './color';`.
+
 - [ ] **Step 6:** Correr `pnpm test` → PASS. Revisar visualmente: 81 combinaciones en una hoja HTML de scratchpad (no en el repo) a 200 px y a 40 px.
 - [ ] **Step 7:** En `CLAUDE.md`, bajo «Estilo visual…», añadir: «Excepción (Fase H, decidida por el profesor): el dibujo del robot (packages/ui/src/robotArt.ts) es arte propio, no el del MVP. La medalla sí sigue idéntica al MVP.»
 - [ ] **Step 8: Commit**
@@ -299,28 +322,29 @@ git commit -m "feat(faseH): robots con arte estilo Medabot anime y miniaturas de
 ### Task 3: Tokens de tipografía y espacio
 
 **Files:**
+
 - Modify: `apps/web/src/styles/tokens.css`, `apps/web/src/styles/base.css`, `apps/web/src/styles/components.css`, `apps/web/src/styles/game.css`
 
 - [ ] **Step 1: Añadir tokens** al final del bloque `:root { … }` principal de `tokens.css` (no dentro de los bloques oscuros), con un comentario encima de los nuevos: `/* Fase H: escala tipográfica, espaciado y forma. */`
 
 ```css
-  --fs-xs: 0.8rem;
-  --fs-sm: 0.9rem;
-  --fs-md: 1rem;
-  --fs-lg: 1.2rem;
-  --fs-xl: clamp(1.4rem, 3.5vw, 2rem);
-  --fs-2xl: clamp(2rem, 6vw, 3.4rem);
-  --sp-1: 4px;
-  --sp-2: 8px;
-  --sp-3: 12px;
-  --sp-4: 16px;
-  --sp-5: 24px;
-  --sp-6: 32px;
-  --radius: 14px;
-  --radius-sm: 10px;
-  --bw: 3px;
-  --shadow: 5px 5px 0 var(--line);
-  --shadow-sm: 3px 3px 0 var(--line);
+--fs-xs: 0.8rem;
+--fs-sm: 0.9rem;
+--fs-md: 1rem;
+--fs-lg: 1.2rem;
+--fs-xl: clamp(1.4rem, 3.5vw, 2rem);
+--fs-2xl: clamp(2rem, 6vw, 3.4rem);
+--sp-1: 4px;
+--sp-2: 8px;
+--sp-3: 12px;
+--sp-4: 16px;
+--sp-5: 24px;
+--sp-6: 32px;
+--radius: 14px;
+--radius-sm: 10px;
+--bw: 3px;
+--shadow: 5px 5px 0 var(--line);
+--shadow-sm: 3px 3px 0 var(--line);
 ```
 
 Cambiar el comentario de la primera línea a: `/* Tokens del MVP (colores sin cambios) + escala de la Fase H. */`
@@ -363,6 +387,7 @@ git commit -m "feat(faseH): escala tipográfica y de espacio en tokens"
 ### Task 4: Cabecera con menú en celular
 
 **Files:**
+
 - Modify: `apps/web/src/App.tsx`, `apps/web/src/styles/components.css`, `apps/web/e2e/helpers.ts`, specs que hacen clic en enlaces de la cabecera
 - Create: `apps/web/e2e/layout.spec.ts`
 
@@ -404,22 +429,22 @@ test.describe('cabecera', () => {
 - [ ] **Step 3: Implementar en `App.tsx`.** Importar `useEffect, useRef, useState` de react y `useLocation` de react-router-dom. Dentro de `App`:
 
 ```tsx
-  const [menu, setMenu] = useState(false);
-  const menuBtn = useRef<HTMLButtonElement>(null);
-  const { pathname } = useLocation();
-  useEffect(() => {
+const [menu, setMenu] = useState(false);
+const menuBtn = useRef<HTMLButtonElement>(null);
+const { pathname } = useLocation();
+useEffect(() => {
+  setMenu(false);
+}, [pathname]);
+useEffect(() => {
+  if (!menu) return;
+  const onKey = (e: KeyboardEvent) => {
+    if (e.key !== 'Escape') return;
     setMenu(false);
-  }, [pathname]);
-  useEffect(() => {
-    if (!menu) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key !== 'Escape') return;
-      setMenu(false);
-      menuBtn.current?.focus();
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [menu]);
+    menuBtn.current?.focus();
+  };
+  window.addEventListener('keydown', onKey);
+  return () => window.removeEventListener('keydown', onKey);
+}, [menu]);
 ```
 
 En el JSX, entre la marca y el `<nav>`:
@@ -509,6 +534,7 @@ git commit -m "feat(faseH): cabecera de una línea con menú en celular"
 ### Task 5: Selector de piezas por pestañas con miniaturas
 
 **Files:**
+
 - Modify: `apps/web/src/routes/Forge/fields.tsx` (`PartsPicker`), `apps/web/src/styles/components.css` (sección «Constructor»), `apps/web/src/styles/game.css` (`.shelf .partpick`), `apps/web/e2e/helpers.ts`, `apps/web/e2e/forge.spec.ts`, `apps/web/e2e/layout.spec.ts`
 
 - [ ] **Step 1: Prueba E2E** — añadir a `layout.spec.ts`:
@@ -530,7 +556,9 @@ test('selector de piezas: pestañas con flechas y miniaturas', async ({ page }) 
   await page.keyboard.press('ArrowLeft');
   await page.keyboard.press('ArrowLeft');
   await expect(tabs.getByRole('tab', { name: 'Piernas' })).toBeFocused();
-  const orugas = page.getByRole('group', { name: 'Piernas' }).getByRole('button', { name: 'Orugas' });
+  const orugas = page
+    .getByRole('group', { name: 'Piernas' })
+    .getByRole('button', { name: 'Orugas' });
   await orugas.click();
   await expect(orugas).toHaveAttribute('aria-pressed', 'true');
 });
@@ -715,7 +743,10 @@ const PART_TAB: Record<string, string> = {
 };
 /** Elige una medaparte: abre su pestaña y pulsa la ficha. */
 export async function pickPart(page: Page, group: keyof typeof PART_TAB, option: string) {
-  await page.getByRole('tablist', { name: 'Medapartes' }).getByRole('tab', { name: PART_TAB[group] }).click();
+  await page
+    .getByRole('tablist', { name: 'Medapartes' })
+    .getByRole('tab', { name: PART_TAB[group] })
+    .click();
   await page.getByRole('group', { name: group }).getByRole('button', { name: option }).click();
 }
 ```
@@ -735,6 +766,7 @@ git commit -m "feat(faseH): selector de medapartes por pestañas con miniaturas"
 ### Task 6: Barra de progreso de la forja
 
 **Files:**
+
 - Modify: `apps/web/src/components/Steps.tsx`, `apps/web/src/routes/Forge/Forge.tsx`, `apps/web/src/styles/components.css` (sección «Pasos de la forja»), `apps/web/src/styles/game.css` (`.act-stamp`), `apps/web/e2e/layout.spec.ts`
 
 - [ ] **Step 1: Prueba** — añadir a `layout.spec.ts`:
@@ -860,6 +892,7 @@ git commit -m "feat(faseH): barra de progreso de la forja por actos"
 ### Task 7: Escenario del robot, HUD y cero desbordes
 
 **Files:**
+
 - Modify: `apps/web/src/routes/Gallery.tsx`, `apps/web/src/routes/Medals.tsx`, `apps/web/src/routes/Forge/StepBody.tsx`, `apps/web/src/routes/Forge/scenes/Workshop.tsx`, `apps/web/src/styles/components.css`, `apps/web/src/styles/game.css`, `apps/web/e2e/layout.spec.ts`
 
 - [ ] **Step 1: Prueba de desborde** — añadir a `layout.spec.ts` (importar `playToCity` de `./helpers`):

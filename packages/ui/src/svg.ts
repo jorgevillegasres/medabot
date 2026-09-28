@@ -1,8 +1,9 @@
-// Port fiel de robotSVG() y medalSVG() del MVP. Producen exactamente el mismo texto SVG
-// (los tests lo comparan con el original), así la pantalla y la exportación coinciden.
+// medalSvg() es un port fiel de medalSVG() del MVP (los tests lo comparan con el original).
+// robotSvg() usa el arte propio de la Fase H (robotArt.ts), decidido por el profesor.
 
 import { AXES, CATALOGS, type PartKey } from '@medalab/content';
 import type { Profile } from '@medalab/engine';
+import { drawRobot, FIT, normalizeParts, STROKE } from './robotArt';
 
 export interface RobotLook {
   name?: string;
@@ -33,41 +34,8 @@ const safeColor = (c: unknown) => (typeof c === 'string' && COLOR_RE.test(c) ? c
 const safeSerial = (s: unknown) => (typeof s === 'string' && SERIAL_SAFE_RE.test(s) ? s : '');
 
 export function robotSvg(r: RobotLook): string {
-  const c = safeColor(r.color) || CATALOGS.colors[0],
-    p = r.parts || { head: 0, rarm: 0, larm: 0, legs: 0 };
-  const ink = '#1B1B2F',
-    st = '#C9CED4';
-  let head = '',
-    legs = '';
-  // cabezas
-  if (p.head === 0)
-    head = `<path d="M100 38 L88 8 L100 26 L112 8 Z" fill="${c}" stroke="${ink}" stroke-width="3"/><rect x="72" y="36" width="56" height="40" rx="10" fill="${c}" stroke="${ink}" stroke-width="3"/><rect x="82" y="50" width="36" height="12" rx="3" fill="#2FB39A" stroke="${ink}" stroke-width="3"/>`;
-  if (p.head === 1)
-    head = `<path d="M70 76 a30 30 0 0 1 60 0 Z" fill="${c}" stroke="${ink}" stroke-width="3"/><rect x="72" y="58" width="56" height="12" rx="6" fill="#2FB39A" stroke="${ink}" stroke-width="3"/>`;
-  if (p.head === 2)
-    head = `<line x1="100" y1="36" x2="100" y2="12" stroke="${ink}" stroke-width="3"/><circle cx="100" cy="10" r="6" fill="#D8382E" stroke="${ink}" stroke-width="3"/><rect x="74" y="36" width="52" height="40" rx="4" fill="${c}" stroke="${ink}" stroke-width="3"/><circle cx="90" cy="56" r="6" fill="#2FB39A" stroke="${ink}" stroke-width="3"/><circle cx="110" cy="56" r="6" fill="#2FB39A" stroke="${ink}" stroke-width="3"/>`;
-  // torso + medalla en espalda (se ve el borde)
-  const torso = `<rect x="68" y="80" width="64" height="62" rx="8" fill="${st}" stroke="${ink}" stroke-width="3"/><rect x="88" y="92" width="24" height="38" rx="4" fill="${c}" stroke="${ink}" stroke-width="3"/><circle cx="100" cy="111" r="7" fill="#F5C518" stroke="${ink}" stroke-width="3"/>`;
-  // brazos (lado derecho del robot = izquierda del dibujo)
-  const arm = (dir: number, kind: number, shield: boolean) => {
-    const ax = dir < 0 ? 36 : 134;
-    if (kind === 0 && shield)
-      return `<rect x="${ax}" y="82" width="28" height="56" rx="6" fill="${c}" stroke="${ink}" stroke-width="3"/><line x1="${ax + 14}" y1="92" x2="${ax + 14}" y2="128" stroke="${ink}" stroke-width="3"/>`;
-    if (kind === 0)
-      return `<rect x="${ax}" y="84" width="30" height="18" rx="4" fill="${st}" stroke="${ink}" stroke-width="3"/><rect x="${ax + 4}" y="100" width="22" height="42" rx="4" fill="${c}" stroke="${ink}" stroke-width="3"/><circle cx="${ax + 15}" cy="142" r="7" fill="${ink}"/>`;
-    if (kind === 1)
-      return `<rect x="${ax + 4}" y="84" width="22" height="40" rx="4" fill="${st}" stroke="${ink}" stroke-width="3"/><path d="M${ax + 4} 124 l-6 20 l10 -6 M${ax + 26} 124 l6 20 l-10 -6" fill="${c}" stroke="${ink}" stroke-width="3"/>`;
-    return `<rect x="${ax + 6}" y="84" width="18" height="44" rx="6" fill="${st}" stroke="${ink}" stroke-width="3"/><rect x="${ax + 2}" y="128" width="26" height="16" rx="5" fill="${c}" stroke="${ink}" stroke-width="3"/>`;
-  };
-  const rarm = arm(-1, p.rarm, false),
-    larm = arm(1, p.larm, p.larm === 0);
-  if (p.legs === 0)
-    legs = `<rect x="74" y="144" width="20" height="44" rx="5" fill="${c}" stroke="${ink}" stroke-width="3"/><rect x="106" y="144" width="20" height="44" rx="5" fill="${c}" stroke="${ink}" stroke-width="3"/><rect x="68" y="184" width="30" height="12" rx="4" fill="${ink}"/><rect x="102" y="184" width="30" height="12" rx="4" fill="${ink}"/>`;
-  if (p.legs === 1)
-    legs = `<rect x="56" y="150" width="88" height="34" rx="17" fill="${ink}"/><rect x="62" y="156" width="76" height="22" rx="11" fill="${st}" stroke="${ink}" stroke-width="3"/><circle cx="76" cy="167" r="5" fill="${c}"/><circle cx="100" cy="167" r="5" fill="${c}"/><circle cx="124" cy="167" r="5" fill="${c}"/>`;
-  if (p.legs === 2)
-    legs = `<rect x="84" y="142" width="32" height="24" fill="${st}" stroke="${ink}" stroke-width="3"/><circle cx="78" cy="176" r="16" fill="${ink}"/><circle cx="122" cy="176" r="16" fill="${ink}"/><circle cx="78" cy="176" r="6" fill="${c}"/><circle cx="122" cy="176" r="6" fill="${c}"/>`;
-  return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Robot ${esc(r.name || '')}">${legs}${rarm}${larm}${torso}${head}</svg>`;
+  const c = safeColor(r.color) || CATALOGS.colors[0]!;
+  return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Robot ${esc(r.name || '')}"><g transform="${FIT}" ${STROKE}>${drawRobot(normalizeParts(r.parts), c)}</g></svg>`;
 }
 
 export function medalSvg(r: MedalLook): string {

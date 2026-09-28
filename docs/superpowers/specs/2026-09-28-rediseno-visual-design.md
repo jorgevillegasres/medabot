@@ -47,12 +47,12 @@ Metal fijo: acero claro `#C9CED4`, acero oscuro `#9AA3AD`. Acentos: amarillo `#F
 
 Piezas (12), todas redibujadas en el estilo del boceto A aprobado:
 
-| Parte | 0 | 1 | 2 |
-|---|---|---|---|
-| Cabeza | Cuerno kabuto: casco con cuerno en V y visor | Domo con visor: domo redondo, visor oscuro con línea amarilla, aletas laterales | Antena de radar: cabeza cuadrada, antena con luz roja, dos ojos |
-| Brazo derecho (izquierda del dibujo) | Cañón | Pinza | Mano articulada |
-| Brazo izquierdo (derecha del dibujo) | Escudo (con emblema) | Pinza | Mano articulada |
-| Piernas | Bípedas: muslo de acero, rodilla, espinilla, pie | Orugas | Ruedas |
+| Parte                                | 0                                                | 1                                                                               | 2                                                               |
+| ------------------------------------ | ------------------------------------------------ | ------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Cabeza                               | Cuerno kabuto: casco con cuerno en V y visor     | Domo con visor: domo redondo, visor oscuro con línea amarilla, aletas laterales | Antena de radar: cabeza cuadrada, antena con luz roja, dos ojos |
+| Brazo derecho (izquierda del dibujo) | Cañón                                            | Pinza                                                                           | Mano articulada                                                 |
+| Brazo izquierdo (derecha del dibujo) | Escudo (con emblema)                             | Pinza                                                                           | Mano articulada                                                 |
+| Piernas                              | Bípedas: muslo de acero, rodilla, espinilla, pie | Orugas                                                                          | Ruedas                                                          |
 
 Torso común: pecho con sombra, núcleo amarillo, cintura de acero y hombreras. El orden de pintado garantiza que brazos y cabeza queden por encima del torso y las piernas por debajo.
 

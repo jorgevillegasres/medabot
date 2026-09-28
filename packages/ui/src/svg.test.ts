@@ -1,30 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { CATALOGS } from '@medalab/content';
 import { loadMvp } from '../../../scripts/mvp-oracle.mjs';
 import fixtures from '../../engine/fixtures/mvp-robots.json';
 import { medalSvg, robotSvg } from './svg';
 
 const mvp = loadMvp();
 
-describe('SVG idénticos a los del MVP', () => {
+describe('Medalla idéntica a la del MVP', () => {
   it.each(fixtures.robots.map((f) => [f.robot.name, f] as const))('fixture %s', (_, f) => {
-    expect(robotSvg(f.robot)).toBe(f.robotSvg);
     expect(medalSvg(f.robot)).toBe(f.medalSvg);
-  });
-
-  it('las 81 combinaciones de medapartes en todos los colores', () => {
-    for (let n = 0; n < 81; n++) {
-      const parts = {
-        head: n % 3,
-        rarm: Math.floor(n / 3) % 3,
-        larm: Math.floor(n / 9) % 3,
-        legs: Math.floor(n / 27) % 3,
-      };
-      for (const color of CATALOGS.colors) {
-        const r = { name: `R&D <${n}> "x"`, color, parts };
-        expect(robotSvg(r)).toBe(mvp.robotSVG(r));
-      }
-    }
   });
 
   it('medalla con perfiles extremos, sin compat y valores por defecto', () => {
