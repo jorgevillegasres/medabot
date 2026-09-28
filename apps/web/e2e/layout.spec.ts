@@ -32,3 +32,26 @@ test.describe('cabecera', () => {
     ).toBeVisible();
   });
 });
+
+test('selector de piezas: pestañas con flechas y miniaturas', async ({ page }) => {
+  await page.goto('/forja/1');
+  const tabs = page.getByRole('tablist', { name: 'Medapartes' });
+  const cabeza = tabs.getByRole('tab', { name: 'Cabeza' });
+  await expect(cabeza).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByRole('group', { name: 'Cabeza' }).locator('.partsvg svg')).toHaveCount(3);
+  await cabeza.focus();
+  await page.keyboard.press('ArrowRight');
+  const brazos = tabs.getByRole('tab', { name: 'Brazos' });
+  await expect(brazos).toBeFocused();
+  await expect(brazos).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByRole('group', { name: 'Brazo derecho' })).toBeVisible();
+  await expect(page.getByRole('group', { name: 'Brazo izquierdo' })).toBeVisible();
+  await page.keyboard.press('ArrowLeft');
+  await page.keyboard.press('ArrowLeft');
+  await expect(tabs.getByRole('tab', { name: 'Piernas' })).toBeFocused();
+  const orugas = page
+    .getByRole('group', { name: 'Piernas' })
+    .getByRole('button', { name: 'Orugas' });
+  await orugas.click();
+  await expect(orugas).toHaveAttribute('aria-pressed', 'true');
+});

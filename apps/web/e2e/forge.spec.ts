@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { decodeCode, forceClassicForge, navTo, pattern } from './helpers';
+import { decodeCode, forceClassicForge, navTo, pattern, pickPart } from './helpers';
 
 const SHOTS = 'test-results/capturas';
 
@@ -25,10 +25,7 @@ test('forja completa: cuerpo → medalla → test → resultado', async ({ page 
   await page.locator('#fType').selectOption('GRD');
   await expect(page.getByText('Vigila espacios y hace cumplir reglas.')).toBeVisible();
   await page.getByRole('button', { name: 'El Estado' }).click();
-  await page
-    .getByRole('group', { name: 'Piernas' })
-    .getByRole('button', { name: 'Orugas' })
-    .click();
+  await pickPart(page, 'Piernas', 'Orugas');
   await page.getByRole('button', { name: 'color #2B67C2' }).click();
   await expect(page.locator('.preview svg')).toBeVisible();
   await shot('1-cuerpo');

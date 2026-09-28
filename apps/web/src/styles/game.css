@@ -57,10 +57,6 @@
     transform: none;
   }
 }
-.shelf .partpick {
-  background: var(--card);
-  border-top: 6px solid var(--steel);
-}
 .datafile {
   transform: rotate(0.6deg);
 }

@@ -90,6 +90,21 @@ export async function forgeInMvp(page: Page, mvpUrl: string, f: ForgeInput) {
   return (await page.locator('#codeBox').textContent())!.trim();
 }
 
+const PART_TAB: Record<string, string> = {
+  Cabeza: 'Cabeza',
+  'Brazo derecho': 'Brazos',
+  'Brazo izquierdo': 'Brazos',
+  Piernas: 'Piernas',
+};
+/** Elige una medaparte: abre su pestaña y pulsa la ficha. */
+export async function pickPart(page: Page, group: keyof typeof PART_TAB, option: string) {
+  await page
+    .getByRole('tablist', { name: 'Medapartes' })
+    .getByRole('tab', { name: PART_TAB[group] })
+    .click();
+  await page.getByRole('group', { name: group }).getByRole('button', { name: option }).click();
+}
+
 // ===== Ciudad 2045 (forja jugada) =====
 
 export type Press = (l: Locator) => Promise<void>;

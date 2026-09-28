@@ -199,35 +199,83 @@ textarea {
   width: 100%;
   height: auto;
 }
-.parts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
-  gap: 10px;
-}
-.partpick {
-  border: 2px solid var(--line);
-  border-radius: var(--radius-sm);
-  padding: 10px;
-  background: var(--paper);
-}
-.partpick .opts {
+.part-tabs {
   display: flex;
-  gap: 6px;
-  margin-top: 6px;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-3);
 }
-.partpick .opts button {
+.part-tabs [role='tab'] {
   flex: 1;
   border: 2px solid var(--line);
   background: var(--card);
-  border-radius: var(--radius-sm);
-  padding: 6px 4px;
-  font-size: var(--fs-xs);
-  font-weight: 600;
   color: var(--ink);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-weight: 700;
+  font-size: var(--fs-sm);
 }
-.partpick .opts button.on {
+.part-tabs [role='tab'][aria-selected='true'] {
   background: var(--yellow);
   color: #1b1b2f;
+}
+.partpick + .partpick {
+  margin-top: var(--sp-3);
+}
+.partpick b {
+  display: block;
+  margin-bottom: var(--sp-2);
+  font-size: var(--fs-sm);
+}
+.partpick .opts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-2);
+}
+.partpick .opts button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-1);
+  border: 2px solid var(--line);
+  background: var(--card);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-2) var(--sp-1);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.partsvg {
+  display: block;
+  width: 56px;
+  height: 56px;
+}
+.partsvg svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.partpick .opts button.on {
+  border-width: 3px;
+  background: color-mix(in srgb, var(--yellow) 30%, var(--card));
+}
+.partpick .opts button.on::after {
+  content: '✓';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  border: 2px solid var(--line);
+  font-size: 12px;
+  font-weight: 900;
 }
 .swatches {
   display: flex;
