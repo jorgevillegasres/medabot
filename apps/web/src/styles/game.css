@@ -11,7 +11,7 @@
   min-width: min(100%, 420px);
 }
 .mode-toggle {
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
 }
 .scene-actions {
   margin-top: 18px;
@@ -22,7 +22,7 @@
   color: #fff;
   font-weight: 900;
   font-stretch: 125%;
-  font-size: 1rem;
+  font-size: var(--fs-md);
   line-height: 1.2;
   padding: 4px 12px;
   border-radius: 6px;
@@ -35,9 +35,9 @@
 .bench {
   background: var(--paper2);
   border: 3px solid var(--line);
-  border-radius: 14px;
+  border-radius: var(--radius);
   padding: 14px;
-  box-shadow: 6px 6px 0 var(--line);
+  box-shadow: var(--shadow);
 }
 .bench-robot {
   width: min(240px, 80%);
@@ -86,10 +86,10 @@
   gap: 12px;
   background: var(--card);
   border: 3px solid var(--line);
-  border-radius: 12px;
+  border-radius: var(--radius);
   padding: 8px 12px;
   margin-bottom: 12px;
-  box-shadow: 4px 4px 0 var(--line);
+  box-shadow: var(--shadow);
 }
 .city-hud b {
   flex: 1;
@@ -117,7 +117,7 @@
 }
 .flash-label {
   font-weight: 900;
-  font-size: 0.85rem;
+  font-size: var(--fs-xs);
   color: var(--red);
   animation: fadeout 2.4s forwards;
 }
@@ -137,7 +137,7 @@
   margin: 0 auto;
   background: #f1eacf;
   border: 3px solid var(--line);
-  border-radius: 14px;
+  border-radius: var(--radius);
 }
 .street {
   stroke: #1b1b2f;
@@ -201,7 +201,7 @@
   border: 2px solid var(--line);
   background: var(--paper);
   color: var(--ink);
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   padding: 10px 14px;
   font-weight: 600;
 }
@@ -248,9 +248,9 @@
   position: relative;
   background: var(--card);
   border: 3px solid var(--line);
-  border-radius: 14px;
+  border-radius: var(--radius);
   padding: 18px;
-  box-shadow: 6px 6px 0 var(--line);
+  box-shadow: var(--shadow);
   animation: pop 0.25s ease-out;
 }
 @keyframes pop {
@@ -260,7 +260,7 @@
   }
 }
 .cartel span {
-  font-size: 0.8rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   color: var(--red);
 }
@@ -278,7 +278,7 @@
   width: 40px;
   height: 40px;
   border: 2px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: var(--paper);
   color: var(--ink);
   font-weight: 900;
@@ -293,16 +293,16 @@
   width: 64px;
   flex: none;
   background: #fbf6e6;
-  border-radius: 12px;
+  border-radius: var(--radius);
   padding: 4px;
 }
 .bubble {
   margin: 0;
   background: var(--paper);
   border: 3px solid var(--line);
-  border-radius: 14px;
+  border-radius: var(--radius);
   padding: 12px 14px;
-  font-size: 1rem;
+  font-size: var(--fs-md);
 }
 .action-card {
   display: block;
@@ -310,13 +310,13 @@
   text-align: left;
   margin-top: 8px;
   border: 3px solid var(--line);
-  border-radius: 12px;
+  border-radius: var(--radius);
   background: var(--paper);
   color: var(--ink);
   padding: 12px 14px;
-  font-size: 1rem;
+  font-size: var(--fs-md);
   line-height: 1.4;
-  box-shadow: 3px 3px 0 var(--line);
+  box-shadow: var(--shadow-sm);
 }
 .action-card.on {
   background: var(--yellow);

@@ -1,4 +1,4 @@
-/* Tokens portados sin cambios de reference/medalab-mvp.html */
+/* Tokens del MVP (colores sin cambios) + escala de la Fase H. */
 :root {
   --paper: #fbf6e6;
   --paper2: #f1eacf;
@@ -11,6 +11,24 @@
   --blue: #2b67c2;
   --line: #1b1b2f;
   --card: #fffdf6;
+  /* Fase H: escala tipográfica, espaciado y forma. */
+  --fs-xs: 0.8rem;
+  --fs-sm: 0.9rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.2rem;
+  --fs-xl: clamp(1.4rem, 3.5vw, 2rem);
+  --fs-2xl: clamp(2rem, 6vw, 3.4rem);
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --radius: 14px;
+  --radius-sm: 10px;
+  --bw: 3px;
+  --shadow: 5px 5px 0 var(--line);
+  --shadow-sm: 3px 3px 0 var(--line);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
