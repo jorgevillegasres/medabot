@@ -75,6 +75,7 @@
 /* ===== Acto 3 · Ciudad ===== */
 .city-hud {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 12px;
   background: var(--card);
@@ -85,11 +86,9 @@
   box-shadow: var(--shadow);
 }
 .city-hud b {
-  flex: 1;
+  flex: 1 1 8ch;
   min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 .mini-medal {
   display: inline-flex;

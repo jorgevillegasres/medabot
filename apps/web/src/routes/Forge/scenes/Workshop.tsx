@@ -23,7 +23,10 @@ export function Workshop() {
       <div className="grid g2">
         <div className="bench">
           {/* key: cada pieza nueva vuelve a montar el robot y dispara la animación de encaje */}
-          <div className={spark ? 'bench-robot spark' : 'bench-robot'} key={spark}>
+          <div
+            className={spark ? 'bench-robot robot-stage spark' : 'bench-robot robot-stage'}
+            key={spark}
+          >
             <RobotSvg robot={draft} />
           </div>
           <div className="shelf" role="group" aria-label="Estante de medapartes">

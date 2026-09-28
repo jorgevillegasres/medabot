@@ -1,4 +1,7 @@
 import { expect, test } from '@playwright/test';
+import { playToCity, type ForgeInput } from './helpers';
+
+const F: ForgeInput = { name: 'Jugador Uno', type: 'MDR', limit: 'Nunca tomará partido.', seed: 4 };
 
 test.describe('cabecera', () => {
   test('en celular cabe en una línea y el menú abre y cierra', async ({ page, isMobile }) => {
@@ -62,4 +65,57 @@ test('selector de piezas: pestañas con flechas y miniaturas', async ({ page }) 
     .getByRole('button', { name: 'Orugas' });
   await orugas.click();
   await expect(orugas).toHaveAttribute('aria-pressed', 'true');
+});
+
+async function overflow(page: import('@playwright/test').Page) {
+  return page.evaluate(() => {
+    const w = document.documentElement.clientWidth;
+    const scrollAncestor = (el: HTMLElement) => {
+      let p = el.parentElement;
+      while (p) {
+        const ov = getComputedStyle(p).overflowX;
+        if (ov === 'auto' || ov === 'scroll' || ov === 'hidden') return true;
+        p = p.parentElement;
+      }
+      return false;
+    };
+    const out: string[] = [];
+    for (const el of document.querySelectorAll<HTMLElement>('main *')) {
+      const r = el.getBoundingClientRect();
+      if (r.width <= 1) continue;
+      if ((r.right > w + 1 || r.left < -1) && !scrollAncestor(el)) {
+        out.push(el.outerHTML.slice(0, 90));
+      }
+    }
+    for (const b of document.querySelectorAll<HTMLElement>('main button, main .btn')) {
+      // El texto es lo que no debe cortarse; se mide en su propia etiqueta y no en el botón
+      // completo, que puede incluir una insignia posicionada (p. ej. el ✓ de una medaparte
+      // elegida) que a propósito sobresale un poco de la esquina.
+      const label = b.querySelector<HTMLElement>('span:not(.partsvg)') ?? b;
+      if (label.scrollWidth > label.clientWidth + 1) out.push('texto cortado: ' + b.textContent);
+    }
+    return out.slice(0, 8);
+  });
+}
+
+test.describe('sin desbordes a 375 px', () => {
+  test.skip(({ isMobile }) => !isMobile, 'solo en celular');
+  for (const path of ['/', '/entrar', '/forja/1', '/medallas']) {
+    test(path, async ({ page }) => {
+      await page.goto(path);
+      await page.waitForLoadState('networkidle');
+      expect(await overflow(page)).toEqual([]);
+    });
+  }
+  test('taller con cada pestaña', async ({ page }) => {
+    await page.goto('/forja/1');
+    for (const t of ['Cabeza', 'Brazos', 'Piernas']) {
+      await page.getByRole('tab', { name: t }).click();
+      expect(await overflow(page), t).toEqual([]);
+    }
+  });
+  test('ciudad', async ({ page }) => {
+    await playToCity(page, F);
+    expect(await overflow(page)).toEqual([]);
+  });
 });

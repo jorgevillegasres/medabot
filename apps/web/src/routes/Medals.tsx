@@ -58,7 +58,7 @@ export function Medals() {
         <div className="cards">
           {robots.map((r) => (
             <Link className="card" key={r.id} to={`/medalla/${r.id}`}>
-              <RobotSvg robot={r} />
+              <RobotSvg robot={r} className="robot-stage" />
               <h3>{r.name}</h3>
               <div className="serial">
                 {r.serial} · {getType(r.type)?.n ?? ''}

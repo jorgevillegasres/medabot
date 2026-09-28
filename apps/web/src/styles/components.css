@@ -266,6 +266,11 @@ textarea {
   color: var(--ink);
   overflow-wrap: anywhere;
 }
+.partpick .opts button span:not(.partsvg) {
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+}
 .partsvg {
   display: block;
   width: 56px;
@@ -312,15 +317,23 @@ textarea {
   outline: 3px solid var(--yellow);
   outline-offset: 2px;
 }
+.robot-stage {
+  display: block;
+  background: var(--paper2);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-2);
+  background-image: radial-gradient(
+    ellipse 38% 5% at 50% 94%,
+    color-mix(in srgb, var(--ink) 18%, transparent) 97%,
+    transparent 100%
+  );
+}
 .preview {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--paper2);
-  border: 3px solid var(--line);
-  border-radius: var(--radius);
   min-height: 280px;
-  padding: 10px;
 }
 .preview .svgbox {
   width: min(240px, 80%);
@@ -528,11 +541,6 @@ textarea {
   border-radius: var(--radius);
   padding: 12px;
   box-shadow: var(--shadow);
-}
-.card .svgbox svg {
-  background: var(--paper2);
-  border-radius: var(--radius-sm);
-  border: 2px solid var(--line);
 }
 .card h3 {
   margin: 10px 0 2px;
