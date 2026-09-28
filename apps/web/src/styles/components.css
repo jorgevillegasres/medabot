@@ -40,6 +40,42 @@ nav a[aria-current='page'] {
 nav a:hover {
   border-color: var(--yellow);
 }
+.menu-btn {
+  display: none;
+  margin-left: auto;
+  background: transparent;
+  color: var(--paper);
+  border: 2px solid var(--paper);
+  border-radius: var(--radius-sm);
+  padding: 6px 14px;
+  font-weight: 700;
+}
+@media (max-width: 719px) {
+  .watch .wrap {
+    flex-wrap: nowrap;
+  }
+  .menu-btn {
+    display: inline-block;
+  }
+  .watch nav {
+    display: none;
+  }
+  .watch nav.open {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: var(--ink);
+    padding: var(--sp-2) var(--sp-4) var(--sp-4);
+    border-bottom: 4px solid var(--yellow);
+  }
+  .watch nav.open a {
+    padding: var(--sp-3);
+  }
+}
 section.view {
   padding-top: 28px;
 }

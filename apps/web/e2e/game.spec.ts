@@ -5,6 +5,7 @@ import {
   decodeCode,
   enterCorporation,
   forgeInApp,
+  navTo,
   pattern,
   playGame,
   playToCity,
@@ -58,7 +59,7 @@ test('guardar y retomar a mitad de la ciudad', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Plaza Medabots' })).toBeVisible();
   // El menú «Forjar medalla» también retoma en la ciudad.
   await page.goto('/');
-  await page.getByRole('link', { name: 'Forjar medalla' }).click();
+  await navTo(page, 'Forjar medalla');
   await expect(page).toHaveURL(/\/forja\/3$/);
 });
 

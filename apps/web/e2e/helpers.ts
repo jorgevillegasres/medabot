@@ -13,6 +13,13 @@ export interface ForgeInput {
   seed: number;
 }
 
+/** Sigue un enlace de la cabecera; en celular abre antes el menú. */
+export async function navTo(page: Page, name: string | RegExp) {
+  const btn = page.getByRole('button', { name: 'Menú' });
+  if (await btn.isVisible()) await btn.click();
+  await page.getByRole('navigation', { name: 'Principal' }).getByRole('link', { name }).click();
+}
+
 /** Decodifica un código de medalla (base64 sin relleno de JSON en UTF-8). */
 export const decodeCode = (code: string) =>
   JSON.parse(Buffer.from(code.trim(), 'base64').toString('utf8'));

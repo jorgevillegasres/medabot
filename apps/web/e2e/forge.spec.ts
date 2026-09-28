@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import { decodeCode, forceClassicForge, pattern } from './helpers';
+import { decodeCode, forceClassicForge, navTo, pattern } from './helpers';
 
 const SHOTS = 'test-results/capturas';
 
@@ -117,7 +117,7 @@ test('forja completa: cuerpo → medalla → test → resultado', async ({ page 
   expect((await download).suggestedFilename()).toBe(`medalla-${robot.serial}.png`);
 
   // Queda en "Mis medallas" y se puede abrir.
-  await page.getByRole('link', { name: 'Mis medallas' }).click();
+  await navTo(page, 'Mis medallas');
   await page.getByRole('link', { name: /Centinela Kappa/ }).click();
   await expect(page.getByTestId('medal-code')).toHaveText(code);
 

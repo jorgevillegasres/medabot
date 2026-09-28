@@ -10,6 +10,7 @@
 import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { expect, test, type Browser, type Page } from '@playwright/test';
+import { navTo } from './helpers';
 
 const COURSE = process.env.E2E_COURSE_CODE ?? 'DEMO-2045';
 const TEACHER_STATE = new URL('./.auth/teacher.json', import.meta.url);
@@ -31,7 +32,7 @@ async function phone(browser: Browser, name: string): Promise<Page> {
   await page.locator('#jName').fill(name);
   await page.getByRole('button', { name: 'Entrar' }).click();
   await expect(page).toHaveURL(/\/forja\/1$/);
-  await page.getByRole('link', { name: 'Votar' }).click();
+  await navTo(page, 'Votar');
   return page;
 }
 
