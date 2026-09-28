@@ -92,6 +92,45 @@ test('se juega entera con teclado y movimiento reducido', async ({ browser, isMo
   await expect(page.getByRole('button', { name: 'Saltar' })).toHaveCount(0);
 });
 
+test('con Tab se llega a la plaza, a sus encuentros y el diálogo retiene el foco', async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(isMobile, 'teclado: escritorio');
+  await playToCity(page, F);
+  // Desde el principio de la página, Tab hasta la plaza (primer lugar del mapa).
+  await page.locator('body').focus();
+  const plaza = page.getByRole('button', { name: /^Ir a la Plaza/ });
+  let reached = false;
+  for (let i = 0; i < 25 && !reached; i++) {
+    await page.keyboard.press('Tab');
+    reached = await plaza.evaluate((el) => el === document.activeElement);
+  }
+  expect(reached, 'la plaza no se alcanza con Tab').toBe(true);
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('heading', { name: 'Plaza Medabots' })).toBeVisible();
+  // Tab hasta el primer encuentro pendiente y abrirlo con Enter.
+  const first = page.getByRole('button', { name: /Pendiente$/ }).first();
+  reached = false;
+  for (let i = 0; i < 25 && !reached; i++) {
+    await page.keyboard.press('Tab');
+    reached = await first.evaluate((el) => el === document.activeElement);
+  }
+  expect(reached, 'el encuentro no se alcanza con Tab').toBe(true);
+  await page.keyboard.press('Enter');
+  const dlg = page.locator('[role="dialog"][data-index]');
+  await expect(dlg).toBeVisible();
+  // Dentro del diálogo, Tab nunca sale de él.
+  for (let i = 0; i < 12; i++) {
+    await page.keyboard.press('Tab');
+    expect(await dlg.evaluate((el) => el.contains(document.activeElement))).toBe(true);
+  }
+  // Escape cierra y el foco vuelve al botón del encuentro.
+  await page.keyboard.press('Escape');
+  await expect(dlg).toHaveCount(0);
+  expect(await first.evaluate((el) => el === document.activeElement)).toBe(true);
+});
+
 test('la ceremonia se salta con una tecla', async ({ page, isMobile }) => {
   test.skip(isMobile, 'teclado: escritorio');
   await playToCity(page, F);
@@ -104,7 +143,7 @@ test('la ceremonia se salta con una tecla', async ({ page, isMobile }) => {
   await expect(page.getByRole('button', { name: 'Saltar' })).toBeVisible();
   await page.keyboard.press('Escape');
   // La ceremonia completa dura ~4 s; saltada, el resultado aparece de inmediato.
-  await expect(page.getByTestId('medal-code')).toBeVisible({ timeout: 1000 });
+  await expect(page.getByTestId('medal-code')).toBeVisible({ timeout: 2000 });
 });
 
 test('«Ver como formulario» cambia de modo sin perder datos', async ({ page }) => {

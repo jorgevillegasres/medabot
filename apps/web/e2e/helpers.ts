@@ -143,7 +143,11 @@ export async function enterCorporation(page: Page, press: Press = clickWith) {
   await press(page.getByRole('button', { name: 'Grabar la medalla' }));
   await expect(page).toHaveURL(/\/forja\/4$/);
   const skip = page.getByRole('button', { name: 'Saltar' });
-  if (await skip.isVisible()) await press(skip);
+  const shown = await skip
+    .waitFor({ state: 'visible', timeout: 2000 })
+    .then(() => true)
+    .catch(() => false); // con movimiento reducido no hay ceremonia
+  if (shown) await press(skip);
   return (await page.getByTestId('medal-code').textContent())!.trim();
 }
 
