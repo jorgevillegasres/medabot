@@ -64,7 +64,15 @@ export function App() {
           >
             Menú
           </button>
-          <nav id="menu-principal" aria-label="Principal" className={menu ? 'open' : undefined}>
+          {/* Cerrar también al elegir el enlace de la página actual (ahí la ruta no cambia). */}
+          <nav
+            id="menu-principal"
+            aria-label="Principal"
+            className={menu ? 'open' : undefined}
+            onClick={(e) => {
+              if ((e.target as HTMLElement).closest('a')) setMenu(false);
+            }}
+          >
             <NavLink to="/" end>
               Inicio
             </NavLink>
