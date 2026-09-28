@@ -43,15 +43,6 @@ p {
   margin: 0 auto;
   padding: 0 var(--sp-5) 80px;
 }
-@media (max-width: 480px) {
-  .wrap {
-    padding-left: var(--sp-4);
-    padding-right: var(--sp-4);
-  }
-  .sheet {
-    padding: var(--sp-4);
-  }
-}
 .watch {
   position: sticky;
   top: env(safe-area-inset-top, 0px);
@@ -115,6 +106,15 @@ p {
 :focus-visible {
   outline: 3px solid var(--blue);
   outline-offset: 2px;
+}
+@media (max-width: 480px) {
+  .wrap {
+    padding-left: var(--sp-4);
+    padding-right: var(--sp-4);
+  }
+  .sheet {
+    padding: var(--sp-4);
+  }
 }
 .sr-only {
   position: absolute;
