@@ -5,6 +5,9 @@ const PORT = 5173;
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
+  // Las partidas completas del juego son largas: con más procesos en paralelo, en un portátil
+  // algunas pruebas superan los 30 s por carga (no por fallos). En CI se puede subir.
+  workers: process.env.CI ? undefined : 2,
   reporter: [['list']],
   use: {
     baseURL: `http://localhost:${PORT}`,

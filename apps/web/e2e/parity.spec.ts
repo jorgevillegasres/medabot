@@ -14,6 +14,8 @@ const CASES: ForgeInput[] = [
 
 test.describe('paridad MVP ↔ app nueva', () => {
   test.skip(({ isMobile }) => isMobile, 'basta con escritorio');
+  // Cada prueba forja dos robots (MVP y app); con toda la suite en paralelo, 30 s se quedan cortos.
+  test.setTimeout(60_000);
 
   for (const f of CASES) {
     test(f.name, async ({ browser }) => {

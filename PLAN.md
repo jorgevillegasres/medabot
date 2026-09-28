@@ -348,6 +348,18 @@ Tareas:
 
 Aceptación: con 3 celulares y una pantalla, una robatalla completa se ejecuta sin recargar nada; los votos no se duplican por token; la pantalla muestra "cambió de decisión" en rojo cuando corresponde.
 
+### Fase G — Ciudad 2045: la forja como videojuego (1–2 días)
+
+Especificación: `docs/superpowers/specs/2026-09-26-ciudad-2045-design.md` · Plan: `docs/superpowers/plans/2026-09-26-ciudad-2045.md`.
+
+Tareas:
+- [x] Lógica pura en `apps/web/src/game/` (mapa, progreso, eje dominante) con tests.
+- [x] Escenas Taller, Yunque, Ciudad 2045 y Ceremonia (React + SVG), cargadas bajo demanda.
+- [x] Guardado de la partida y «Ver como formulario».
+- [x] E2E: partida completa, paridad juego ↔ formulario, retomar, teclado (incluido recorrido con Tab) y movimiento reducido.
+
+Aceptación: un estudiante completa la forja jugando en un celular de gama media sin tutorial y el robot resultante es idéntico al del formulario; la partida se retoma otro día; todas las pruebas previas siguen pasando.
+
 ### Fase 4 — Medallas para imprimir y cierre (½ día)
 
 Tareas:

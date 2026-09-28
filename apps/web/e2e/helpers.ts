@@ -1,4 +1,4 @@
-import type { Page } from '@playwright/test';
+import { expect, type Locator, type Page } from '@playwright/test';
 
 /** Patrón de respuestas reproducible: opción y motivo para el dilema i. */
 export const pattern = (seed: number) => (i: number) => ({
@@ -17,8 +17,23 @@ export interface ForgeInput {
 export const decodeCode = (code: string) =>
   JSON.parse(Buffer.from(code.trim(), 'base64').toString('utf8'));
 
+/** Fuerza la forja clásica (formulario) en esta página, en cada navegación. */
+export async function forceClassicForge(page: Page) {
+  await page.addInitScript(() => {
+    const key = 'medalab.game.v1';
+    let state = {};
+    try {
+      state = JSON.parse(localStorage.getItem(key) ?? 'null')?.state ?? {};
+    } catch {
+      /* dato corrupto: se reemplaza */
+    }
+    localStorage.setItem(key, JSON.stringify({ state: { ...state, classic: true }, version: 0 }));
+  });
+}
+
 /** Forja un robot en la app nueva y devuelve el código de medalla. */
 export async function forgeInApp(page: Page, f: ForgeInput) {
+  await forceClassicForge(page);
   await page.goto('/forja/1');
   await page.locator('#fName').fill(f.name);
   await page.locator('#fType').selectOption(f.type);
@@ -66,4 +81,90 @@ export async function forgeInMvp(page: Page, mvpUrl: string, f: ForgeInput) {
   }
   await page.getByRole('button', { name: 'Grabar la medalla' }).click();
   return (await page.locator('#codeBox').textContent())!.trim();
+}
+
+// ===== Ciudad 2045 (forja jugada) =====
+
+export type Press = (l: Locator) => Promise<void>;
+export const clickWith: Press = (l) => l.click();
+/** Activa con teclado: foco + Enter (sirve para <button> y para los lugares SVG role="button"). */
+export const keyWith: Press = async (l) => {
+  await l.focus();
+  await l.press('Enter');
+};
+type Check = (where: string) => Promise<void>;
+
+/** Taller y Yunque, hasta llegar a la ciudad. */
+export async function playToCity(
+  page: Page,
+  f: ForgeInput,
+  press: Press = clickWith,
+  check?: Check,
+) {
+  await page.goto('/forja/1');
+  await page.locator('#fName').fill(f.name);
+  await page.locator('#fType').selectOption(f.type);
+  await check?.('taller');
+  await press(page.getByRole('button', { name: 'Ir al yunque' }));
+  await press(page.getByRole('button', { name: 'Subir Privacidad de los datos' }));
+  await page.locator('#fLimit').fill(f.limit);
+  await check?.('yunque');
+  await press(page.getByRole('button', { name: 'Salir a la ciudad' }));
+  await expect(page).toHaveURL(/\/forja\/3$/);
+}
+
+/** Resuelve los encuentros pendientes del lugar abierto (hasta `max`) con el patrón de `seed`. */
+export async function solveHere(
+  page: Page,
+  seed: number,
+  press: Press = clickWith,
+  max = Infinity,
+) {
+  const pick = pattern(seed);
+  const pendingBtn = page.getByRole('button', { name: /Pendiente$/ });
+  let n = 0;
+  while (n < max && (await pendingBtn.count()) > 0) {
+    await press(pendingBtn.first());
+    const dlg = page.getByRole('dialog');
+    const { option, reason } = pick(Number(await dlg.getAttribute('data-index')));
+    await press(dlg.locator('.action-card').nth(option));
+    await press(dlg.locator('.why button').nth(reason - 1));
+    await press(dlg.getByRole('button', { name: 'Continuar' }));
+    // Solo el encuentro (con data-index): tras el 6/6 de la plaza se abre otro diálogo.
+    await expect(page.locator('[role="dialog"][data-index]')).toHaveCount(0);
+    n++;
+  }
+  return n;
+}
+
+/** Entra a la Corporación, graba la medalla y devuelve el código. */
+export async function enterCorporation(page: Page, press: Press = clickWith) {
+  await press(page.getByRole('button', { name: /^Ir a la Corporación/ }));
+  await press(page.getByRole('button', { name: 'Grabar la medalla' }));
+  await expect(page).toHaveURL(/\/forja\/4$/);
+  const skip = page.getByRole('button', { name: 'Saltar' });
+  const shown = await skip
+    .waitFor({ state: 'visible', timeout: 2000 })
+    .then(() => true)
+    .catch(() => false); // con movimiento reducido no hay ceremonia
+  if (shown) await press(skip);
+  return (await page.getByTestId('medal-code').textContent())!.trim();
+}
+
+/** Partida completa: Taller → Yunque → plaza → distrito → Ceremonia. Devuelve el código. */
+export async function playGame(
+  page: Page,
+  f: ForgeInput,
+  { keys = false, check }: { keys?: boolean; check?: Check } = {},
+) {
+  const press = keys ? keyWith : clickWith;
+  await playToCity(page, f, press, check);
+  await press(page.getByRole('button', { name: /^Ir a la Plaza/ }));
+  await solveHere(page, f.seed, press);
+  await press(page.getByRole('button', { name: 'Entrar al circuito' }));
+  await solveHere(page, f.seed, press);
+  await check?.('ciudad');
+  const code = await enterCorporation(page, press);
+  await check?.('ceremonia');
+  return code;
 }
