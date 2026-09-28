@@ -37,14 +37,21 @@ export function Medals() {
             Los robots que viven en este dispositivo. Toca uno para abrir su medalla.
           </p>
         </div>
-        <button
-          type="button"
-          className="btn small alt"
-          onClick={exportAll}
-          disabled={!robots.length}
-        >
-          Exportar todo (JSON)
-        </button>
+        <div className="row">
+          {robots.length > 0 && (
+            <Link className="btn small alt" to="/medallas/hoja">
+              Hoja para imprimir
+            </Link>
+          )}
+          <button
+            type="button"
+            className="btn small alt"
+            onClick={exportAll}
+            disabled={!robots.length}
+          >
+            Exportar todo (JSON)
+          </button>
+        </div>
       </div>
 
       {robots.length ? (

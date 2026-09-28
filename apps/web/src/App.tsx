@@ -10,6 +10,7 @@ import { Medals } from './routes/Medals';
 import { MedalRoute } from './routes/Result';
 import { RobotSheet } from './routes/RobotSheet';
 import { Screen } from './routes/Screen';
+import { CourseSheet, LocalSheet } from './routes/SheetRoutes';
 import { TeacherLogin } from './routes/Teacher/Login';
 import { TeacherPanel } from './routes/Teacher/Panel';
 import { Vote } from './routes/Vote';
@@ -45,6 +46,7 @@ export function App() {
           <Route path="/forja/:step" element={<Forge />} />
           <Route path="/medalla/:robotId" element={<MedalRoute />} />
           <Route path="/medallas" element={<Medals />} />
+          <Route path="/medallas/hoja" element={<LocalSheet />} />
           <Route path="/galeria" element={<Gallery />} />
           <Route path="/robot/:robotId" element={<RobotSheet />} />
           <Route path="/votar" element={<Vote />} />
@@ -52,6 +54,7 @@ export function App() {
           <Route path="/pantalla" element={<Screen />} />
           <Route path="/profesor" element={<TeacherLogin />} />
           <Route path="/profesor/panel" element={<TeacherPanel />} />
+          <Route path="/profesor/hoja" element={<CourseSheet />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

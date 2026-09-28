@@ -2,16 +2,21 @@ import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { CIRCUITS, SCHOOLS, getType } from '@medalab/content';
 import { axesByWeight, medalCode, type Robot } from '@medalab/engine';
-import { MedalSvg, downloadBlob, exportPng, medalSvg } from '@medalab/ui';
+import {
+  MedalSvg,
+  PRINT_WIDTH,
+  downloadBlob,
+  exportPng,
+  medalSvg,
+  printableMedalSvg,
+} from '@medalab/ui';
 import { Metric } from '../components/Metric';
 import { publishRobot } from '../lib/api';
+import { archivoDataUrl } from '../lib/printFont';
 import { explain, isOnline } from '../lib/supabase';
 import { useCourse } from '../store/course';
 import { toast } from '../store/toast';
 import { useRobot, useRobots } from '../store/robots';
-
-/** Ancho del PNG de la medalla. La versión de impresión (2400 px) llega en la Fase 4. */
-const PNG_WIDTH = 1200;
 
 interface Props {
   robot: Robot;
@@ -37,10 +42,28 @@ export function ResultView({ robot: r, onForgeAnother }: Props) {
     }
   };
 
+  /** SVG de impresión (fuente incrustada); sin conexión para la fuente, el de pantalla. */
+  const printSvg = async () => {
+    try {
+      return printableMedalSvg(r, await archivoDataUrl());
+    } catch {
+      return medalSvg(r);
+    }
+  };
+
+  // PNG de 2400×2550 px: se imprime igual que se ve en pantalla.
   const savePng = async () => {
-    const { blob, ext } = await exportPng(medalSvg(r), PNG_WIDTH);
+    const { blob, ext } = await exportPng(await printSvg(), PRINT_WIDTH);
     downloadBlob(blob, `medalla-${r.serial}.${ext}`);
     toast(ext === 'png' ? 'Medalla guardada.' : 'Medalla guardada como SVG.');
+  };
+
+  const saveSvg = async () => {
+    downloadBlob(
+      new Blob([await printSvg()], { type: 'image/svg+xml' }),
+      `medalla-${r.serial}.svg`,
+    );
+    toast('Medalla guardada en SVG para imprenta.');
   };
 
   return (
@@ -91,6 +114,9 @@ export function ResultView({ robot: r, onForgeAnother }: Props) {
             </button>
             <button type="button" className="btn small alt" onClick={savePng}>
               Descargar medalla PNG
+            </button>
+            <button type="button" className="btn small alt" onClick={saveSvg}>
+              SVG para imprenta
             </button>
             {onForgeAnother && (
               <button type="button" className="btn small alt" onClick={onForgeAnother}>

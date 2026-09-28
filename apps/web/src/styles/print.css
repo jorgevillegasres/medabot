@@ -1,0 +1,83 @@
+/* Hoja de medallas (Fase 4). En pantalla: páginas como tarjetas; impresa: A4, 6 por página. */
+
+.sheet-page {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+  gap: 16px;
+  padding: 16px;
+  margin-bottom: 22px;
+  background: #fff;
+  border: 3px solid var(--line);
+  border-radius: 14px;
+}
+.medal-card {
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+  border: 1px dashed #9aa3ad;
+  border-radius: 10px;
+  color: #1b1b2f;
+}
+.medal-card .svgbox {
+  width: min(220px, 100%);
+  margin: 0 auto;
+}
+.medal-card figcaption {
+  display: grid;
+  gap: 2px;
+  margin-top: 6px;
+  font-size: 0.9rem;
+}
+.medal-card .serial {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.8rem;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+  :root {
+    color-scheme: light;
+  }
+  body {
+    background: #fff !important;
+    background-image: none !important;
+    color: #1b1b2f !important;
+  }
+  .watch,
+  .foot,
+  .toast,
+  .noprint {
+    display: none !important;
+  }
+  main.wrap,
+  section.view {
+    max-width: none;
+    padding: 0;
+  }
+  .sheet-page {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    height: 277mm;
+    gap: 4mm;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    break-after: page;
+  }
+  .sheet-page:last-child {
+    break-after: auto;
+  }
+  .medal-card {
+    display: grid;
+    align-content: center;
+    padding: 3mm;
+    break-inside: avoid;
+  }
+  .medal-card .svgbox {
+    width: 58mm;
+  }
+}

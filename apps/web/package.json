@@ -11,6 +11,7 @@
     "e2e:profesor": "playwright open --save-storage=e2e/.auth/teacher.json http://localhost:5173/profesor"
   },
   "dependencies": {
+    "@fontsource/archivo": "^5.3.0",
     "@medalab/content": "workspace:*",
     "@medalab/engine": "workspace:*",
     "@medalab/ui": "workspace:*",
