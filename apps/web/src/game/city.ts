@@ -14,7 +14,7 @@ export interface Place {
 }
 
 /** Tamaño del plano (unidades del viewBox SVG). Vertical, pensado para celular. */
-export const MAP = { width: 360, height: 450 } as const;
+export const MAP = { width: 360, height: 470 } as const;
 
 const LAYOUT: Record<CircuitKey, { x: number; y: number; color: string }> = {
   core: { x: 180, y: 250, color: '#F5C518' },

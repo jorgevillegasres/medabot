@@ -5,7 +5,15 @@ const INK = '#1B1B2F';
 const PAPER = '#FBF6E6';
 
 /** Edificio de un distrito. */
-export function Building({ place, status }: { place: Place; status: PlaceStatus }) {
+export function Building({
+  place,
+  status,
+  note,
+}: {
+  place: Place;
+  status: PlaceStatus;
+  note?: string;
+}) {
   const { x, y, color, name } = place;
   return (
     <g className={`building ${status}`} transform={`translate(${x} ${y})`}>
@@ -41,6 +49,11 @@ export function Building({ place, status }: { place: Place; status: PlaceStatus 
       <text y="44" textAnchor="middle" className="place-label">
         {name}
       </text>
+      {note && (
+        <text y="58" textAnchor="middle" className="place-note">
+          {note}
+        </text>
+      )}
     </g>
   );
 }

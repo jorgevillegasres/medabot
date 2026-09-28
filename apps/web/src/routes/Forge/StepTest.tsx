@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { CIRCUITS, REASONS, circuitFor, getType, testFor } from '@medalab/content';
 import { Chips } from '../../components/Chips';
+import { isSolved } from '../../game/progress';
 import { useDraft } from '../../store/draft';
 import { useFinishForge } from './useFinishForge';
 
@@ -13,9 +14,7 @@ export function StepTest() {
 
   const list = testFor(draft.type);
   const circ = CIRCUITS[circuitFor(draft.type)];
-  const done = list.filter(
-    (d) => draft.answers[d.id] != null && draft.reasons[d.id] != null,
-  ).length;
+  const done = list.filter((d) => isSolved(draft, d.id)).length;
   const complete = done === list.length;
 
   const finish = () => {

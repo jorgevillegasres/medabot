@@ -45,7 +45,8 @@ export function Encounter({ dilemma: d, index, total, onClose }: Props) {
       >
         <div className="cartel">
           <span>
-            {index + 1}/{total} · Circuito {CIRCUITS[d.c].n}
+            {index + 1}/{total} ·{' '}
+            {d.c === 'core' ? `Plaza ${CIRCUITS.core.n}` : `Circuito ${CIRCUITS[d.c].n}`}
           </span>
           <h2 id="enc-title" tabIndex={-1} ref={titleRef}>
             {d.t}

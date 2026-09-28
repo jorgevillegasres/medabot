@@ -103,7 +103,17 @@ export function CityMap({ state, at, robot, onVisit, onCorporation }: Props) {
           className={statusOf(p) === 'locked' ? 'place locked' : 'place'}
           {...asButton(labelOf(p), () => onVisit(p.key))}
         >
-          <Building place={p} status={statusOf(p)} />
+          <Building
+            place={p}
+            status={statusOf(p)}
+            note={
+              p.key !== home.key
+                ? 'próximamente'
+                : home.status === 'locked'
+                  ? 'se abre con la plaza'
+                  : undefined
+            }
+          />
         </g>
       ))}
 

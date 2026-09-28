@@ -21,6 +21,8 @@ export function City() {
   const [open, setOpen] = useState<string | null>(null);
   const [flash, setFlash] = useState<{ axis: AxisKey; at: number } | null>(null);
   const [gate, setGate] = useState(false);
+  /** true solo tras una acción del estudiante (visitar un lugar o entrar desde el aviso), nunca en la carga inicial. */
+  const userMoved = useRef(false);
 
   const city = cityState(draft);
   const home = city.district;
@@ -49,6 +51,7 @@ export function City() {
   }, [flash]);
 
   const visit = (key: CircuitKey) => {
+    userMoved.current = true;
     if (key === 'core') return goTo('core');
     if (key !== home.key) return toast(`El circuito ${CIRCUITS[key].n} se abre más adelante.`);
     if (home.status === 'locked')
@@ -90,7 +93,7 @@ export function City() {
       />
 
       {here ? (
-        <PlacePanel place={here} onOpen={setOpen} />
+        <PlacePanel place={here} onOpen={setOpen} autoFocus={userMoved.current} />
       ) : (
         <p className="hint" style={{ textAlign: 'center' }}>
           Toca un lugar del mapa para ir con tu robot.
@@ -121,6 +124,7 @@ export function City() {
         <UnlockBanner
           place={home}
           onEnter={() => {
+            userMoved.current = true;
             markSeen(unlockKey);
             goTo(home.key);
           }}
@@ -132,15 +136,22 @@ export function City() {
   );
 }
 
-function PlacePanel({ place, onOpen }: { place: PlaceState; onOpen: (id: string) => void }) {
+function PlacePanel({
+  place,
+  onOpen,
+  autoFocus,
+}: {
+  place: PlaceState;
+  onOpen: (id: string) => void;
+  autoFocus: boolean;
+}) {
   const p = placeOf(place.key);
   const title = place.key === 'core' ? `Plaza ${p.name}` : `Circuito ${p.name}`;
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const mounted = useRef(false);
 
   useEffect(() => {
-    if (mounted.current) headingRef.current?.focus();
-    mounted.current = true;
+    if (autoFocus) headingRef.current?.focus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [place.key]);
 
   return (
