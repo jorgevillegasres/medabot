@@ -84,6 +84,14 @@ export function City() {
         />
       </header>
 
+      {!here && (
+        <p className="hint" style={{ textAlign: 'center' }}>
+          {city.plaza.solved < city.plaza.encounters.length
+            ? 'Empieza por la Plaza Medabots: toca el círculo amarillo del centro.'
+            : `Toca el circuito ${placeOf(home.key).name} en el mapa para seguir.`}
+        </p>
+      )}
+
       <CityMap
         state={city}
         at={spot}
@@ -92,13 +100,7 @@ export function City() {
         onCorporation={visitCorporation}
       />
 
-      {here ? (
-        <PlacePanel place={here} onOpen={setOpen} autoFocus={userMoved.current} />
-      ) : (
-        <p className="hint" style={{ textAlign: 'center' }}>
-          Toca un lugar del mapa para ir con tu robot.
-        </p>
-      )}
+      {here && <PlacePanel place={here} onOpen={setOpen} autoFocus={userMoved.current} />}
 
       <nav className="city-nav" aria-label="Forja">
         <button type="button" className="btn small alt" onClick={toMap}>
