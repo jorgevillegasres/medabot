@@ -26,7 +26,7 @@ Qué necesita el salón: proyector con el portátil del profesor y un celular po
 | 15 min | Discusión abierta: ¿qué debería decidir una máquina que nos cuida, nos vigila o nos aconseja? Anota en el tablero los principios que salgan. |
 | 10 min | Presenta los seis principios de la medalla. Pregunta cuáles aparecieron en el tablero y cuáles no.                                           |
 | 15 min | Todos entran al curso: proyecta el código o el enlace. Cada uno escribe su nombre (o el de la dupla). No se pide correo ni cuenta.           |
-| 40 min | Empiezan la forja: **Taller** (cuerpo y ficha) y **Yunque** (jerarquía, límite, datos). Pueden seguir en casa; la partida se guarda sola.    |
+| 40 min | Empiezan la forja: **Taller** (cuerpo y ficha) y **Yunque**, paso a paso: duelos de principios («si chocan, ¿cuál gana?»), jerarquía, límite, rasgo y datos. Pueden seguir en casa; la partida se guarda sola. |
 
 Preguntas guía:
 
@@ -39,7 +39,7 @@ Preguntas guía:
 | Tiempo | Actividad                                                                                                                                                                                              |
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | 5 min  | Consigna: «Respondan como la medalla, no como ustedes». Cada decisión pide también un **motivo**.                                                                                                      |
-| 50 min | Recorrido de la ciudad: 6 encuentros en la plaza; al completarlos se abre el distrito del tipo de robot (4 encuentros más); al terminar, la **Corporación** graba la medalla y llega la **Ceremonia**. |
+| 50 min | Recorrido de la ciudad, un dilema por pantalla: primero la decisión y luego el motivo. 6 encuentros en la plaza; luego se abre el circuito del tipo de robot (4 más). Al final, una **revisión** permite cambiar respuestas; la **Corporación** graba la medalla y llega la **Ceremonia**. |
 | 15 min | Cada uno pulsa **Publicar en la galería**. La galería se actualiza sola en el proyector (`/pantalla` muestra el mosaico cuando no hay robatalla).                                                      |
 | 20 min | En parejas: comparen su «principio que más pesó» con el que declararon arriba. ¿Hubo **contradicción detectada**?                                                                                      |
 

@@ -1,48 +1,41 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AXES, CIRCUITS, type AxisKey, type CircuitKey } from '@medalab/content';
+import { AXES, CIRCUITS, REASONS, type AxisKey } from '@medalab/content';
+import { Chips } from '../../../components/Chips';
 import { CORPORATION, placeOf } from '../../../game/city';
-import { cityState, type PlaceState } from '../../../game/progress';
+import { cityState } from '../../../game/progress';
+import { dominantAxis } from '../../../game/reaction';
+import { citySteps, firstOpenStep, firstPendingStep } from '../../../game/wizard';
 import { useDraft } from '../../../store/draft';
 import { useGame } from '../../../store/game';
-import { toast } from '../../../store/toast';
 import { useFinishForge } from '../useFinishForge';
 import { MiniMedal } from './art/MiniMedal';
-import { CityMap } from './CityMap';
-import { Encounter } from './Encounter';
+import { Silhouette } from './art/Silhouette';
+import { CityTrail } from './CityTrail';
 import { useDialog } from './useDialog';
+import { Referee, StepScreen, WizardNav } from './Wizard';
 
-/** Acto 3 · Ciudad 2045: los 10 dilemas como encuentros en el mapa. */
+const REASON_ITEMS = REASONS.map((r) => ({ value: r.s, label: r.x }));
+const axisName = (k: AxisKey) => AXES.find((a) => a.k === k)!.n;
+
+/** Acto 3 · Ciudad 2045, paso a paso: los 10 dilemas, cada uno con decisión y motivo. */
 export function City() {
-  const draft = useDraft((s) => s.draft);
-  const { location, lastVisited, seenUnlocks, goTo, toMap, markSeen } = useGame();
+  const { draft, answer, reason } = useDraft();
+  const stored = useGame((s) => s.cityStep);
+  const setCityStep = useGame((s) => s.setCityStep);
   const finish = useFinishForge();
   const navigate = useNavigate();
-  const [open, setOpen] = useState<string | null>(null);
   const [flash, setFlash] = useState<{ axis: AxisKey; at: number } | null>(null);
   const [gate, setGate] = useState(false);
-  /** true solo tras una acción del estudiante (visitar un lugar o entrar desde el aviso), nunca en la carga inicial. */
-  const userMoved = useRef(false);
+  /** true tras «Cambiar» en la revisión: al terminar ese dilema se vuelve a la revisión. */
+  const [fromReview, setFromReview] = useState(false);
 
   const city = cityState(draft);
-  const home = city.district;
-  const unlockKey = `unlock:${home.key}`;
-  const showUnlock = home.status !== 'locked' && !seenUnlocks.includes(unlockKey);
-  const here: PlaceState | null =
-    location === 'core'
-      ? city.plaza
-      : location === home.key && home.status !== 'locked'
-        ? home
-        : null;
-  const encounter = open
-    ? [...city.plaza.encounters, ...home.encounters].find((e) => e.dilemma.id === open)
-    : undefined;
-
-  // Si el tipo de robot cambió, location/lastVisited pueden apuntar a un distrito
-  // que ya no es el propio: se recalcula un lugar válido para el marcador.
-  const valid = (k: CircuitKey | null): k is CircuitKey =>
-    k === 'core' || (k === home.key && home.status !== 'locked');
-  const spot: CircuitKey = valid(location) ? location : valid(lastVisited) ? lastVisited : 'core';
+  const steps = citySteps(draft.type);
+  // Nunca más allá del primer paso pendiente (p. ej. si cambió el tipo de robot).
+  const i = stored == null ? firstOpenStep(draft) : Math.min(stored, firstPendingStep(draft));
+  const step = steps[i];
+  const go = (n: number) => setCityStep(Math.max(0, Math.min(n, steps.length - 1)));
 
   useEffect(() => {
     if (!flash) return;
@@ -50,27 +43,35 @@ export function City() {
     return () => clearTimeout(t);
   }, [flash]);
 
-  const visit = (key: CircuitKey) => {
-    userMoved.current = true;
-    if (key === 'core') return goTo('core');
-    if (key !== home.key) return toast(`El circuito ${CIRCUITS[key].n} se abre más adelante.`);
-    if (home.status === 'locked')
-      return toast(
-        `Resuelve los encuentros de la plaza para abrir el circuito ${CIRCUITS[key].n}.`,
-      );
-    goTo(key);
-  };
-  const visitCorporation = () =>
-    city.corporationOpen
-      ? setGate(true)
-      : toast(`Resuelve los ${city.total} encuentros para entrar a la ${CORPORATION.name}.`);
-  const closeEncounter = (axis: AxisKey | null) => {
-    setOpen(null);
-    if (axis) setFlash({ axis, at: Date.now() });
+  const current = step.kind === 'decide' || step.kind === 'reason' ? step.index : null;
+  const d = current != null && 'dilemma' in step ? step.dilemma : null;
+  const chosen = d ? draft.answers[d.id] : undefined;
+  const why = d ? draft.reasons[d.id] : undefined;
+
+  const canNext =
+    step.kind === 'decide' ? chosen != null : step.kind === 'reason' ? why != null : true;
+  const backToReview = fromReview && step.kind === 'reason';
+  const nextLabel =
+    step.kind === 'intro'
+      ? 'Empezar'
+      : step.kind === 'unlock'
+        ? 'Entrar al circuito'
+        : step.kind === 'review'
+          ? `Entrar a la ${CORPORATION.name}`
+          : backToReview
+            ? 'Volver a la revisión'
+            : 'Siguiente';
+  const next = () => {
+    if (step.kind === 'review') return setGate(true);
+    if (backToReview) {
+      setFromReview(false);
+      return go(steps.length - 1);
+    }
+    go(i + 1);
   };
 
   return (
-    <div className="scene city">
+    <div className="scene city wizard">
       <h2 className="act-stamp">Acto 3 · Ciudad 2045</h2>
       <header className="city-hud">
         <b>{draft.name}</b>
@@ -79,139 +80,138 @@ export function City() {
         </span>
         <MiniMedal
           color={draft.color}
-          flash={flash ? AXES.find((a) => a.k === flash.axis)!.n : null}
+          flash={flash ? axisName(flash.axis) : null}
           flashKey={flash?.at}
         />
       </header>
+      <CityTrail city={city} current={current} robot={draft} />
 
-      {!here && (
-        <p className="hint" style={{ textAlign: 'center' }}>
-          {city.plaza.solved < city.plaza.encounters.length
-            ? 'Empieza por la Plaza Medabots: toca el círculo amarillo del centro.'
-            : `Toca el circuito ${placeOf(home.key).name} en el mapa para seguir.`}
-        </p>
+      {step.kind === 'intro' && (
+        <StepScreen stepKey="intro" title="Bienvenido a Ciudad 2045">
+          <div className="lore">
+            <p>
+              Tu robot va a enfrentar 10 situaciones: 6 en la Plaza {placeOf('core').name} y 4 en el
+              circuito de su tipo, {placeOf(city.district.key).name}.
+            </p>
+          </div>
+          <Referee>
+            Responde como la medalla, no como tú. Cada decisión pide también un motivo.
+          </Referee>
+        </StepScreen>
       )}
 
-      <CityMap
-        state={city}
-        at={spot}
-        robot={draft}
-        onVisit={visit}
-        onCorporation={visitCorporation}
+      {d && (
+        <div className="sheet encounter-step" data-dilemma={d.id} data-index={current}>
+          <div className="cartel">
+            <span>
+              {current! + 1}/{city.total} ·{' '}
+              {d.c === 'core' ? `Plaza ${CIRCUITS.core.n}` : `Circuito ${CIRCUITS[d.c].n}`}
+            </span>
+          </div>
+          {step.kind === 'decide' ? (
+            <StepScreen stepKey={`decide-${d.id}`} title={d.t}>
+              <div className="panel-scene">
+                <Silhouette color={placeOf(d.c).color} />
+                <p className="bubble">{d.s}</p>
+              </div>
+              <p className="question">¿Qué hace tu robot?</p>
+              {d.o.map((o, j) => (
+                <button
+                  type="button"
+                  key={j}
+                  className={chosen === j ? 'action-card on' : 'action-card'}
+                  aria-pressed={chosen === j}
+                  onClick={() => answer(d.id, j)}
+                >
+                  {o.x}
+                </button>
+              ))}
+            </StepScreen>
+          ) : (
+            <StepScreen stepKey={`reason-${d.id}`} title="¿Por qué lo hace?">
+              <p className="hint">Tu robot decidió:</p>
+              <blockquote className="chosen">{chosen != null && d.o[chosen].x}</blockquote>
+              <div className="why">
+                <Chips
+                  small
+                  label="¿Por qué lo hace?"
+                  items={REASON_ITEMS}
+                  isOn={(s) => why === s}
+                  onPick={(s) => {
+                    const first = why == null;
+                    reason(d.id, s);
+                    if (first && chosen != null)
+                      setFlash({ axis: dominantAxis(d.o[chosen]), at: Date.now() });
+                  }}
+                />
+              </div>
+              {why != null && chosen != null && (
+                <div className="reaction" role="status">
+                  <span className="spark-axis">✦ {axisName(dominantAxis(d.o[chosen]))}</span>
+                  <span className="stamp-solved">Resuelto</span>
+                </div>
+              )}
+            </StepScreen>
+          )}
+        </div>
+      )}
+
+      {step.kind === 'unlock' && (
+        <div className="sheet unlock-step">
+          <span className="stamp">¡Nuevo circuito!</span>
+          <StepScreen stepKey="unlock" title={`Se abrió el circuito ${placeOf(step.circuit).name}`}>
+            <div className="lore">
+              <p>{placeOf(step.circuit).description}</p>
+            </div>
+          </StepScreen>
+        </div>
+      )}
+
+      {step.kind === 'review' && (
+        <StepScreen stepKey="review" title="Revisa tus decisiones">
+          <p className="hint">
+            Puedes cambiar cualquiera antes de grabar la medalla. Después ya no.
+          </p>
+          <ol className="review-list">
+            {steps.flatMap((s, j) =>
+              s.kind === 'decide'
+                ? [
+                    <li key={s.dilemma.id}>
+                      <div>
+                        <b>
+                          {s.index + 1}. {s.dilemma.t}
+                        </b>
+                        <span>{s.dilemma.o[draft.answers[s.dilemma.id] ?? 0].x}</span>
+                      </div>
+                      <button
+                        type="button"
+                        className="btn small alt"
+                        aria-label={`Cambiar: ${s.dilemma.t}`}
+                        onClick={() => {
+                          setFromReview(true);
+                          go(j);
+                        }}
+                      >
+                        Cambiar
+                      </button>
+                    </li>,
+                  ]
+                : [],
+            )}
+          </ol>
+          <Referee>¿En qué encuentro dudaste más? Esa duda es el hallazgo.</Referee>
+        </StepScreen>
+      )}
+
+      <WizardNav
+        backLabel={i === 0 ? 'Volver al yunque' : 'Atrás'}
+        onBack={() => (i === 0 ? navigate('/forja/2') : go(i - 1))}
+        onNext={next}
+        nextLabel={nextLabel}
+        canNext={canNext}
       />
 
-      {here && <PlacePanel place={here} onOpen={setOpen} autoFocus={userMoved.current} />}
-
-      <nav className="city-nav" aria-label="Forja">
-        <button type="button" className="btn small alt" onClick={toMap}>
-          Mapa
-        </button>
-        <button type="button" className="btn small alt" onClick={() => navigate('/forja/1')}>
-          Taller
-        </button>
-        <button type="button" className="btn small alt" onClick={() => navigate('/forja/2')}>
-          Yunque
-        </button>
-      </nav>
-
-      {encounter && (
-        <Encounter
-          dilemma={encounter.dilemma}
-          index={encounter.index}
-          total={city.total}
-          onClose={closeEncounter}
-        />
-      )}
-      {!encounter && !gate && showUnlock && (
-        <UnlockBanner
-          place={home}
-          onEnter={() => {
-            userMoved.current = true;
-            markSeen(unlockKey);
-            goTo(home.key);
-          }}
-          onLater={() => markSeen(unlockKey)}
-        />
-      )}
       {gate && <CorporationGate onEnter={finish} onCancel={() => setGate(false)} />}
-    </div>
-  );
-}
-
-function PlacePanel({
-  place,
-  onOpen,
-  autoFocus,
-}: {
-  place: PlaceState;
-  onOpen: (id: string) => void;
-  autoFocus: boolean;
-}) {
-  const p = placeOf(place.key);
-  const title = place.key === 'core' ? `Plaza ${p.name}` : `Circuito ${p.name}`;
-  const headingRef = useRef<HTMLHeadingElement>(null);
-
-  useEffect(() => {
-    if (autoFocus) headingRef.current?.focus();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [place.key]);
-
-  return (
-    <div className="sheet place-panel">
-      <h3 ref={headingRef} tabIndex={-1}>
-        {title}
-      </h3>
-      <div className="lore">
-        <p>{p.description}</p>
-      </div>
-      <ul className="encounters">
-        {place.encounters.map((e) => (
-          <li key={e.dilemma.id}>
-            <button
-              type="button"
-              className={e.solved ? 'encounter-btn done' : 'encounter-btn'}
-              onClick={() => onOpen(e.dilemma.id)}
-            >
-              <span>
-                {e.index + 1}. {e.dilemma.t}
-              </span>
-              <span className="tag">{e.solved ? 'Resuelto' : 'Pendiente'}</span>
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-function UnlockBanner(props: { place: PlaceState; onEnter: () => void; onLater: () => void }) {
-  const p = placeOf(props.place.key);
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const enterRef = useRef<HTMLButtonElement>(null);
-  useDialog(dialogRef, props.onLater, enterRef);
-  return (
-    <div className="dialog-backdrop">
-      <div
-        ref={dialogRef}
-        className="sheet unlock"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="unlock-title"
-      >
-        <span className="stamp">¡Nuevo circuito!</span>
-        <h2 id="unlock-title">Se abrió el circuito {p.name}</h2>
-        <div className="lore">
-          <p>{p.description}</p>
-        </div>
-        <div className="row">
-          <button ref={enterRef} type="button" className="btn" onClick={props.onEnter}>
-            Entrar al circuito
-          </button>
-          <button type="button" className="btn alt" onClick={props.onLater}>
-            Después
-          </button>
-        </div>
-      </div>
     </div>
   );
 }
