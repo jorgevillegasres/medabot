@@ -4,7 +4,10 @@
 import { AXIS_KEYS, type AxisKey } from '@medalab/content';
 
 export type DuelState =
-  | { /** [retador, ya ordenado] */ pair: [AxisKey, AxisKey]; /** Número del duelo, desde 1. */ n: number }
+  | {
+      /** [retador, ya ordenado] */ pair: [AxisKey, AxisKey];
+      /** Número del duelo, desde 1. */ n: number;
+    }
   | { rank: AxisKey[] };
 
 /** Estado tras los duelos `outcomes` (true = gana el primero de la pareja). Sin estado propio. */

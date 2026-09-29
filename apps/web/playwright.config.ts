@@ -1,6 +1,7 @@
 import { defineConfig } from '@playwright/test';
 
-const PORT = 5173;
+// E2E_PORT permite probar otra copia (p. ej. un worktree) sin chocar con el servidor de desarrollo.
+const PORT = Number(process.env.E2E_PORT ?? 5173);
 
 export default defineConfig({
   testDir: './e2e',

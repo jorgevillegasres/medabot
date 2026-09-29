@@ -252,6 +252,16 @@
 .referee-card p {
   margin: 6px 0 0;
 }
+.referee-card ul {
+  margin: 8px 0 0;
+  padding-left: 1.2em;
+  display: grid;
+  gap: 4px;
+}
+.encounter-step .referee-card {
+  margin: 12px 0 4px;
+  padding: 10px 14px;
+}
 
 /* Duelos de principios */
 .duel {

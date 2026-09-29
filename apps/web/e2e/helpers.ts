@@ -182,7 +182,9 @@ export async function solveHere(
   const step = page.locator('.encounter-step');
   let n = 0;
   while (n < max) {
-    const stop = page.getByRole('heading', { name: /^(Se abrió el circuito|Revisa tus decisiones)/ });
+    const stop = page.getByRole('heading', {
+      name: /^(Se abrió el circuito|Revisa tus decisiones)/,
+    });
     await expect(step.or(stop).first()).toBeVisible();
     if (!(await step.isVisible())) break;
     const index = Number(await step.getAttribute('data-index'));

@@ -6,13 +6,13 @@
 
 Que forjar la medalla sea un **ejercicio de ética**, no un formulario: una pregunta por pantalla, con avance visible, y cada pregunta planteada como una decisión entre cosas buenas que chocan. La meta pedagógica viene de la guía docente (`docs/guia-docente.md`) y su bibliografía:
 
-| Fuente                                                   | Cómo se traduce en la forja                                                                                                                                                               |
-| -------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Beauchamp y Childress, _Principles of Biomedical Ethics_ | Los principios valen _prima facie_: solo se jerarquizan cuando chocan. La jerarquía se construye con **duelos** («si chocan, ¿cuál gana?»), no ordenando una lista en abstracto.          |
-| Kohlberg, _Essays on Moral Development_                  | Lo que se decide y por qué se decide son cosas distintas. En la Ciudad, la **decisión** y el **motivo** son dos pasos separados; el motivo se elige con la decisión a la vista.            |
-| Gilligan, _In a Different Voice_                         | Los dilemas se leen desde la situación concreta: cada paso muestra la escena completa antes de las opciones.                                                                              |
+| Fuente                                                   | Cómo se traduce en la forja                                                                                                                                                                                   |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Beauchamp y Childress, _Principles of Biomedical Ethics_ | Los principios valen _prima facie_: solo se jerarquizan cuando chocan. La jerarquía se construye con **duelos** («si chocan, ¿cuál gana?»), no ordenando una lista en abstracto.                              |
+| Kohlberg, _Essays on Moral Development_                  | Lo que se decide y por qué se decide son cosas distintas. En la Ciudad, la **decisión** y el **motivo** son dos pasos separados; el motivo se elige con la decisión a la vista.                               |
+| Gilligan, _In a Different Voice_                         | Los dilemas se leen desde la situación concreta: cada paso muestra la escena completa antes de las opciones.                                                                                                  |
 | Guía docente §3–§4 (preguntas guía)                      | Tarjetas de reflexión del **Sr. Referí** que no se responden ni se guardan: «Si tu límite choca con tu primer principio, ¿qué gana?», «¿Quién más podría usar esos datos?», «¿En qué encuentro dudaste más?». |
-| Guía docente §4 (consigna)                               | La Ciudad empieza con la consigna «Responde como la medalla, no como tú».                                                                                                                 |
+| Guía docente §4 (consigna)                               | La Ciudad empieza con la consigna «Responde como la medalla, no como tú».                                                                                                                                     |
 
 Se mantiene la decisión de la Fase G: **la reacción tras cada dilema no muestra números** (solo destella el eje dominante), para que el test no se pueda optimizar. La contradicción entre lo declarado y lo decidido se revela en la Ceremonia, como hoy.
 

@@ -83,7 +83,10 @@ test('cambiar de opinión antes de la ceremonia; después ya no', async ({ page 
   await page.getByRole('button', { name: 'Entrar al circuito' }).click();
   await solveHere(page, F.seed);
   // Desde la revisión, cambiar el primer encuentro (índice 0 = 'sumision').
-  await page.getByRole('button', { name: /^Cambiar: / }).first().click();
+  await page
+    .getByRole('button', { name: /^Cambiar: / })
+    .first()
+    .click();
   const changed = (pick(0).option + 1) % 3;
   await page.locator('.action-card').nth(changed).click();
   await page.getByRole('button', { name: 'Siguiente' }).click();

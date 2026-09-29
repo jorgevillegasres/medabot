@@ -17,12 +17,27 @@ export function StageBar({ labels, current }: { labels: string[]; current: numbe
   );
 }
 
-/** Tarjeta de reflexión: no se responde ni se guarda; es para pensar (guía docente §3–§4). */
-export function Referee({ children }: { children: ReactNode }) {
+/** Tarjeta de reflexión: no se responde ni se guarda; es para pensar (preguntas en game/referee.ts). */
+export function Referee({
+  children,
+  questions,
+  label = 'Sr. Referí',
+}: {
+  children?: ReactNode;
+  questions?: string[];
+  label?: string;
+}) {
   return (
     <aside className="referee-card">
-      <span className="stamp">Sr. Referí</span>
-      <p>{children}</p>
+      <span className="stamp">{label}</span>
+      {children && <p>{children}</p>}
+      {questions && (
+        <ul>
+          {questions.map((q) => (
+            <li key={q}>{q}</li>
+          ))}
+        </ul>
+      )}
     </aside>
   );
 }

@@ -20,12 +20,12 @@ Qué necesita el salón: proyector con el portátil del profesor y un celular po
 
 ## 3. Sesión 1 · Lanzamiento (90 min)
 
-| Tiempo | Actividad                                                                                                                                    |
-| ------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| 10 min | Proyecta la portada de Medalab y lee en voz alta el relato: «El cuerpo se compra en la tienda. La medalla, no.»                              |
-| 15 min | Discusión abierta: ¿qué debería decidir una máquina que nos cuida, nos vigila o nos aconseja? Anota en el tablero los principios que salgan. |
-| 10 min | Presenta los seis principios de la medalla. Pregunta cuáles aparecieron en el tablero y cuáles no.                                           |
-| 15 min | Todos entran al curso: proyecta el código o el enlace. Cada uno escribe su nombre (o el de la dupla). No se pide correo ni cuenta.           |
+| Tiempo | Actividad                                                                                                                                                                                                      |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 10 min | Proyecta la portada de Medalab y lee en voz alta el relato: «El cuerpo se compra en la tienda. La medalla, no.»                                                                                                |
+| 15 min | Discusión abierta: ¿qué debería decidir una máquina que nos cuida, nos vigila o nos aconseja? Anota en el tablero los principios que salgan.                                                                   |
+| 10 min | Presenta los seis principios de la medalla. Pregunta cuáles aparecieron en el tablero y cuáles no.                                                                                                             |
+| 15 min | Todos entran al curso: proyecta el código o el enlace. Cada uno escribe su nombre (o el de la dupla). No se pide correo ni cuenta.                                                                             |
 | 40 min | Empiezan la forja: **Taller** (cuerpo y ficha) y **Yunque**, paso a paso: duelos de principios («si chocan, ¿cuál gana?»), jerarquía, límite, rasgo y datos. Pueden seguir en casa; la partida se guarda sola. |
 
 Preguntas guía:
@@ -36,12 +36,12 @@ Preguntas guía:
 
 ## 4. Sesión 2 · La forja en Ciudad 2045 (90 min)
 
-| Tiempo | Actividad                                                                                                                                                                                              |
-| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 5 min  | Consigna: «Respondan como la medalla, no como ustedes». Cada decisión pide también un **motivo**.                                                                                                      |
+| Tiempo | Actividad                                                                                                                                                                                                                                                                                  |
+| ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 5 min  | Consigna: «Respondan como la medalla, no como ustedes». Cada decisión pide también un **motivo**.                                                                                                                                                                                          |
 | 50 min | Recorrido de la ciudad, un dilema por pantalla: primero la decisión y luego el motivo. 6 encuentros en la plaza; luego se abre el circuito del tipo de robot (4 más). Al final, una **revisión** permite cambiar respuestas; la **Corporación** graba la medalla y llega la **Ceremonia**. |
-| 15 min | Cada uno pulsa **Publicar en la galería**. La galería se actualiza sola en el proyector (`/pantalla` muestra el mosaico cuando no hay robatalla).                                                      |
-| 20 min | En parejas: comparen su «principio que más pesó» con el que declararon arriba. ¿Hubo **contradicción detectada**?                                                                                      |
+| 15 min | Cada uno pulsa **Publicar en la galería**. La galería se actualiza sola en el proyector (`/pantalla` muestra el mosaico cuando no hay robatalla).                                                                                                                                          |
+| 20 min | En parejas: comparen su «principio que más pesó» con el que declararon arriba. ¿Hubo **contradicción detectada**?                                                                                                                                                                          |
 
 Si un celular va lento o alguien necesita accesibilidad, el enlace **«Ver como formulario»** muestra la misma forja como formulario, sin perder nada.
 
@@ -103,6 +103,18 @@ Exporta CSV o JSON desde el panel si quieres analizar los datos aparte. Cierra l
 - **Pesos de los dilemas**: son criterio editorial. Antes del piloto, forja unos 5 robots de prueba y revisa que las predicciones de la Arena no se sientan arbitrarias.
 - **Nombres**: se guardan como texto libre, sin verificación. Es aceptable para una clase; pide a los estudiantes que no usen datos personales adicionales.
 - **Marca**: «Medabots» es una marca registrada; el proyecto usa el universo solo como inspiración pedagógica. Si se publica fuera de la UAO, revisar nombres y no usar arte oficial.
+- **Temas sensibles de la bibliografía**: Noble, _Feminismo digital_ (sexting, difusión de imágenes íntimas) y Dworkin tratan violencia sexual. Avisa antes, trabaja con casos descritos (no con capturas), no pidas experiencias personales y ten a mano la ruta de bienestar universitario de la UAO. No se recomienda asignar Dworkin; si se menciona, como antecedente histórico y controvertido.
+- **El dato de Kohlberg es una tendencia, no una medida** (Lind, en Harding, 1985): elegir un motivo muestra una preferencia; un motivo «bajo» puede ser cinismo o matiz. Tampoco presentes los motivos de cuidado (etapa 3) ni la escuela del cuidado como inferiores (Friedman, en Harding, 1985; Gilligan, 1982).
+
+### Decisiones de contenido pendientes (surgidas de la bibliografía)
+
+La plataforma no cambia dilemas ni principios por su cuenta; estas decisiones son del profesor.
+
+1. **Premisa de «Doble efecto» (circuito Umbral).** El dilema dice que la sedación «probablemente acorte la vida»; Carr y Berger (2025) sostienen que la sedación paliativa bien usada no acelera la muerte. Revisar si la premisa se mantiene como hipótesis del caso o se corrige.
+2. **Justicia y no discriminación.** Ninguno de los seis principios la nombra (O'Neil, 2017; Criado Perez, 2019; Iansiti y Lakhani, 2020). Recomendación de la lectura: tratarla como pregunta transversal y como ejemplo de límite infranqueable, no como séptimo principio negociable en los duelos.
+3. **Otras tensiones ausentes**: aceptar corrección o apagado e incertidumbre sobre lo que quiere el humano (Russell, 2019); rendición de cuentas como algo distinto de la honestidad (Dignum, 2020).
+4. **Procedencia de «¿Quién dice que está muerto?»** (circuito Umbral): viene de Appel (2019), no del libro de paliativos.
+5. **Casos que faltan y podrían sugerirse**: privacidad genética y deber de advertir (Appel); decisión por representación y retiro de tratamientos (Carr y Berger); traslados como castigo y zonas grises de los privilegios del cargo (Swarup); autoría regalada y exclusión de datos después de ver el resultado (Petritsch); quién responde cuando la IA falla (Boutin et al.).
 
 ## 9. Problemas frecuentes
 
@@ -116,13 +128,72 @@ Exporta CSV o JSON desde el panel si quieres analizar los datos aparte. Cierra l
 
 ## 10. Bibliografía de apoyo
 
-Obras de referencia para los temas de los circuitos. **Verifica las ediciones disponibles en la biblioteca de la UAO** y completa las fuentes marcadas.
+Las preguntas del Sr. Referí en la forja citan estas obras (`apps/web/src/game/referee.ts`). **Verifica las ediciones disponibles en la biblioteca de la UAO**; las marcadas «(verificar)» se tomaron de catálogos porque el archivo no traía créditos completos.
 
-- Kohlberg, L. (1981). _Essays on Moral Development, Vol. I: The Philosophy of Moral Development_. Harper & Row. — Etapas del razonamiento moral (motivos).
-- Gilligan, C. (1982). _In a Different Voice_. Harvard University Press. — Ética del cuidado (circuito Vínculos; temperamento «Vinculada»).
-- Beauchamp, T. L., y Childress, J. F. _Principles of Biomedical Ethics_. Oxford University Press. — Bioética clínica (circuito Cuerpo).
-- Sófocles, _Antígona_; Homero, _Ilíada_. — Tragedia griega (circuito Vínculos: «Antígona», «La cólera de Aquiles»).
-- Scharre, P. (2018). _Army of None: Autonomous Weapons and the Future of War_. W. W. Norton. — Debate sobre IA militar (circuito Guerra).
-- National Academy of Sciences (2009). _On Being a Scientist: A Guide to Responsible Conduct in Research_ (3.ª ed.). National Academies Press. — Integridad científica (circuito Ciencia).
-- _[Completar por el profesor]_ — Casos de cuidados paliativos que inspiran el circuito Umbral.
-- _[Completar por el profesor]_ — Memorias del funcionario público que inspiran el circuito Estado.
+### Razonamiento moral y método para dilemas
+
+- Gallop, J. D. (2020). _A.S.P.I.R.E. to ethics: An analytical approach to solving ethical dilemmas_. Kendall Hunt. (verificar) — Método de seis pasos: reconocer, afectados, perspectivas, alternativas, consecuencias, emociones. Base de la pausa «Antes de decidir» y de la revisión final. Sirve el método, no sus ejemplos.
+- Gilligan, C. (1982). _In a different voice_. Harvard University Press. — Ética del cuidado (circuito Vínculos; temperamento «Vinculada»).
+- Harding, C. G. (Ed.). (1985). _Moral dilemmas: Philosophical and psychological issues in the development of moral reasoning_. Precedent Publishing. — Discusión «transactiva» (Berkowitz), etapas (Kohlberg), competencia moral (Lind).
+- Jones, M. S., Farnham, M. J., y Saxon, D. L. (2021). _Talking about ethics: A conversational approach to moral dilemmas_. Kregel Academic. — Diálogo entre posturas y «cambiar un factor». Sirve el método; las conclusiones son confesionales.
+- Ferrarello, S. (2023). _The ethics of love: Emotional dilemmas for a relational life_. Routledge. — Lo trágico, la sabiduría práctica y los valores que no se ordenan en una balanza.
+- Kohlberg, L. (1981). _Essays on moral development, Vol. I: The philosophy of moral development_. Harper & Row. — Etapas del razonamiento moral (motivos).
+- Beauchamp, T. L., y Childress, J. F. _Principles of biomedical ethics_. Oxford University Press. — Principios _prima facie_: base de los duelos del Yunque.
+
+### Fuentes de los circuitos
+
+- **Cuerpo**: Appel, J. M. (2019). _Who says you're dead? Medical & ethical dilemmas for the curious & concerned_. Algonquin Books of Chapel Hill.
+- **Umbral**: Carr, D. B., y Berger, A. (Eds.). (2025). _Clinical and ethical dilemmas in palliative and end-of-life care_. Oxford University Press. https://doi.org/10.1093/med/9780197681541.001.0001
+- **Estado**: Swarup, A. (2020). _Ethical dilemmas of a civil servant_. Unique Publishers. (verificar el año: los créditos dicen «Edition 2020-2021»)
+- **Ciencia**: Petritsch, K. (Ed.). (2018). _Ethical challenges in science: Dilemmas, misconduct, plagiarism, improvements_. Society Publishing. — Complementa a National Academy of Sciences (2009), _On being a scientist_ (3.ª ed.).
+- **Guerra**: Boutin, B., Woodcock, T. K., y Soltanzadeh, S. (Eds.). (2026). _Legal, ethical, and technical dilemmas in military artificial intelligence_. T.M.C. Asser Press. https://doi.org/10.1007/978-94-6265-759-5 (acceso abierto) — Complementa a Scharre (2018), _Army of none_.
+- **Vínculos**: Sófocles, _Antígona_; Homero, _Ilíada_.
+
+### Ética y control de la IA
+
+- Dubber, M. D., Pasquale, F., y Das, S. (Eds.). (2020). _The Oxford handbook of ethics of AI_. Oxford University Press. — Caps. 2 (Powers y Ganascia), 9 (Kroll), 10 (Diakopoulos) y 11 (Dignum: responsabilidad, rendición de cuentas y transparencia).
+- Russell, S. (2019). _Human compatible: Artificial intelligence and the problem of control_. Allen Lane. — Máquinas inseguras de lo que queremos, el botón de apagado, la trampa que cumple la letra.
+- Suleyman, M., y Bhaskar, M. (2023). _The coming wave_. Crown. — Contención.
+- Floridi, L. (2019). _The logic of information_. Oxford University Press. — La ética como diseño; niveles de abstracción.
+- Pickering, A. (2010). _The cybernetic brain_. University of Chicago Press. — «Correrlo y ver»: base de la Arena.
+- Iansiti, M., y Lakhani, K. R. (2020). _Competing in the age of AI_. Harvard Business Review Press. — La escala amplifica el daño.
+- Hao, K. (2025). _Empire of AI_. Penguin Press. — Trabajo humano invisible detrás de la IA (incluye una anotadora en Colombia).
+
+### Datos, privacidad y vigilancia
+
+- Véliz, C. (2021). _Privacidad es poder: Datos, vigilancia y libertad en la era digital_ (A. Santos Mosquera, Trad.). Debate. — Datos como activo tóxico; privacidad colectiva.
+- Agencia Española de Protección de Datos. (2024). _Patrones adictivos en el tratamiento de datos personales_. AEPD.
+- Mayer-Schönberger, V., y Cukier, K. (2013). _Big data_. Houghton Mifflin Harcourt.
+- Couldry, N., y Mejias, U. A. (2019). _The costs of connection_. Stanford University Press. — Colonialismo de datos, con perspectiva latinoamericana.
+- Pasquale, F. (2015). _The black box society_. Harvard University Press.
+- Steinberger, M. (2025). _The philosopher in the valley_. Avid Reader Press. — Caso de desvío de finalidad (HSI/ERO).
+- Karp, A. C., y Zamiska, N. W. (2025). _The technological republic_. Crown Currency. — Contrapunto a Véliz.
+- Zittrain, J. (2008). _The future of the internet—and how to stop it_. Yale University Press.
+- Elsen, J. H. (2025). _Inside Palantir_. Edición del autor. — Sin editorial y con datos dudosos: solo como disparador, no como fuente.
+
+### Sesgo, género y justicia
+
+- Noble, S. U. (2018). _Algorithms of oppression_. New York University Press.
+- O'Neil, C. (2017). _Armas de destrucción matemática_ (V. Arranz de la Torre, Trad.). Capitán Swing. (verificar)
+- Criado Perez, C. (2019). _Invisible women_. Abrams Press.
+- Saini, A. (2018). _Inferior_. 4th Estate.
+- Rudder, C. (2014). _Dataclysm_. Crown Publishers.
+- Aránguez Sánchez, T., y Olariu, O. (Coords.). (2021). _Feminismo digital: Violencia contra las mujeres y brecha sexista en Internet_. Dykinson. — Asignar los caps. 5 y 7.
+
+### Redes sociales y atención
+
+- Vaidhyanathan, S. (2018). _Antisocial media_. Oxford University Press.
+- Pariser, E. (2011). _The filter bubble_. Penguin Press.
+- Carr, N. (2010). _The shallows_. W. W. Norton. — Por qué el asistente evita ayudas y recompensas que invitan a pulsar sin pensar.
+- Lanier, J. (2010). _You are not a gadget_. Alfred A. Knopf.
+- Torres-Toukoumidis, Á., y De-Santis, A. (Coords.). (2023). _Redes sociales y crisis humanitarias_. Abya-Yala. https://doi.org/10.17163/abyaups.25
+- Horumarin. (2002). _Medabots, Vol. 1: A boy and his 'bot_ (K. Bridges, Trad.). Viz Communications. — Fuente del universo (tin-pet, medapartes, medalla que evoluciona, referí).
+
+## 11. Actividades sugeridas por la bibliografía
+
+- **Parejas que decidieron distinto** (Berkowitz, en Harding, 1985): juntar a quienes eligieron opciones diferentes en el mismo dilema. Antes de responder, cada uno parafrasea el argumento del otro y pregunta «ayúdame a entender». El profesor pregunta; no da el veredicto (Kohlberg).
+- **La otra salida** (Gallop, 2020; Harding, 1985): cada dilema tiene tres opciones cerradas. Pide a la clase la cuarta opción que nadie vio y analízala con los pasos de ASPIRE.
+- **Arena: justificar antes de revelar** (Vaidhyanathan, 2018): pide que cada predicción se diga en voz alta con su motivo antes de revelar. Tras el giro, pregunta qué dato cambió la predicción (Jones et al., 2021). Una predicción fallida es un dato, no un fracaso (Pickering, 2010).
+- **Giros sugeridos para escenarios nuevos**: el mismo robot en otro contexto (Suleyman y Bhaskar, 2023); el dueño quiere algo que perjudica a terceros (Russell, 2019); alguien intenta apagar al robot.
+- **Cierre legislativo**: cada estudiante relaciona sus respuestas del Yunque (datos, finalidad, conservación) con los principios de la Ley 1581 de 2012 (verificar los artículos antes de citarlos). Pregunta final: ¿qué le falta a la ley para los patrones adictivos, los corredores de datos o las decisiones automatizadas? (AEPD, 2024; Pasquale, 2015).
+- **Debates**: ¿consentimiento o rendición de cuentas? (Mayer-Schönberger y Cukier frente a Véliz); ¿hay herramientas neutrales? (Karp y Zamiska frente a Steinberger); ¿colonialismo de datos en Colombia? (Couldry y Mejias).

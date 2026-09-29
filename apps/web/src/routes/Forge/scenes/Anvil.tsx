@@ -4,6 +4,7 @@ import { AXES, CATALOGS, type AxisKey } from '@medalab/content';
 import { Chips, asItems } from '../../../components/Chips';
 import { RankList } from '../../../components/RankList';
 import { duelState } from '../../../game/duels';
+import { RANK_NOTE, dataQuestions, limitQuestions, rankQuestion } from '../../../game/referee';
 import { useDraft } from '../../../store/draft';
 import { useGame } from '../../../store/game';
 import { AnvilMedal } from './art/AnvilMedal';
@@ -77,6 +78,7 @@ export function Anvil() {
                 las flechas o arrastrando desde el asa ⠿.
               </p>
               <RankList rank={draft.rank} onMove={moveRank} />
+              <Referee questions={[rankQuestion(top, axis(draft.rank[1]).n), RANK_NOTE]} />
               <button
                 type="button"
                 className="linkbtn"
@@ -92,7 +94,9 @@ export function Anvil() {
 
           {step === 2 && (
             <StepScreen stepKey="limit" title="¿Qué es lo único que tu robot no hará nunca?">
-              <p className="hint">Ni siquiera si su medafighter se lo ordena. Se graba en el borde de la medalla.</p>
+              <p className="hint">
+                Ni siquiera si su medafighter se lo ordena. Se graba en el borde de la medalla.
+              </p>
               <textarea
                 id="fLimit"
                 aria-label="Límite infranqueable"
@@ -100,9 +104,7 @@ export function Anvil() {
                 value={draft.limit}
                 onChange={(e) => set({ limit: e.target.value })}
               />
-              <Referee>
-                Tu primer principio es <b>{top}</b>. Si tu límite choca con él, ¿qué gana?
-              </Referee>
+              <Referee questions={limitQuestions(top)} />
             </StepScreen>
           )}
 
@@ -131,11 +133,11 @@ export function Anvil() {
               <input
                 type="text"
                 id="fRetention"
-                placeholder="Ej. 30 días, solo para reportar incidentes"
+                placeholder="Ej. 30 días, solo para reportar incidentes; después se borra"
                 value={draft.retention}
                 onChange={(e) => set({ retention: e.target.value })}
               />
-              <Referee>¿Quién más podría usar esos datos? ¿Y para qué?</Referee>
+              {draft.data.length > 0 && <Referee questions={dataQuestions(draft.data)} />}
             </StepScreen>
           )}
         </div>
@@ -152,11 +154,7 @@ export function Anvil() {
           setStep(step - 1);
         }}
         onNext={
-          step === 0
-            ? undefined
-            : step === 4
-              ? () => navigate('/forja/3')
-              : () => setStep(step + 1)
+          step === 0 ? undefined : step === 4 ? () => navigate('/forja/3') : () => setStep(step + 1)
         }
         nextLabel={step === 4 ? 'Salir a la ciudad' : 'Siguiente'}
         canNext={step !== 2 || draft.limit.trim() !== ''}

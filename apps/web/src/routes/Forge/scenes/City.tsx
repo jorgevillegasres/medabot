@@ -5,6 +5,7 @@ import { Chips } from '../../../components/Chips';
 import { CORPORATION, placeOf } from '../../../game/city';
 import { cityState } from '../../../game/progress';
 import { dominantAxis } from '../../../game/reaction';
+import { PAUSE_QUESTIONS, REVIEW_QUESTIONS, circuitQuestion } from '../../../game/referee';
 import { citySteps, firstOpenStep, firstPendingStep } from '../../../game/wizard';
 import { useDraft } from '../../../store/draft';
 import { useGame } from '../../../store/game';
@@ -95,7 +96,9 @@ export function City() {
             </p>
           </div>
           <Referee>
-            Responde como la medalla, no como tú. Cada decisión pide también un motivo.
+            Responde como la medalla, no como tú. Cada decisión pide también un motivo. Si ninguna
+            opción te convence, elige la más cercana y guarda tu otra salida para la discusión en
+            clase.
           </Referee>
         </StepScreen>
       )}
@@ -114,6 +117,7 @@ export function City() {
                 <Silhouette color={placeOf(d.c).color} />
                 <p className="bubble">{d.s}</p>
               </div>
+              <Referee label="Antes de decidir" questions={PAUSE_QUESTIONS} />
               <p className="question">¿Qué hace tu robot?</p>
               {d.o.map((o, j) => (
                 <button
@@ -150,6 +154,9 @@ export function City() {
                   <span className="spark-axis">✦ {axisName(dominantAxis(d.o[chosen]))}</span>
                   <span className="stamp-solved">Resuelto</span>
                 </div>
+              )}
+              {why != null && (
+                <Referee>{circuitQuestion(d.c, d.c === 'core' ? current! : current! - 6)}</Referee>
               )}
             </StepScreen>
           )}
@@ -199,7 +206,7 @@ export function City() {
                 : [],
             )}
           </ol>
-          <Referee>¿En qué encuentro dudaste más? Esa duda es el hallazgo.</Referee>
+          <Referee questions={REVIEW_QUESTIONS} />
         </StepScreen>
       )}
 

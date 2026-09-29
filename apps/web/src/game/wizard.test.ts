@@ -3,21 +3,24 @@ import { TYPES, circuitFor, testFor } from '@medalab/content';
 import { citySteps, firstOpenStep, firstPendingStep } from './wizard';
 
 describe('citySteps', () => {
-  it.each(TYPES.map((t) => t.c))('tipo %s: consigna, 6 de la plaza, aviso, 4 del circuito, revisión', (type) => {
-    const steps = citySteps(type);
-    const ids = testFor(type).map((d) => d.id);
-    expect(steps.map((s) => s.kind)).toEqual([
-      'intro',
-      ...ids.slice(0, 6).flatMap(() => ['decide', 'reason']),
-      'unlock',
-      ...ids.slice(6).flatMap(() => ['decide', 'reason']),
-      'review',
-    ]);
-    const decided = steps.flatMap((s) => (s.kind === 'decide' ? [s.dilemma.id] : []));
-    expect(decided).toEqual(ids);
-    const unlock = steps.find((s) => s.kind === 'unlock');
-    expect(unlock && unlock.kind === 'unlock' && unlock.circuit).toBe(circuitFor(type));
-  });
+  it.each(TYPES.map((t) => t.c))(
+    'tipo %s: consigna, 6 de la plaza, aviso, 4 del circuito, revisión',
+    (type) => {
+      const steps = citySteps(type);
+      const ids = testFor(type).map((d) => d.id);
+      expect(steps.map((s) => s.kind)).toEqual([
+        'intro',
+        ...ids.slice(0, 6).flatMap(() => ['decide', 'reason']),
+        'unlock',
+        ...ids.slice(6).flatMap(() => ['decide', 'reason']),
+        'review',
+      ]);
+      const decided = steps.flatMap((s) => (s.kind === 'decide' ? [s.dilemma.id] : []));
+      expect(decided).toEqual(ids);
+      const unlock = steps.find((s) => s.kind === 'unlock');
+      expect(unlock && unlock.kind === 'unlock' && unlock.circuit).toBe(circuitFor(type));
+    },
+  );
 });
 
 describe('firstOpenStep', () => {
