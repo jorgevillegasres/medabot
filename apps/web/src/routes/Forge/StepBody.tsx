@@ -21,7 +21,7 @@ export function StepBody() {
           <BodyFields />
         </div>
         <div>
-          <div className="preview">
+          <div className="preview robot-stage">
             <RobotSvg robot={draft} />
           </div>
           <div style={{ marginTop: 12 }}>

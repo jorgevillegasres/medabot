@@ -37,7 +37,7 @@ export function Gallery() {
         <div className="cards" data-testid="gallery">
           {robots.map(({ row, robot: r }) => (
             <Link className="card" key={row.id} to={`/robot/${row.id}`} data-serial={r.serial}>
-              <RobotSvg robot={r} />
+              <RobotSvg robot={r} className="robot-stage" />
               <h3>{r.name}</h3>
               <div className="serial">
                 {r.serial} · {getType(r.type)?.n ?? ''}

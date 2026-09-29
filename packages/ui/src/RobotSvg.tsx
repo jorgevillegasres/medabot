@@ -1,3 +1,5 @@
+import type { PartKey } from '@medalab/content';
+import { partSvg } from './robotArt';
 import { robotSvg, type RobotLook } from './svg';
 
 interface Props {
@@ -11,6 +13,25 @@ export function RobotSvg({ robot, className }: Props) {
     <span
       className={['svgbox', className].filter(Boolean).join(' ')}
       dangerouslySetInnerHTML={{ __html: robotSvg(robot) }}
+    />
+  );
+}
+
+/** Miniatura decorativa de una medaparte: el nombre accesible lo pone el botón que la contiene. */
+export function PartSvg({
+  part,
+  option,
+  color,
+}: {
+  part: PartKey;
+  option: number;
+  color?: string;
+}) {
+  return (
+    <span
+      className="partsvg"
+      aria-hidden="true"
+      dangerouslySetInnerHTML={{ __html: partSvg(part, option, color) }}
     />
   );
 }

@@ -31,7 +31,7 @@ h3 {
   margin: 0 0 0.4em;
 }
 h1 {
-  font-size: clamp(2rem, 6vw, 3.6rem);
+  font-size: var(--fs-2xl);
   letter-spacing: -0.01em;
 }
 p {
@@ -41,7 +41,7 @@ p {
 .wrap {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 0 20px 80px;
+  padding: 0 var(--sp-5) 80px;
 }
 .watch {
   position: sticky;
@@ -78,11 +78,11 @@ p {
 }
 .sheet {
   background: var(--card);
-  border: 3px solid var(--line);
-  border-radius: 14px;
-  padding: 22px;
+  border: var(--bw) solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--sp-5);
   position: relative;
-  box-shadow: 6px 6px 0 var(--line);
+  box-shadow: var(--shadow);
 }
 .stamp {
   position: absolute;
@@ -106,6 +106,26 @@ p {
 :focus-visible {
   outline: 3px solid var(--blue);
   outline-offset: 2px;
+}
+@media (max-width: 480px) {
+  .wrap {
+    padding-left: var(--sp-4);
+    padding-right: var(--sp-4);
+  }
+  .sheet {
+    padding: var(--sp-4);
+  }
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 @media (prefers-reduced-motion: reduce) {
   * {

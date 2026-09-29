@@ -9,10 +9,10 @@ button {
   cursor: pointer;
 }
 h2 {
-  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-size: var(--fs-xl);
 }
 h3 {
-  font-size: 1.1rem;
+  font-size: var(--fs-lg);
 }
 .brand {
   text-decoration: none;
@@ -39,6 +39,42 @@ nav a[aria-current='page'] {
 }
 nav a:hover {
   border-color: var(--yellow);
+}
+.menu-btn {
+  display: none;
+  margin-left: auto;
+  background: transparent;
+  color: var(--paper);
+  border: 2px solid var(--paper);
+  border-radius: var(--radius-sm);
+  padding: 6px 14px;
+  font-weight: 700;
+}
+@media (max-width: 719px) {
+  .watch .wrap {
+    flex-wrap: nowrap;
+  }
+  .menu-btn {
+    display: inline-block;
+  }
+  .watch nav {
+    display: none;
+  }
+  .watch nav.open {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: var(--ink);
+    padding: var(--sp-2) var(--sp-4) var(--sp-4);
+    border-bottom: 4px solid var(--yellow);
+  }
+  .watch nav.open a {
+    padding: var(--sp-3);
+  }
 }
 section.view {
   padding-top: 28px;
@@ -72,7 +108,7 @@ select {
   font: inherit;
   padding: 10px 12px;
   border: 2px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: var(--paper);
   color: var(--ink);
 }
@@ -86,11 +122,11 @@ textarea {
   background: var(--yellow);
   color: #1b1b2f;
   border: 3px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   padding: 10px 18px;
   font-weight: 900;
   font-stretch: 125%;
-  box-shadow: 4px 4px 0 var(--line);
+  box-shadow: var(--shadow);
   transition: transform 0.08s;
 }
 .btn:active {
@@ -107,8 +143,8 @@ textarea {
 }
 .btn.small {
   padding: 6px 12px;
-  font-size: 0.85rem;
-  box-shadow: 3px 3px 0 var(--line);
+  font-size: var(--fs-xs);
+  box-shadow: var(--shadow-sm);
 }
 .btn:disabled {
   opacity: 0.45;
@@ -123,35 +159,54 @@ textarea {
 
 /* ===== Pasos de la forja ===== */
 .steps {
-  display: flex;
-  gap: 0;
-  margin: 18px 0 26px;
+  margin: var(--sp-4) 0 var(--sp-5);
+}
+.steps-now {
+  margin: 0 0 var(--sp-2);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  color: var(--ink2);
+}
+.steps ol {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-1);
+  margin: 0;
   padding: 0;
   list-style: none;
-  border: 3px solid var(--line);
-  border-radius: 10px;
-  overflow: hidden;
 }
 .steps li {
-  flex: 1;
-  padding: 8px 6px;
-  text-align: center;
+  display: grid;
+  gap: var(--sp-1);
+  font-size: var(--fs-xs);
   font-weight: 600;
-  font-size: 0.85rem;
-  background: var(--paper2);
   color: var(--ink2);
-  border-right: 3px solid var(--line);
 }
-.steps li:last-child {
-  border-right: 0;
+.steps li::before {
+  content: '';
+  height: 8px;
+  border-radius: 4px;
+  background: var(--paper2);
+  border: 2px solid var(--line);
+}
+.steps li.done::before {
+  background: var(--red);
+}
+.steps li.on::before {
+  background: var(--yellow);
 }
 .steps li.on {
-  background: var(--yellow);
-  color: #1b1b2f;
+  color: var(--ink);
 }
-.steps li.done {
-  background: var(--green);
-  color: #fff;
+@media (max-width: 719px) {
+  .steps li span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
 }
 
 /* ===== Constructor ===== */
@@ -163,35 +218,88 @@ textarea {
   width: 100%;
   height: auto;
 }
-.parts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
-  gap: 10px;
-}
-.partpick {
-  border: 2px solid var(--line);
-  border-radius: 10px;
-  padding: 10px;
-  background: var(--paper);
-}
-.partpick .opts {
+.part-tabs {
   display: flex;
-  gap: 6px;
-  margin-top: 6px;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-3);
 }
-.partpick .opts button {
+.part-tabs [role='tab'] {
   flex: 1;
   border: 2px solid var(--line);
   background: var(--card);
-  border-radius: 8px;
-  padding: 6px 4px;
-  font-size: 0.8rem;
-  font-weight: 600;
   color: var(--ink);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-weight: 700;
+  font-size: var(--fs-sm);
 }
-.partpick .opts button.on {
+.part-tabs [role='tab'][aria-selected='true'] {
   background: var(--yellow);
   color: #1b1b2f;
+}
+.partpick + .partpick {
+  margin-top: var(--sp-3);
+}
+.partpick b {
+  display: block;
+  margin-bottom: var(--sp-2);
+  font-size: var(--fs-sm);
+}
+.partpick .opts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-2);
+}
+.partpick .opts button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-1);
+  border: 2px solid var(--line);
+  background: var(--card);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-2) var(--sp-1);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.partpick .opts button span:not(.partsvg) {
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+}
+.partsvg {
+  display: block;
+  width: 56px;
+  height: 56px;
+}
+.partsvg svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.partpick .opts button.on {
+  border-width: 3px;
+  background: color-mix(in srgb, var(--yellow) 30%, var(--card));
+}
+.partpick .opts button.on::after {
+  content: '✓';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  border: 2px solid var(--line);
+  font-size: 12px;
+  font-weight: 900;
 }
 .swatches {
   display: flex;
@@ -209,15 +317,23 @@ textarea {
   outline: 3px solid var(--yellow);
   outline-offset: 2px;
 }
+.robot-stage {
+  display: block;
+  background: var(--paper2);
+  border: 2px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-2);
+  background-image: radial-gradient(
+    ellipse 38% 5% at 50% 94%,
+    color-mix(in srgb, var(--ink) 18%, transparent) 97%,
+    transparent 100%
+  );
+}
 .preview {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--paper2);
-  border: 3px solid var(--line);
-  border-radius: 14px;
   min-height: 280px;
-  padding: 10px;
 }
 .preview .svgbox {
   width: min(240px, 80%);
@@ -235,7 +351,7 @@ textarea {
   align-items: center;
   gap: 10px;
   border: 2px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   padding: 8px 12px;
   margin-bottom: 8px;
   background: var(--paper);
@@ -253,7 +369,7 @@ textarea {
   color: var(--paper);
   display: grid;
   place-items: center;
-  font-size: 0.85rem;
+  font-size: var(--fs-xs);
 }
 .rank li .v {
   flex: 1;
@@ -283,7 +399,7 @@ textarea {
   cursor: grab;
   touch-action: none;
   user-select: none;
-  font-size: 1.2rem;
+  font-size: var(--fs-lg);
   color: var(--ink2);
   padding: 4px 2px;
 }
@@ -312,14 +428,14 @@ textarea {
   color: var(--paper);
 }
 .chips.small button {
-  font-size: 0.8rem;
+  font-size: var(--fs-xs);
   padding: 5px 10px;
 }
 
 /* ===== Dilemas ===== */
 .dilema {
   border: 3px solid var(--line);
-  border-radius: 14px;
+  border-radius: var(--radius);
   background: var(--card);
   padding: 20px;
   margin-bottom: 16px;
@@ -331,7 +447,7 @@ textarea {
   align-items: baseline;
 }
 .dilema h3 span {
-  font-size: 0.8rem;
+  font-size: var(--fs-xs);
   color: var(--red);
 }
 .opt {
@@ -341,7 +457,7 @@ textarea {
   border: 2px solid var(--line);
   background: var(--paper);
   color: var(--ink);
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   padding: 10px 14px;
   margin-top: 8px;
   line-height: 1.4;
@@ -400,11 +516,11 @@ textarea {
 }
 .code {
   font-family: ui-monospace, Menlo, Consolas, monospace;
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   word-break: break-all;
   background: var(--paper2);
   border: 2px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   padding: 10px;
   max-height: 110px;
   overflow: auto;
@@ -422,26 +538,21 @@ textarea {
   color: inherit;
   background: var(--card);
   border: 3px solid var(--line);
-  border-radius: 14px;
+  border-radius: var(--radius);
   padding: 12px;
-  box-shadow: 4px 4px 0 var(--line);
-}
-.card .svgbox svg {
-  background: var(--paper2);
-  border-radius: 10px;
-  border: 2px solid var(--line);
+  box-shadow: var(--shadow);
 }
 .card h3 {
   margin: 10px 0 2px;
 }
 .card .serial {
   font-family: ui-monospace, Menlo, monospace;
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   color: var(--ink2);
 }
 .tag {
   display: inline-block;
-  font-size: 0.72rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
   border: 2px solid var(--line);
   border-radius: 999px;
@@ -450,7 +561,7 @@ textarea {
 }
 .empty {
   border: 3px dashed var(--line);
-  border-radius: 14px;
+  border-radius: var(--radius);
   padding: 30px;
   text-align: center;
   color: var(--ink2);
@@ -465,7 +576,7 @@ textarea {
   background: var(--ink);
   color: var(--paper);
   padding: 10px 16px;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   border: 3px solid var(--yellow);
   opacity: 0;
   pointer-events: none;
@@ -535,7 +646,7 @@ code {
   grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) 2ch;
   gap: 8px;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
   padding: 4px 0;
 }
 .barrow small {
@@ -566,7 +677,7 @@ code {
 .table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.9rem;
+  font-size: var(--fs-sm);
 }
 .table th,
 .table td {
@@ -586,7 +697,7 @@ code {
 .foot {
   padding-top: 0;
   padding-bottom: 40px;
-  font-size: 0.85rem;
+  font-size: var(--fs-xs);
   color: var(--ink2);
 }
 
@@ -616,7 +727,7 @@ code {
 .fighter {
   background: var(--card);
   border: 3px solid var(--line);
-  border-radius: 14px;
+  border-radius: var(--radius);
   padding: 16px;
   min-height: 200px;
 }
@@ -640,7 +751,7 @@ code {
   margin-top: 12px;
   border: 3px solid var(--green);
   background: color-mix(in srgb, var(--green) 12%, var(--card));
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   padding: 12px;
 }
 .changed {
@@ -657,7 +768,7 @@ code {
   margin: 0 auto;
 }
 .scenario {
-  font-size: 1.1rem;
+  font-size: var(--fs-lg);
 }
 .options {
   list-style: none;
@@ -668,7 +779,7 @@ code {
 }
 .options li {
   border: 2px solid var(--line);
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   padding: 8px 12px;
   background: var(--paper);
 }
@@ -748,12 +859,12 @@ code {
 }
 .tile {
   border: 3px solid var(--line);
-  border-radius: 12px;
+  border-radius: var(--radius);
   background: var(--card);
   padding: 8px;
   text-align: center;
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: var(--fs-xs);
   transition: transform 0.4s;
 }
 .tile.on {

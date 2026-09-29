@@ -1,5 +1,5 @@
-import { lazy, Suspense } from 'react';
-import { Link, NavLink, Navigate, Route, Routes } from 'react-router-dom';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { Link, NavLink, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { Toast } from './components/Toast';
 import { isOnline } from './lib/supabase';
 import { Forge, ForgeResume } from './routes/Forge/Forge';
@@ -30,6 +30,22 @@ const LocalSheet = lazy(() =>
 
 export function App() {
   const course = useCourse((s) => s.course);
+  const [menu, setMenu] = useState(false);
+  const menuBtn = useRef<HTMLButtonElement>(null);
+  const { pathname } = useLocation();
+  useEffect(() => {
+    setMenu(false);
+  }, [pathname]);
+  useEffect(() => {
+    if (!menu) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      setMenu(false);
+      menuBtn.current?.focus();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [menu]);
   return (
     <>
       <header className="watch">
@@ -38,7 +54,25 @@ export function App() {
             <span className="dot" />
             MEDALAB 2045
           </NavLink>
-          <nav aria-label="Principal">
+          <button
+            ref={menuBtn}
+            type="button"
+            className="menu-btn"
+            aria-expanded={menu}
+            aria-controls="menu-principal"
+            onClick={() => setMenu((m) => !m)}
+          >
+            Menú
+          </button>
+          {/* Cerrar también al elegir el enlace de la página actual (ahí la ruta no cambia). */}
+          <nav
+            id="menu-principal"
+            aria-label="Principal"
+            className={menu ? 'open' : undefined}
+            onClick={(e) => {
+              if ((e.target as HTMLElement).closest('a')) setMenu(false);
+            }}
+          >
             <NavLink to="/" end>
               Inicio
             </NavLink>

@@ -8,6 +8,7 @@ Plataforma pedagógica de ética de la IA inspirada en Medabots. Ver PLAN.md par
 - El motor (packages/engine) debe reproducir exactamente las fórmulas de PLAN.md §5. Cualquier cambio requiere actualizar los fixtures y explicarlo.
 - Idioma de la interfaz: español (Colombia). Tono: directo, sin jerga técnica hacia el estudiante.
 - Estilo visual: portar el sistema del MVP (tokens en apps/web/src/styles/tokens.css). No introducir Tailwind, MUI ni librerías de componentes.
+  - Excepción (Fase H, decidida por el profesor): el dibujo del robot (packages/ui/src/robotArt.ts) es arte propio, no el del MVP. La medalla sí sigue idéntica al MVP.
 - Estudiantes no tienen cuenta. Nunca pedir email a un estudiante.
 - Lo que el estudiante no debe ver: nombre técnico de la escuela ética, número de etapa Kohlberg, panel agregado. Estos datos solo se renderizan en rutas /profesor/* y /arena con sesión de profesor.
 

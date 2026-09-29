@@ -1,5 +1,7 @@
 // Campos de la forja, compartidos por la forja clásica (Step*) y las escenas del juego.
 import { AXES, CATALOGS, TYPES, getType, type PartKey } from '@medalab/content';
+import { PartSvg } from '@medalab/ui';
+import { useId, useRef, useState, type KeyboardEvent } from 'react';
 import { Chips, asItems } from '../../components/Chips';
 import { RankList } from '../../components/RankList';
 import { useDraft } from '../../store/draft';
@@ -60,30 +62,77 @@ export function BodyFields() {
   );
 }
 
-/** Las cuatro medapartes. onPick se llama tras instalar una pieza. */
+const PART_TABS: { label: string; parts: PartKey[] }[] = [
+  { label: 'Cabeza', parts: ['head'] },
+  { label: 'Brazos', parts: ['rarm', 'larm'] },
+  { label: 'Piernas', parts: ['legs'] },
+];
+
+/** Las cuatro medapartes, agrupadas en pestañas. onPick se llama tras instalar una pieza. */
 export function PartsPicker({ onPick }: { onPick?: () => void }) {
   const { draft, setPart } = useDraft();
+  const [tab, setTab] = useState(0);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const id = useId();
+  const onKey = (e: KeyboardEvent) => {
+    const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+    if (!d) return;
+    e.preventDefault();
+    const n = (tab + d + PART_TABS.length) % PART_TABS.length;
+    setTab(n);
+    tabRefs.current[n]?.focus();
+  };
   return (
     <div className="parts">
-      {(Object.keys(CATALOGS.parts) as PartKey[]).map((k) => (
-        <div className="partpick" key={k} role="group" aria-label={CATALOGS.parts[k].n}>
-          <b>{CATALOGS.parts[k].n}</b>
-          <div className="opts">
-            {CATALOGS.parts[k].opts.map((o, i) => (
-              <button
-                type="button"
-                key={o}
-                className={draft.parts[k] === i ? 'on' : ''}
-                aria-pressed={draft.parts[k] === i}
-                onClick={() => {
-                  setPart(k, i);
-                  onPick?.();
-                }}
-              >
-                {o}
-              </button>
-            ))}
-          </div>
+      <div className="part-tabs" role="tablist" aria-label="Medapartes" onKeyDown={onKey}>
+        {PART_TABS.map((t, i) => (
+          <button
+            key={t.label}
+            ref={(el) => {
+              tabRefs.current[i] = el;
+            }}
+            type="button"
+            role="tab"
+            id={`${id}-t${i}`}
+            aria-selected={tab === i}
+            aria-controls={`${id}-p${i}`}
+            tabIndex={tab === i ? 0 : -1}
+            onClick={() => setTab(i)}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+      {PART_TABS.map((t, i) => (
+        <div
+          key={t.label}
+          role="tabpanel"
+          id={`${id}-p${i}`}
+          aria-labelledby={`${id}-t${i}`}
+          hidden={tab !== i}
+        >
+          {t.parts.map((k) => (
+            <div className="partpick" key={k} role="group" aria-label={CATALOGS.parts[k].n}>
+              {t.parts.length > 1 && <b>{CATALOGS.parts[k].n}</b>}
+              <div className="opts">
+                {CATALOGS.parts[k].opts.map((o, j) => (
+                  <button
+                    type="button"
+                    key={o}
+                    className={draft.parts[k] === j ? 'on' : ''}
+                    aria-pressed={draft.parts[k] === j}
+                    onClick={() => {
+                      setPart(k, j);
+                      onPick?.();
+                    }}
+                  >
+                    <PartSvg part={k} option={j} color={draft.color} />
+                    <span>{o}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       ))}
     </div>
